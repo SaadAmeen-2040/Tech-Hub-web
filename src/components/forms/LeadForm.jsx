@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function LeadForm() {
@@ -12,6 +12,12 @@ export default function LeadForm() {
     city: "",
   });
 
+  useEffect(() => {
+    if (location.state?.program) {
+      setFormData((prev) => ({ ...prev, program: location.state.program }));
+    }
+  }, [location.state]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -19,64 +25,94 @@ export default function LeadForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Student Data:", formData);
-    alert("Form Submitted Successfully!");
+    alert("Form Submitted Successfully! Our team will contact you soon.");
   };
 
   return (
-    <section className="py-16 bg-gray-100">
-      <div className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+    <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-indigo-500/10 border border-slate-100 animate-fade-in-up">
+      <div className="mb-8">
+        <h2 className="text-3xl font-bold text-slate-900 mb-2">
           Apply Now
         </h2>
+        <p className="text-slate-500">Fill out the form below to secure your seat.</p>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              onChange={handleChange}
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700 ml-1">Phone Number</label>
+            <input
+              type="text"
+              name="phone"
+              placeholder="+92 300 0000000"
+              onChange={handleChange}
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+            />
+          </div>
+        </div>
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-          />
-
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-          />
-
+        <div className="space-y-2">
+          <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
           <input
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="john@example.com"
             onChange={handleChange}
-            className="w-full p-3 border rounded"
+            required
+            className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
           />
+        </div>
 
-          {/* Auto-filled Program */}
-          <input
-            type="text"
-            name="program"
-            value={formData.program}
-            onChange={handleChange}
-            className="w-full p-3 border rounded bg-gray-100"
-          />
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700 ml-1">Selected Program</label>
+            <select
+              name="program"
+              value={formData.program}
+              onChange={handleChange}
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all appearance-none"
+            >
+              <option value="">Select a Program</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Graphic Design">Graphic Design</option>
+              <option value="Freelancing">Freelancing</option>
+              <option value="Digital Marketing">Digital Marketing</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-700 ml-1">City</label>
+            <input
+              type="text"
+              name="city"
+              placeholder="e.g. Lahore"
+              onChange={handleChange}
+              required
+              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+            />
+          </div>
+        </div>
 
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            onChange={handleChange}
-            className="w-full p-3 border rounded"
-          />
-
-          <button className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700">
-            Submit Application
-          </button>
-        </form>
-      </div>
-    </section>
+        <button className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1 mt-4">
+          Submit Application
+        </button>
+        
+        <p className="text-center text-xs text-slate-400">
+          By submitting, you agree to our terms and privacy policy.
+        </p>
+      </form>
+    </div>
   );
 }

@@ -1,22 +1,81 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
-   <div className="max-w-6xl mx-auto">
-     <section className="min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 px-6">
-      
-      <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
-        Learn IT Skills for FREE
-      </h1>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50 pt-20">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-100/50 rounded-full blur-3xl animate-float" style={{ animationDelay: "0s" }}></div>
+        <div className="absolute top-[20%] -right-[5%] w-[30%] h-[30%] bg-purple-100/50 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
+        <div className="absolute -bottom-[10%] left-[20%] w-[35%] h-[35%] bg-blue-100/50 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s" }}></div>
+      </div>
 
-      <p className="max-w-2xl text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-        Join Tech Hub Institute in collaboration with Government programs.
-        Start your journey in Web Development, Graphic Design, and more.
-      </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="animate-fade-in-up">
+          <span className="inline-block py-1 px-3 rounded-full bg-indigo-50 text-indigo-600 text-sm font-bold tracking-wide uppercase mb-6">
+            Trusted by 5,000+ Students
+          </span>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 tracking-tight mb-8">
+            Learn IT Skills <br />
+            <span className="text-gradient">For FREE</span>
+          </h1>
 
-      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-300">
-        Apply Now
-      </button>
+          <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mb-12">
+            Empowering the next generation of tech leaders. Join Tech Hub Institute in collaboration with 
+            Government initiatives to master Web Development, Graphic Design, and Freelancing.
+          </p>
 
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all duration-300 shadow-xl shadow-indigo-500/25 transform hover:-translate-y-1"
+            >
+              Apply Now
+            </Link>
+            <Link
+              to="/programs"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              Browse Programs
+            </Link>
+          </div>
+        </div>
+
+        {/* Floating Icons / Tech Stack (Visual Placeholder) */}
+        <div className="mt-20 grid grid-cols-3 md:grid-cols-6 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">JS</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">RE</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">PS</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">AI</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">TW</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
+              <span className="font-bold text-slate-800">ND</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-   </div>
   );
 }
