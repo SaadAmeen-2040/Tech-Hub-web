@@ -56,14 +56,18 @@ export default function LeadForm() {
           />
 
           {/* Auto-filled Program */}
-          <input
-            type="text"
-            name="program"
-            placeholder="Program of Interest"
-            value={formData.program}
-            onChange={handleChange}
-            className="w-full p-3 border rounded bg-gray-100"
-          />
+        <select
+  name="program"
+  value={formData.program}
+  onChange={handleChange}
+  className="w-full p-3 border rounded bg-gray-100"
+>
+  <option value="">Select Program of Interest</option>
+  <option value="cs">Computer Science</option>
+  <option value="ai">Artificial Intelligence</option>
+  <option value="it">Information Technology</option>
+  <option value="business">Business Administration</option>
+</select>
 
           <input
             type="text"
