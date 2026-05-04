@@ -59,6 +59,7 @@ export default function LeadForm() {
           <input
             type="text"
             name="program"
+            placeholder="Program of Interest"
             value={formData.program}
             onChange={handleChange}
             className="w-full p-3 border rounded bg-gray-100"

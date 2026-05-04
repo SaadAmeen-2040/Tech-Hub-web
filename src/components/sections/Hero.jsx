@@ -1,22 +1,58 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+const slides = [
+  {
+    title: "Web Development",
+    desc: "Learn HTML, CSS, JavaScript & React",
+    img: "https://static.vecteezy.com/system/resources/thumbnails/006/709/644/small/abstract-modern-tech-of-programming-code-screen-developer-free-photo.jpg",
+  },
+  {
+    title: "Graphic Design",
+    desc: "Master Photoshop & Illustrator",
+    img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f",
+  },
+  {
+    title: "Freelancing",
+    desc: "Earn online using Fiverr & Upwork",
+    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+  },
+];
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
+
+  // auto slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const slide = slides[current];
+
   return (
-   <div className="max-w-6xl mx-auto">
-     <section className="min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 px-6">
-      
-      <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
-        Learn IT Skills for FREE
-      </h1>
+    <section
+      className="h-[80vh] mt-18 flex items-center justify-center text-center text-white bg-cover bg-center"
+      style={{ backgroundImage: `url(${slide.img})` }}
+    >
+      <div className="bg-black/60 p-8 rounded-xl max-w-xl">
+        <h1 className="text-4xl font-bold mb-4">{slide.title}</h1>
 
-      <p className="max-w-2xl text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-        Join Tech Hub Institute in collaboration with Government programs.
-        Start your journey in Web Development, Graphic Design, and more.
-      </p>
+        <p className="mb-6">{slide.desc}</p>
 
-      <button className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg font-medium hover:bg-blue-700 transition duration-300">
-        Apply Now
-      </button>
-
+        <button
+          onClick={() =>
+            navigate("/contact", { state: { program: slide.title } })
+          }
+          className="bg-blue-600 px-6 py-3 rounded hover:bg-blue-700"
+        >
+          Apply Now
+        </button>
+      </div>
     </section>
-   </div>
   );
 }
