@@ -75,7 +75,6 @@ export default function LeadForm() {
           />
         </div>
 
-<<<<<<< HEAD
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-700 ml-1">Selected Program</label>
@@ -105,21 +104,6 @@ export default function LeadForm() {
             />
           </div>
         </div>
-=======
-          {/* Auto-filled Program */}
-        <select
-  name="program"
-  value={formData.program}
-  onChange={handleChange}
-  className="w-full p-3 border rounded bg-gray-100"
->
-  <option value="">Select Program of Interest</option>
-  <option value="cs">Computer Science</option>
-  <option value="ai">Artificial Intelligence</option>
-  <option value="it">Information Technology</option>
-  <option value="business">Business Administration</option>
-</select>
->>>>>>> 7c828453ebd51e50765c3141e533a71465b9a3bf
 
         <button className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1 mt-4">
           Submit Application
