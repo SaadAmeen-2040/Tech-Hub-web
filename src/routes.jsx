@@ -12,6 +12,7 @@ export default function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/contact" element={<Contact />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
