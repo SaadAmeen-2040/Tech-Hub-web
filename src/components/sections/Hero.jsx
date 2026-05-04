@@ -1,5 +1,11 @@
-import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 
 const slides = [
   {
@@ -20,19 +26,7 @@ const slides = [
 ];
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
-
-  // auto slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000); // 5 seconds for better readability
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const slide = slides[current];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50 pt-20">
@@ -43,52 +37,61 @@ export default function Hero() {
         <div className="absolute -bottom-[10%] left-[20%] w-[35%] h-[35%] bg-blue-100/50 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s" }}></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div key={current} className="animate-fade-in-up">
-          <span className="inline-block py-1 px-3 rounded-full bg-indigo-50 text-indigo-600 text-sm font-bold tracking-wide uppercase mb-6">
-            Trusted by 5,000+ Students
-          </span>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 tracking-tight mb-8 min-h-[2.5em] md:min-h-[auto]">
-            {slide.title} <br />
-            <span className="text-gradient">{slide.highlight}</span>
-          </h1>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <Swiper
+          modules={[Autoplay, Pagination, EffectFade]}
+          effect="fade"
+          fadeEffect={{ crossFade: true }}
+          speed={1000}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+            renderBullet: (index, className) => {
+              return `<span class="${className} custom-bullet"></span>`;
+            },
+          }}
+          className="hero-swiper"
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <div className="py-10 animate-fade-in-up">
+                <span className="inline-block py-1 px-3 rounded-full bg-indigo-50 text-indigo-600 text-sm font-bold tracking-wide uppercase mb-6">
+                  Trusted by 5,000+ Students
+                </span>
+                
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 tracking-tight mb-8 min-h-[2.5em] md:min-h-[auto]">
+                  {slide.title} <br />
+                  <span className="text-gradient">{slide.highlight}</span>
+                </h1>
 
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mb-12 min-h-[4.5em]">
-            {slide.description}
-          </p>
+                <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mb-12 min-h-[4.5em]">
+                  {slide.description}
+                </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => navigate("/contact")}
-              className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all duration-300 shadow-xl shadow-indigo-500/25 transform hover:-translate-y-1"
-            >
-              Apply Now
-            </button>
-            <Link
-              to="/programs"
-              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Browse Programs
-            </Link>
-          </div>
-
-          {/* Slider Indicators */}
-          <div className="mt-12 flex justify-center gap-3">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrent(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  current === index ? "bg-indigo-600 w-8" : "bg-slate-300"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                  <button
+                    onClick={() => navigate("/contact")}
+                    className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all duration-300 shadow-xl shadow-indigo-500/25 transform hover:-translate-y-1"
+                  >
+                    Apply Now
+                  </button>
+                  <Link
+                    to="/programs"
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all duration-300 transform hover:-translate-y-1"
+                  >
+                    Browse Programs
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         {/* Floating Icons / Tech Stack */}
-        <div className="mt-16 grid grid-cols-3 md:grid-cols-6 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+        <div className="mt-8 grid grid-cols-3 md:grid-cols-6 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
           {["JS", "RE", "PS", "AI", "TW", "ND"].map((tech) => (
             <div key={tech} className="flex flex-col items-center gap-2">
               <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center">
@@ -98,6 +101,28 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        .hero-swiper {
+          padding-bottom: 50px !important;
+        }
+        .swiper-pagination {
+          bottom: 0 !important;
+        }
+        .custom-bullet {
+          width: 12px !important;
+          height: 12px !important;
+          background: #cbd5e1 !important;
+          opacity: 1 !important;
+          margin: 0 6px !important;
+          transition: all 0.3s ease !important;
+          border-radius: 6px !important;
+        }
+        .swiper-pagination-bullet-active {
+          background: #4f46e5 !important;
+          width: 32px !important;
+        }
+      `}} />
     </section>
   );
 }
