@@ -1,6 +1,7 @@
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 px-6">
+   <div className="max-w-6xl mx-auto">
+     <section className="min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 px-6">
       
       <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
         Learn IT Skills for FREE
@@ -16,5 +17,6 @@ export default function Hero() {
       </button>
 
     </section>
+   </div>
   );
 }

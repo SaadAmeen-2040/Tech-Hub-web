@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function LeadForm() {
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
-    program: "",
+    program: location.state?.program || "",
     city: "",
   });
 
@@ -16,7 +19,6 @@ export default function LeadForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Student Data:", formData);
-
     alert("Form Submitted Successfully!");
   };
 
@@ -28,7 +30,7 @@ export default function LeadForm() {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          
+
           <input
             type="text"
             name="name"
@@ -53,12 +55,13 @@ export default function LeadForm() {
             className="w-full p-3 border rounded"
           />
 
+          {/* Auto-filled Program */}
           <input
             type="text"
             name="program"
-            placeholder="Selected Program"
+            value={formData.program}
             onChange={handleChange}
-            className="w-full p-3 border rounded"
+            className="w-full p-3 border rounded bg-gray-100"
           />
 
           <input
@@ -69,10 +72,7 @@ export default function LeadForm() {
             className="w-full p-3 border rounded"
           />
 
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700"
-          >
+          <button className="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700">
             Submit Application
           </button>
         </form>
