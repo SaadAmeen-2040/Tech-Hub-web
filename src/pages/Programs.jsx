@@ -1,100 +1,132 @@
-import { programs } from "../data/programs";
 import { useNavigate } from "react-router-dom";
+import { programs } from "../data/programs";
+import { 
+  Cpu, 
+  Code2, 
+  ShieldCheck, 
+  Globe, 
+  Palette, 
+  TrendingUp, 
+  FileCode, 
+  Terminal,
+  Calendar,
+  ArrowRight,
+  Clock,
+  UserCheck
+} from "lucide-react";
 
 export default function Programs() {
   const navigate = useNavigate();
 
+  // Group programs by level
+  const groupedPrograms = programs.reduce((acc, program) => {
+    if (!acc[program.level]) {
+      acc[program.level] = [];
+    }
+    acc[program.level].push(program);
+    return acc;
+  }, {});
+
+  const getIcon = (domain) => {
+    switch (domain) {
+      case "Artificial Intelligence": return <Cpu className="w-8 h-8" />;
+      case "Web Development": return <Code2 className="w-8 h-8" />;
+      case "Programming": return <Terminal className="w-8 h-8" />;
+      case "Cyber Security": return <ShieldCheck className="w-8 h-8" />;
+      case "Digital Marketing": return <TrendingUp className="w-8 h-8" />;
+      case "Design": return <Palette className="w-8 h-8" />;
+      default: return <FileCode className="w-8 h-8" />;
+    }
+  };
+
   return (
     <div className="pt-32 pb-24 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-20 animate-fade-in-up">
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-            All <span className="text-gradient">Programs</span>
+            Our <span className="text-gradient">Specialized Tracks</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Explore our comprehensive list of free IT courses. Each program is designed 
-            to provide you with the skills needed to succeed in the modern digital economy.
+          <p className="max-w-2xl mx-auto text-xl text-slate-600">
+            100% Free 3-Months Advanced IT Courses with International Certification. 
+            Choose the track that matches your educational background.
           </p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
-          {programs.map((p, index) => (
-            <div
-              key={p.id}
-              className="group bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="flex flex-col md:row justify-between items-start gap-6 mb-8">
-                <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 bg-indigo-50 rounded-3xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-500">
-                    {p.title.includes("Web") ? "💻" : p.title.includes("Graphic") ? "🎨" : "🚀"}
+        {Object.entries(groupedPrograms).map(([level, items], groupIndex) => (
+          <div key={level} className="mb-20 animate-fade-in-up" style={{ animationDelay: `${groupIndex * 0.1}s` }}>
+            <div className="flex items-center gap-4 mb-10">
+              <h2 className="text-3xl font-bold text-slate-900">{level}</h2>
+              <div className="h-px grow bg-slate-200"></div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {items.map((program) => (
+                <div 
+                  key={program.id}
+                  className="group bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 transform hover:-translate-y-2"
+                >
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                    {getIcon(program.domain)}
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                      {p.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full uppercase tracking-wider">
-                        Free Course
-                      </span>
-                      <span className="text-xs font-bold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full uppercase tracking-wider">
-                        Certified
-                      </span>
+                  
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
+                    {program.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
+                    {program.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+                    <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest">
+                      <Clock className="w-4 h-4" />
+                      {program.duration}
                     </div>
+                    <button 
+                      onClick={() => navigate("/contact", { state: { program: program.title } })}
+                      className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-2 group/btn transition-all"
+                    >
+                      Apply Now 
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* Info Banner */}
+        <div className="mt-20 p-10 md:p-16 rounded-[3rem] bg-indigo-600 relative overflow-hidden text-center text-white shadow-2xl shadow-indigo-600/20">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-white/10 border border-white/20 mb-8 backdrop-blur-md">
+              <UserCheck className="w-5 h-5 text-indigo-300" />
+              <span className="text-sm font-bold uppercase tracking-widest text-indigo-100">Age Limit: 18-40 Years</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to start your journey?</h2>
+            
+            <div className="flex flex-wrap justify-center gap-8 mb-12">
+              <div className="flex items-center gap-2 text-indigo-100 font-medium">
+                <Calendar className="w-5 h-5" />
+                Batch 2026 Now Open
               </div>
-
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                {p.description} Our {p.title} program covers everything from fundamentals to advanced techniques, 
-                ensuring you gain a competitive edge in the industry.
-              </p>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-10 p-6 bg-slate-50 rounded-3xl">
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase mb-1">Duration</p>
-                  <p className="font-bold text-slate-900">{p.duration}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase mb-1">Level</p>
-                  <p className="font-bold text-slate-900">{p.level}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase mb-1">Mode</p>
-                  <p className="font-bold text-slate-900">In-Person</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() =>
-                    navigate("/contact", { state: { program: p.title } })
-                  }
-                  className="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1"
-                >
-                  Apply Now
-                </button>
-                <button
-                  className="flex-1 py-4 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold text-lg hover:bg-slate-50 transition-all transform hover:-translate-y-1"
-                >
-                  Download Syllabus
-                </button>
+              <div className="flex items-center gap-2 text-indigo-100 font-medium">
+                <Clock className="w-5 h-5" />
+                Flexible Shifts Available
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Feature Banner */}
-        <div className="mt-24 bg-linear-to-r from-indigo-600 to-purple-600 rounded-[3rem] p-12 text-center text-white relative overflow-hidden">
-           <div className="relative z-10">
-             <h2 className="text-3xl font-bold mb-4">Don't see what you're looking for?</h2>
-             <p className="text-indigo-100 text-lg mb-8 max-w-2xl mx-auto">
-               We are constantly adding new programs. Suggest a course or sign up for our newsletter to get notified about new openings.
-             </p>
-             <button className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold text-lg hover:bg-slate-100 transition-all">
-               Get Notified
-             </button>
-           </div>
+            <button 
+              onClick={() => navigate("/contact")}
+              className="px-12 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-xl flex items-center gap-3 mx-auto transform hover:-translate-y-1"
+            >
+              Secure Your Seat Now <ArrowRight className="w-6 h-6" />
+            </button>
+          </div>
+          {/* Decorative Background */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
         </div>
       </div>
     </div>

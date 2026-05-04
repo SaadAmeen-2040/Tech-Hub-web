@@ -1,4 +1,5 @@
 import LeadForm from "../components/forms/LeadForm";
+import { MapPin, Mail, Phone, Building2, Clock, MessageSquare } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -8,53 +9,69 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-              Get in <span className="text-gradient">Touch</span>
+              Contact <span className="text-gradient">Bahawalpur Center</span>
             </h1>
             <p className="text-xl text-slate-600 mb-12 leading-relaxed">
-              Have questions about our programs or the enrollment process? 
-              Our team is here to help you start your tech journey.
+              Join the Tech Hub Innovation Center in Bahawalpur. We are here to help you 
+              enroll in the Prime Minister's Youth Programme & NAVTTC courses.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-4">📍</div>
+              <div className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors duration-300">
+                  <MapPin className="w-6 h-6 text-indigo-600 group-hover:text-white" />
+                </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Visit Us</h4>
-                <p className="text-slate-500 text-sm">
-                  123 Tech Avenue, Innovation City, Lahore, Pakistan
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road Near Saddar Pulli, Bahawalpur
                 </p>
               </div>
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-4">✉️</div>
+
+              <div className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors duration-300">
+                  <Mail className="w-6 h-6 text-indigo-600 group-hover:text-white" />
+                </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Email Us</h4>
                 <p className="text-slate-500 text-sm">
-                  admissions@techhub.edu.pk<br />
-                  info@techhub.edu.pk
+                  info@techhubinstitute.pk<br />
+                  admissions@techhubinstitute.pk
                 </p>
               </div>
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-4">📞</div>
+
+              <div className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors duration-300">
+                  <Phone className="w-6 h-6 text-indigo-600 group-hover:text-white" />
+                </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Call Us</h4>
                 <p className="text-slate-500 text-sm">
-                  +92 300 1234567<br />
-                  +92 42 35123456
+                  +92 308 0620868<br />
+                  Mon - Sat: 9 AM - 5 PM
                 </p>
               </div>
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-4">⏰</div>
-                <h4 className="text-lg font-bold text-slate-900 mb-2">Office Hours</h4>
+
+              <div className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 transition-colors duration-300">
+                  <Building2 className="w-6 h-6 text-indigo-600 group-hover:text-white" />
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Partnership</h4>
                 <p className="text-slate-500 text-sm">
-                  Mon - Fri: 9 AM - 6 PM<br />
-                  Sat: 10 AM - 2 PM
+                  NAVTTC & Prime Minister's Youth Programme
                 </p>
               </div>
             </div>
 
-            {/* Google Maps Placeholder */}
-            <div className="w-full h-64 bg-slate-200 rounded-[2.5rem] overflow-hidden relative group">
-              <div className="absolute inset-0 bg-linear-to-tr from-slate-900/20 to-transparent z-10"></div>
-              <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold">
-                MAP VIEW
+            {/* Quick Stats Overlay */}
+            <div className="bg-indigo-600 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-indigo-600/20">
+              <div className="relative z-10 flex items-center gap-6">
+                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+                  <MessageSquare className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold">Have Questions?</h4>
+                  <p className="text-indigo-100">Our team is ready to guide you through the process.</p>
+                </div>
               </div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
             </div>
           </div>
 

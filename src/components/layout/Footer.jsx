@@ -1,4 +1,16 @@
 import { Link } from "react-router-dom";
+import { 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin, 
+  MapPin, 
+  Phone, 
+  Mail, 
+  ChevronRight,
+  ShieldCheck,
+  Zap
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,18 +27,33 @@ export default function Footer() {
               </div>
               <span className="text-2xl font-bold text-white">Tech Hub</span>
             </Link>
-            <p className="text-slate-500 leading-relaxed">
-              Empowering youth with industry-relevant IT skills through fully funded government initiatives. Join our community of learners today.
+            
+            <div className="flex items-center gap-3 bg-white/5 p-4 rounded-2xl border border-white/10 group hover:border-indigo-500/50 transition-colors">
+              <ShieldCheck className="w-8 h-8 text-indigo-500 shrink-0" />
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-tighter leading-tight">
+                Official Partner Of<br/>
+                <span className="text-white text-xs">NAVTTC & PM YOUTH PROGRAM</span>
+              </span>
+            </div>
+
+            <p className="text-slate-500 leading-relaxed text-sm">
+              Empowering the youth of Bahawalpur with industry-relevant IT skills through fully funded government initiatives.
             </p>
-            <div className="flex space-x-4">
-              {/* Social Placeholders */}
-              {["FB", "TW", "IG", "LI"].map((social) => (
+            
+            <div className="flex space-x-3">
+              {[
+                { icon: <Facebook className="w-5 h-5" />, label: "Facebook" },
+                { icon: <Twitter className="w-5 h-5" />, label: "Twitter" },
+                { icon: <Instagram className="w-5 h-5" />, label: "Instagram" },
+                { icon: <Linkedin className="w-5 h-5" />, label: "Linkedin" }
+              ].map((social, i) => (
                 <a
-                  key={social}
+                  key={i}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all duration-300"
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all duration-300 border border-white/5"
                 >
-                  <span className="text-xs font-bold">{social}</span>
+                  {social.icon}
                 </a>
               ))}
             </div>
@@ -34,51 +61,73 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6">Quick Links</h4>
+            <h4 className="text-white font-bold text-lg mb-8">Quick Links</h4>
             <ul className="space-y-4">
-              <li><Link to="/" className="hover:text-indigo-400 transition-colors">Home</Link></li>
-              <li><Link to="/programs" className="hover:text-indigo-400 transition-colors">Programs</Link></li>
-              <li><Link to="/contact" className="hover:text-indigo-400 transition-colors">Contact Us</Link></li>
-              <li><a href="#" className="hover:text-indigo-400 transition-colors">About Institute</a></li>
+              {["Home", "Programs", "Contact Us", "Admissions"].map((item) => (
+                <li key={item}>
+                  <Link 
+                    to={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "")}`} 
+                    className="flex items-center gap-2 hover:text-indigo-400 transition-colors group"
+                  >
+                    <ChevronRight className="w-4 h-4 text-slate-700 group-hover:text-indigo-400 transition-colors" />
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Programs */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6">Our Programs</h4>
+            <h4 className="text-white font-bold text-lg mb-8">Top Programs</h4>
             <ul className="space-y-4">
-              <li><Link to="/programs" className="hover:text-indigo-400 transition-colors">Web Development</Link></li>
-              <li><Link to="/programs" className="hover:text-indigo-400 transition-colors">Graphic Design</Link></li>
-              <li><Link to="/programs" className="hover:text-indigo-400 transition-colors">Freelancing</Link></li>
-              <li><Link to="/programs" className="hover:text-indigo-400 transition-colors">Digital Marketing</Link></li>
+              {["Web Development", "Cyber Security", "Cloud Computing", "Google UX Design"].map((item) => (
+                <li key={item}>
+                  <Link 
+                    to="/programs" 
+                    className="flex items-center gap-2 hover:text-indigo-400 transition-colors group"
+                  >
+                    <Zap className="w-4 h-4 text-slate-700 group-hover:text-indigo-400 transition-colors" />
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6">Contact Us</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-indigo-400">📍</span>
-                <span>123 Tech Hub, Innovation Bahawalpur, Pakistan</span>
+            <h4 className="text-white font-bold text-lg mb-8">Contact Us</h4>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shrink-0 border border-white/5">
+                  <MapPin className="w-5 h-5 text-indigo-500" />
+                </div>
+                <span className="text-sm leading-relaxed">
+                  Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road, Bahawalpur
+                </span>
               </li>
-              <li className="flex items-center gap-3">
-                <span className="text-indigo-400">📞</span>
-                <span>+92 300 1234567</span>
+              <li className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shrink-0 border border-white/5">
+                  <Phone className="w-5 h-5 text-indigo-500" />
+                </div>
+                <span className="text-sm">+92 308 0620868</span>
               </li>
-              <li className="flex items-center gap-3">
-                <span className="text-indigo-400">✉️</span>
-                <span>info@techhub.edu.pk</span>
+              <li className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shrink-0 border border-white/5">
+                  <Mail className="w-5 h-5 text-indigo-500" />
+                </div>
+                <span className="text-sm">info@techhubinstitute.pk</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-900 pt-8 flex flex-col md:row justify-between items-center gap-4 text-sm text-slate-600">
-          <p>© {currentYear} Tech Hub Institute. All rights reserved.</p>
+        <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-600">
+          <p>© {currentYear} Tech Hub Innovation Center Bahawalpur.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-indigo-400">Privacy Policy</a>
-            <a href="#" className="hover:text-indigo-400">Terms of Service</a>
+            <a href="#" className="hover:text-indigo-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-indigo-400 transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

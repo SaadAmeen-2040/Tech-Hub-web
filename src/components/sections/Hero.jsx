@@ -1,6 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
+import { Clock, User, Award, ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Import Swiper styles
 import "swiper/css";
@@ -10,22 +12,25 @@ import "swiper/css/effect-fade";
 
 const slides = [
   {
-    title: "Web Development",
-    desc: "Master the art of building modern, responsive websites. Learn HTML, CSS, JavaScript, and React from industry experts.",
+    title: "Kickstart Your",
+    highlight: "IT Career",
+    desc: "100% Free 3-Months Advanced IT Courses with International Certification. Join Tech Hub Innovation Center Bahawalpur today.",
     img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072",
-    tag: "Most Popular",
+    tag: "Batch 2026 Open",
   },
   {
-    title: "Graphic Design",
-    desc: "Unleash your creativity and design stunning visuals. Master Adobe Photoshop, Illustrator, and modern branding techniques.",
+    title: "Advanced Skill",
+    highlight: "Development",
+    desc: "Specialized tracks for 16-years education and intermediate students. Morning, Evening, and Weekend classes available.",
     img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=2071",
-    tag: "Creative Arts",
+    tag: "Morning | Evening | Weekend",
   },
   {
-    title: "Freelancing",
-    desc: "Start your journey as a successful freelancer. Learn how to secure high-paying clients on Fiverr, Upwork, and more.",
+    title: "Global Industry",
+    highlight: "Standards",
+    desc: "Age limit 18-40 years. Master AI, Cyber Security, Digital Marketing, and more with international standards of training.",
     img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2071",
-    tag: "Career Growth",
+    tag: "Age Limit: 18-40 Years",
   },
 ];
 
@@ -58,70 +63,96 @@ export default function Hero() {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-full w-full">
-              {/* Background Image with Overlay */}
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[10000ms] scale-110 group-active:scale-100"
-                style={{ backgroundImage: `url(${slide.img})` }}
-              >
-                <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-slate-950/20"></div>
-              </div>
+            {({ isActive }) => (
+              <div className="relative h-full w-full">
+                {/* Background Image with Overlay */}
+                <motion.div 
+                  initial={{ scale: 1.1 }}
+                  animate={isActive ? { scale: 1 } : { scale: 1.1 }}
+                  transition={{ duration: 6, ease: "easeOut" }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${slide.img})` }}
+                >
+                  <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[1px]"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-slate-950/40"></div>
+                </motion.div>
 
-              {/* Content */}
-              <div className="relative h-full flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl">
-                  <div className="animate-fade-in-up">
-                    <span className="inline-block py-1.5 px-4 rounded-full bg-indigo-600/20 border border-indigo-400/30 text-indigo-300 text-sm font-bold tracking-widest uppercase mb-8 backdrop-blur-sm">
-                      {slide.tag}
-                    </span>
-                    
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-8 leading-tight">
-                      {slide.title.split(' ').slice(0, -1).join(' ')} <br />
-                      <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-purple-400">
-                        {slide.title.split(' ').slice(-1)}
-                      </span>
-                    </h1>
+                {/* Content */}
+                <div className="relative h-full flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20">
+                  <div className="max-w-5xl">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                      <div className="flex justify-center mb-8 gap-4 flex-wrap">
+                        <motion.span 
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                          className="inline-block py-1.5 px-4 rounded-full bg-indigo-600/30 border border-indigo-400/30 text-indigo-200 text-sm font-bold tracking-widest uppercase backdrop-blur-md shadow-lg"
+                        >
+                          {slide.tag}
+                        </motion.span>
+                      </div>
+                      
+                      <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-8 leading-tight drop-shadow-2xl">
+                        {slide.title} <br />
+                        <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-indigo-300">
+                          {slide.highlight}
+                        </span>
+                      </h1>
 
-                    <p className="max-w-2xl mx-auto text-xl md:text-2xl text-slate-300 leading-relaxed mb-12 font-medium">
-                      {slide.desc}
-                    </p>
+                      <p className="max-w-3xl mx-auto text-xl md:text-2xl text-slate-200 leading-relaxed mb-12 font-medium drop-shadow-md">
+                        {slide.desc}
+                      </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                      <button
-                        onClick={() => navigate("/contact", { state: { program: slide.title } })}
-                        className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 transform hover:-translate-y-1 active:scale-95"
-                      >
-                        Apply Now
-                      </button>
-                      <Link
-                        to="/programs"
-                        className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 active:scale-95"
-                      >
-                        Learn More
-                      </Link>
-                    </div>
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <motion.button
+                          whileHover={{ scale: 1.05, translateY: -4 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => navigate("/contact")}
+                          className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
+                        >
+                          Apply Now <ArrowRight className="w-6 h-6" />
+                        </motion.button>
+                        <motion.div
+                          whileHover={{ scale: 1.05, translateY: -4 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Link
+                            to="/programs"
+                            className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center"
+                          >
+                            Browse Programs
+                          </Link>
+                        </motion.div>
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </SwiperSlide>
         ))}
 
         {/* Custom Navigation Arrows */}
         <div className="hidden md:flex absolute inset-y-0 left-8 z-20 items-center">
-          <button className="swiper-button-prev-custom w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-indigo-600 hover:border-indigo-600 transition-all active:scale-90">
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          <motion.button 
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(99, 102, 241, 1)" }}
+            whileTap={{ scale: 0.9 }}
+            className="swiper-button-prev-custom w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-white transition-all shadow-2xl"
+          >
+            <ChevronLeft className="w-8 h-8" />
+          </motion.button>
         </div>
         <div className="hidden md:flex absolute inset-y-0 right-8 z-20 items-center">
-          <button className="swiper-button-next-custom w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-indigo-600 hover:border-indigo-600 transition-all active:scale-90">
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          <motion.button 
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(99, 102, 241, 1)" }}
+            whileTap={{ scale: 0.9 }}
+            className="swiper-button-next-custom w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center text-white transition-all shadow-2xl"
+          >
+            <ChevronRight className="w-8 h-8" />
+          </motion.button>
         </div>
       </Swiper>
 
@@ -143,19 +174,6 @@ export default function Hero() {
         .swiper-pagination-bullet-active {
           background: #6366f1 !important;
           width: 60px !important;
-        }
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
       `}} />
     </section>

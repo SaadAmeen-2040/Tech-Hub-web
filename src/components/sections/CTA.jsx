@@ -1,43 +1,103 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function CTA() {
-  return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-5xl mx-auto">
-        <div className="relative bg-slate-900 rounded-[3rem] overflow-hidden p-12 md:p-20 text-center">
-          {/* Background decoration */}
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-indigo-600 rounded-full blur-3xl opacity-20"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"></div>
+  const navigate = useNavigate();
 
-          <div className="relative z-10 animate-fade-in-up">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-              Ready to Start Your <br />
-              <span className="text-indigo-400">Tech Journey?</span>
-            </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-12">
-              Don't miss this opportunity to gain world-class IT skills for free. 
-              Limited seats available for the upcoming session.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1"
+  return (
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="relative bg-slate-950 rounded-[3rem] p-12 md:p-20 text-center overflow-hidden shadow-2xl shadow-indigo-500/10"
+        >
+          {/* Animated Background Orbs */}
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+              x: [0, 50, 0],
+              y: [0, -50, 0]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 right-0 w-96 h-96 bg-indigo-600 rounded-full blur-[100px] pointer-events-none"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.15, 0.1],
+              x: [0, -70, 0],
+              y: [0, 70, 0]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-[100px] pointer-events-none"
+          ></motion.div>
+
+          <div className="relative z-10 space-y-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+            >
+              <Sparkles className="w-4 h-4 text-indigo-400" />
+              <span className="text-sm font-bold text-indigo-200 uppercase tracking-widest">Enrollment is Live</span>
+            </motion.div>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight"
+            >
+              Ready to Transform Your <br />
+              <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-indigo-300">
+                Future in Tech?
+              </span>
+            </motion.h2>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            >
+              Don't miss the opportunity to learn from the best. Join thousands of students who have already started their journey with Tech Hub Bahawalpur.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05, translateY: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/contact")}
+                className="w-full sm:w-auto px-12 py-6 bg-indigo-600 text-white rounded-2xl font-black text-xl hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-600/20 flex items-center justify-center gap-3"
               >
-                Apply Now for Free
-              </Link>
-              <Link
-                to="/programs"
-                className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all transform hover:-translate-y-1"
+                Apply Now For Batch 2026 <ArrowRight className="w-6 h-6" />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05, translateY: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate("/programs")}
+                className="w-full sm:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md"
               >
                 View Courses
-              </Link>
-            </div>
-            
-            <p className="mt-8 text-slate-400 text-sm font-medium">
-              Join 1,200+ applicants for the current batch
-            </p>
+              </motion.button>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
