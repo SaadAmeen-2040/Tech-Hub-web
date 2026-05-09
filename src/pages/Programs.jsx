@@ -100,7 +100,7 @@ export default function Programs() {
                         {program.duration}
                       </div>
                       <button 
-                        onClick={() => navigate("/contact", { state: { program: program.title } })}
+                        onClick={() => navigate("/registration", { state: { program: program.title } })}
                         className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-2 group/btn transition-all text-sm"
                       >
                         Enroll Now 
@@ -136,7 +136,7 @@ export default function Programs() {
             </div>
 
             <button 
-              onClick={() => navigate("/contact")}
+              onClick={() => navigate("/registration")}
               className="px-12 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-xl flex items-center gap-3 mx-auto transform hover:-translate-y-1"
             >
               Secure Your Seat Now <ArrowRight className="w-6 h-6" />

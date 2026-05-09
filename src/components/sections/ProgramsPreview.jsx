@@ -113,7 +113,7 @@ export default function ProgramsPreview() {
               
               <motion.button 
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/contact", { state: { program: program.title } })}
+                onClick={() => navigate("/registration", { state: { program: program.title } })}
                 className="w-full py-3 sm:py-4 bg-slate-50 text-slate-900 rounded-xl font-bold group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Enroll Now <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />

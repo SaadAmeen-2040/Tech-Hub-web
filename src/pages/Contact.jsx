@@ -1,4 +1,4 @@
-import LeadForm from "../components/forms/LeadForm";
+import ContactForm from "../components/forms/ContactForm";
 import { MapPin, Mail, Phone, Building2, Clock, MessageSquare } from "lucide-react";
 
 export default function Contact() {
@@ -9,11 +9,11 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-              Contact <span className="text-gradient">Bahawalpur Center</span>
+              Get in <span className="text-gradient">Touch</span>
             </h1>
             <p className="text-xl text-slate-600 mb-12 leading-relaxed">
-              Join the Tech Hub Innovation Center in Bahawalpur. We are here to help you 
-              enroll in the Prime Minister's Youth Programme & NAVTTC courses.
+              Have questions about our courses, software services, or partnerships? 
+              Reach out to our team at Tech Hub Innovation Center Bahawalpur.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-8 mb-12">
@@ -67,8 +67,8 @@ export default function Contact() {
                   <MessageSquare className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold">Have Questions?</h4>
-                  <p className="text-indigo-100">Our team is ready to guide you through the process.</p>
+                  <h4 className="text-xl font-bold">Need Fast Help?</h4>
+                  <p className="text-indigo-100">Our support team is available during office hours.</p>
                 </div>
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
@@ -76,7 +76,7 @@ export default function Contact() {
           </div>
 
           {/* Form Section */}
-          <LeadForm />
+          <ContactForm />
         </div>
       </div>
     </div>

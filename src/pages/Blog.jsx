@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, Tag, Calendar, User, ArrowRight, TrendingUp, Newspaper } from "lucide-react";
 
@@ -40,6 +42,17 @@ const posts = [
 const categories = ["All Posts", "Tech Trends", "Success Stories", "Education", "Industry News"];
 
 export default function Blog() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      alert(`Success! ${email} has been subscribed to the Tech Hub newsletter.`);
+      setEmail("");
+    }
+  };
+
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
       {/* Hero */}
@@ -129,7 +142,10 @@ export default function Blog() {
                 <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
-                <button className="flex items-center gap-3 font-black text-indigo-600 group-hover:gap-5 transition-all mt-auto">
+                <button 
+                  onClick={() => navigate("/contact", { state: { subject: `Blog Inquiry: ${post.title}` } })}
+                  className="flex items-center gap-3 font-black text-indigo-600 group-hover:gap-5 transition-all mt-auto"
+                >
                   Read Full Article <ArrowRight className="w-5 h-5" />
                 </button>
               </div>
@@ -149,16 +165,22 @@ export default function Blog() {
               Subscribe to get the latest tech insights and institutional 
               updates delivered directly to your inbox every week.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
               <input 
                 type="email" 
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email" 
                 className="flex-1 px-8 py-5 bg-white rounded-2xl text-slate-900 font-bold border-none focus:ring-4 focus:ring-indigo-300 outline-none"
               />
-              <button className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-2xl">
+              <button 
+                type="submit"
+                className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-2xl"
+              >
                 Subscribe
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>

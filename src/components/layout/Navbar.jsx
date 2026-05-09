@@ -64,6 +64,7 @@ export default function Navbar() {
         { name: "Tech Blog", path: "/blog", icon: <Newspaper className="w-4 h-4" /> },
       ]
     },
+    { name: "Contact", path: "/contact", icon: <MessageCircle className="w-4 h-4" /> },
   ];
 
   const isHomePage = location.pathname === "/";
@@ -237,7 +238,10 @@ export default function Navbar() {
                   <div key={item.name} className="space-y-2">
                     <Link
                       to={item.path}
-                      onClick={() => !item.submenu && setIsOpen(false)}
+                      onClick={() => {
+                        if (item.path === "/") handleLogoClick();
+                        if (!item.submenu) setIsOpen(false);
+                      }}
                       className={`flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${
                         location.pathname === item.path
                           ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"

@@ -13,7 +13,8 @@ import {
   ArrowRight,
   CheckCircle2,
   GraduationCap,
-  Award
+  Award,
+  Cpu
 } from "lucide-react";
 
 const services = [
@@ -29,9 +30,9 @@ const services = [
 
   {
     title: "Software Development",
-    description: "We build scalable, high-performance custom software solutions tailored to your business needs.",
+    description: "Tailored digital products for startups and enterprises, ranging from e-commerce to AI-driven automation.",
     icon: <Code2 className="w-12 h-12" />,
-    features: ["Custom ERP Systems", "E-commerce Platforms", "Mobile Applications", "Cloud Solutions"],
+    features: ["Custom ERP & E-commerce", "AI & LLM Integration", "Mobile & Web Apps", "Final Year Projects (FYP)"],
     color: "bg-indigo-600",
     highlight: true
   },
@@ -54,9 +55,9 @@ const services = [
 
 const devTech = [
   { name: "Frontend", icons: ["React", "Next.js", "Vue.js", "Tailwind"] },
-  { name: "Backend", icons: ["Node.js", "Python", "PHP", "Go"] },
-  { name: "Database", icons: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
-  { name: "Cloud", icons: ["AWS", "Azure", "Docker", "Kubernetes"] },
+  { name: "Backend", icons: ["Node.js", "Python", "Go", "FastAPI"] },
+  { name: "AI & Automation", icons: ["OpenAI", "LangChain", "TensorFlow", "Bots"] },
+  { name: "Cloud & DevOps", icons: ["AWS", "Docker", "Kubernetes", "Redis"] },
 ];
 
 const trainingFeatures = [
@@ -132,7 +133,7 @@ export default function Services() {
                 </div>
                 {service.highlight && (
                   <button 
-                    onClick={() => navigate(service.title === "Software Development" ? "/contact" : "/programs")}
+                    onClick={() => navigate(service.title === "Software Development" ? "/software-development" : "/programs")}
                     className="mt-10 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-700 transition-all"
                   >
                     {service.title === "Software Development" ? "Request a Quote" : "View Courses"} <ArrowRight className="w-5 h-5" />
@@ -148,11 +149,11 @@ export default function Services() {
                       <>
                         <div className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10">
                           <Smartphone className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
-                          <h4 className="font-bold">Mobile First</h4>
+                          <h4 className="font-bold">Mobile/Web</h4>
                         </div>
                         <div className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10">
-                          <Globe className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
-                          <h4 className="font-bold">Cloud Ready</h4>
+                          <Cpu className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
+                          <h4 className="font-bold">AI Driven</h4>
                         </div>
                       </>
                     ) : (
@@ -312,7 +313,7 @@ export default function Services() {
           services to help your business thrive in the digital age.
         </p>
         <button 
-          onClick={() => navigate("/contact")}
+          onClick={() => navigate("/software-development")}
           className="px-12 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1"
         >
           Start Your Project Now

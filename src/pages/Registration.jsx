@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   User, 
@@ -16,11 +17,35 @@ import {
 } from "lucide-react";
 
 export default function Registration() {
+  const location = useLocation();
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    fatherName: "",
+    whatsapp: "",
+    email: "",
+    cnic: "",
+    dob: "",
+    qualification: "",
+    fieldOfStudy: "",
+    course: location.state?.program || "",
+    address: "",
+    guardianPhone: ""
+  });
+
+  useEffect(() => {
+    if (location.state?.program) {
+      setFormData(prev => ({ ...prev, course: location.state.program }));
+    }
+  }, [location.state]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate API call
+    console.log("Admission Data:", formData);
     setSubmitted(true);
   };
 
@@ -71,8 +96,8 @@ export default function Registration() {
             <span className="text-indigo-600 font-black text-sm uppercase tracking-widest">NAVTTC & PM Youth Program</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight mb-6">
-            100% Free Training with <br />
-            <span className="text-gradient">Free International Certification</span>
+            100% Free Training with Free International Certification <br />
+            <span className="text-gradient">Under NAVTTC</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Secure your future in tech. Fill out the official admission form below 
@@ -105,6 +130,9 @@ export default function Registration() {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                     <input 
                       required 
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
                       placeholder="Enter your full name" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -117,6 +145,9 @@ export default function Registration() {
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                     <input 
                       required 
+                      name="fatherName"
+                      value={formData.fatherName}
+                      onChange={handleChange}
                       placeholder="Enter father's name" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -130,6 +161,9 @@ export default function Registration() {
                     <input 
                       required 
                       type="tel" 
+                      name="whatsapp"
+                      value={formData.whatsapp}
+                      onChange={handleChange}
                       placeholder="03012345678" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -143,6 +177,9 @@ export default function Registration() {
                     <input 
                       required 
                       type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder="example@gmail.com" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -155,6 +192,9 @@ export default function Registration() {
                     <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                     <input 
                       required 
+                      name="cnic"
+                      value={formData.cnic}
+                      onChange={handleChange}
                       placeholder="3220401234567" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -168,6 +208,9 @@ export default function Registration() {
                     <input 
                       required 
                       type="date" 
+                      name="dob"
+                      value={formData.dob}
+                      onChange={handleChange}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
                   </div>
@@ -193,6 +236,9 @@ export default function Registration() {
                     <GraduationCap className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors z-10" />
                     <select 
                       required 
+                      name="qualification"
+                      value={formData.qualification}
+                      onChange={handleChange}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900 appearance-none relative"
                     >
                       <option value="">Select Qualification</option>
@@ -210,6 +256,9 @@ export default function Registration() {
                     <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                     <input 
                       required 
+                      name="fieldOfStudy"
+                      value={formData.fieldOfStudy}
+                      onChange={handleChange}
                       placeholder="e.g. BS Computer Science" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />
@@ -222,6 +271,9 @@ export default function Registration() {
                     <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors z-10" />
                     <select 
                       required 
+                      name="course"
+                      value={formData.course}
+                      onChange={handleChange}
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900 appearance-none relative"
                     >
                       <option value="">Select a Program</option>
@@ -255,6 +307,9 @@ export default function Registration() {
                     <textarea 
                       required 
                       rows="3"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
                       placeholder="Enter your complete home address" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900 resize-none"
                     />
@@ -268,6 +323,9 @@ export default function Registration() {
                     <input 
                       required 
                       type="tel" 
+                      name="guardianPhone"
+                      value={formData.guardianPhone}
+                      onChange={handleChange}
                       placeholder="030XXXXXXXX" 
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition-all font-medium text-slate-900"
                     />

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Trophy, Code2, Cpu, Palette, Globe, Briefcase } from "lucide-react";
 
@@ -43,6 +45,13 @@ const studentProjects = [
 const filters = ["All Projects", "AI & ML", "Web Design", "Design", "Security"];
 
 export default function Projects() {
+  const navigate = useNavigate();
+  const [activeFilter, setActiveFilter] = useState("All Projects");
+
+  const filteredProjects = activeFilter === "All Projects" 
+    ? studentProjects 
+    : studentProjects.filter(project => project.type === activeFilter);
+
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
@@ -72,8 +81,9 @@ export default function Projects() {
           {filters.map((filter, i) => (
             <button 
               key={i} 
+              onClick={() => setActiveFilter(filter)}
               className={`px-8 py-3 rounded-full font-black text-sm transition-all ${
-                i === 0 ? "bg-indigo-600 text-white shadow-xl shadow-indigo-600/25" : "bg-slate-50 text-slate-500 hover:bg-slate-100"
+                activeFilter === filter ? "bg-indigo-600 text-white shadow-xl shadow-indigo-600/25" : "bg-slate-50 text-slate-500 hover:bg-slate-100"
               }`}
             >
               {filter}
@@ -84,13 +94,14 @@ export default function Projects() {
 
       {/* Projects Grid */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-        {studentProjects.map((project, index) => (
+        {filteredProjects.map((project, index) => (
           <motion.div
-            key={index}
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 50 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            key={project.title}
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
             className="group relative bg-slate-900 rounded-[3.5rem] overflow-hidden shadow-2xl transition-all duration-500"
           >
             {/* Image Overlay */}
@@ -110,7 +121,10 @@ export default function Projects() {
               {/* Hover Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-12 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-10 group-hover:translate-y-0">
                 <div className="flex gap-4 mb-6">
-                  <button className="p-4 bg-white rounded-2xl text-slate-900 hover:bg-indigo-600 hover:text-white transition-all shadow-xl">
+                  <button 
+                    onClick={() => navigate("/contact", { state: { subject: `Project Inquiry: ${project.title}` } })}
+                    className="p-4 bg-white rounded-2xl text-slate-900 hover:bg-indigo-600 hover:text-white transition-all shadow-xl"
+                  >
                     <ExternalLink className="w-6 h-6" />
                   </button>
                   <button className="p-4 bg-white/10 backdrop-blur-md rounded-2xl text-white hover:bg-indigo-600 transition-all border border-white/20">
@@ -160,7 +174,10 @@ export default function Projects() {
             Our graduates are equipped with industry-standard skills and ready to 
             contribute to your team's success. Hire the best from Tech Hub.
           </p>
-          <button className="px-12 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-xl shadow-white/10">
+          <button 
+            onClick={() => navigate("/contact", { state: { subject: "Talent Profile Request" } })}
+            className="px-12 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-xl shadow-white/10"
+          >
             Request Talent Profile
           </button>
         </div>

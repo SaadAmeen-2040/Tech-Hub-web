@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight, Video, Users, Award } from "lucide-react";
 
@@ -29,6 +30,8 @@ const pastEvents = [
 ];
 
 export default function Events() {
+  const navigate = useNavigate();
+
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 text-center">
@@ -91,7 +94,10 @@ export default function Events() {
                 <p className="text-slate-600 mb-8 leading-relaxed">
                   {event.description}
                 </p>
-                <button className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all">
+                <button 
+                  onClick={() => navigate("/contact", { state: { subject: `Event Registration: ${event.title}` } })}
+                  className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all"
+                >
                   Register for Free <ArrowRight className="w-5 h-5" />
                 </button>
               </div>
@@ -140,7 +146,10 @@ export default function Events() {
               Join our weekly webinars and live Q&A sessions with industry experts 
               right from the comfort of your home.
             </p>
-            <button className="px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-2xl">
+            <button 
+              onClick={() => navigate("/contact", { state: { subject: "Webinar Link Request" } })}
+              className="px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-2xl"
+            >
               Watch Live Sessions
             </button>
           </div>

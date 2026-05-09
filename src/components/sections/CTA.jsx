@@ -64,7 +64,7 @@ export default function CTA() {
               <motion.button
                 whileHover={{ scale: 1.05, translateY: -5 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/contact")}
+                onClick={() => navigate("/registration")}
                 className="w-full sm:w-auto px-6 py-4 sm:px-12 sm:py-6 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-xl hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-600/20 flex items-center justify-center gap-3"
               >
                 Apply Now For Batch 2026 <ArrowRight className="w-6 h-6" />

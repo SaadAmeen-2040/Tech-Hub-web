@@ -8,6 +8,7 @@ import Events from "./pages/Events";
 import Blog from "./pages/Blog";
 import Projects from "./pages/Projects";
 import Registration from "./pages/Registration";
+import SoftwareDevelopment from "./pages/SoftwareDevelopment";
 import MainLayout from "./components/layout/MainLayout";
 import ScrollToTop from "./components/utils/ScrollToTop";
 
@@ -26,6 +27,7 @@ export default function AppRoutes() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/software-development" element={<SoftwareDevelopment />} />
         </Route>
       </Routes>
     </BrowserRouter>
