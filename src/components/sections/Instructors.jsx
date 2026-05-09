@@ -34,12 +34,11 @@ export default function Instructors() {
               <img 
                 src={`/assets/instructors/${instructor.image}`} 
                 alt={instructor.name}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                 onError={(e) => {
                   e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(instructor.name) + "&background=6366f1&color=fff&size=512";
                 }}
               />
-              <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
 
             {/* Content */}
