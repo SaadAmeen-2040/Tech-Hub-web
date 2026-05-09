@@ -88,13 +88,13 @@ export default function WhyChooseUs() {
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '30px 30px' }}></div>
               
               <div className="relative z-10 space-y-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center">
-                    <ShieldCheck className="w-8 h-8" />
+                <div className="flex items-center gap-6">
+                  <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center p-2 shadow-xl overflow-hidden shrink-0">
+                    <img src="/src/assets/navttcofficial_logo.jpg" alt="NAVTTC Official Logo" className="w-full h-full object-contain" />
                   </div>
                   <div>
-                    <p className="text-indigo-200 font-bold uppercase tracking-tighter text-xs">Official Partner</p>
-                    <p className="text-xl font-black tracking-tight">NAVTTC & PM YOUTH</p>
+                    <p className="text-indigo-200 font-bold uppercase tracking-widest text-[10px]">Strategic Partner</p>
+                    <p className="text-2xl font-black tracking-tight text-white leading-tight">NAVTTC & PM YOUTH<br/>PROGRAM</p>
                   </div>
                 </div>
 

@@ -84,8 +84,8 @@ export default function About() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl"></div>
               <div className="relative z-10 text-center">
-                <div className="w-32 h-32 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/20">
-                  <span className="text-white text-6xl font-black">T</span>
+                <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/20 overflow-hidden shadow-2xl">
+                  <img src="/src/assets/logo.png" alt="Tech Hub" className="w-full h-full object-cover" />
                 </div>
                 <h3 className="text-white text-3xl font-bold">Tech Hub</h3>
                 <p className="text-white/60 mt-2">Innovation Center Bahawalpur</p>
@@ -110,7 +110,7 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img 
-                  src="/src/assets/instructors/principal_salman .png" 
+                  src="/src/assets/instructors/principal_salman.png" 
                   alt="Muhammad Salman - Principal"
                   className="w-full h-full object-cover"
                 />
