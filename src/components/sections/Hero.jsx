@@ -67,9 +67,9 @@ export default function Hero() {
               <div className="relative h-full w-full">
                 {/* Background Image with Overlay */}
                 <motion.div 
-                  initial={{ scale: 1.1 }}
-                  animate={isActive ? { scale: 1 } : { scale: 1.1 }}
-                  transition={{ duration: 6, ease: "easeOut" }}
+                  initial={{ scale: 1.05 }}
+                  animate={isActive ? { scale: 1 } : { scale: 1.05 }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${slide.img})` }}
                 >
@@ -111,7 +111,7 @@ export default function Hero() {
                           whileHover={{ scale: 1.05, translateY: -4 }}
                           whileTap={{ scale: 0.95 }}
                           onClick={() => navigate("/contact")}
-                          className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
+                          className="w-full sm:w-auto px-6 py-3 sm:px-10 sm:py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg sm:text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
                         >
                           Apply Now <ArrowRight className="w-6 h-6" />
                         </motion.button>
@@ -121,7 +121,7 @@ export default function Hero() {
                         >
                           <Link
                             to="/programs"
-                            className="w-full sm:w-auto px-10 py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center"
+                            className="w-full sm:w-auto px-6 py-3 sm:px-10 sm:py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-2xl font-bold text-lg sm:text-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center"
                           >
                             Browse Programs
                           </Link>

@@ -59,8 +59,8 @@ export default function WhyChooseUs() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ x: 10 }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  whileHover={{ scale: 1.02 }}
                   className="flex items-start gap-6 p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-300"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shrink-0">
@@ -82,8 +82,8 @@ export default function WhyChooseUs() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-linear-to-tr from-indigo-500/20 to-purple-500/20 rounded-[3rem] blur-2xl transform rotate-3"></div>
-            <div className="relative bg-indigo-600 rounded-[3rem] p-12 lg:p-16 text-white overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 bg-linear-to-tr from-indigo-500/20 to-purple-500/20 rounded-[2rem] sm:rounded-[3rem] blur-2xl transform rotate-3"></div>
+            <div className="relative bg-indigo-600 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl">
               {/* Pattern */}
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '30px 30px' }}></div>
               
@@ -114,7 +114,7 @@ export default function WhyChooseUs() {
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.5 + (i * 0.1) }}
+                      transition={{ duration: 0.4, delay: i * 0.1 }}
                       className="flex items-center gap-4"
                     >
                       <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
@@ -127,11 +127,11 @@ export default function WhyChooseUs() {
 
                 <div className="pt-6">
                   <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center gap-4 bg-white p-2 rounded-2xl pr-8 group cursor-pointer shadow-xl shadow-black/10"
                   >
-                    <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white group-hover:rotate-12 transition-transform">
+                    <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white transition-transform">
                       <Zap className="w-6 h-6" />
                     </div>
                     <div>

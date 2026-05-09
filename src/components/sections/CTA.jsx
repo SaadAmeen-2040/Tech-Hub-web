@@ -15,27 +15,9 @@ export default function CTA() {
           transition={{ duration: 0.8 }}
           className="relative bg-slate-950 rounded-[3rem] p-12 md:p-20 text-center overflow-hidden shadow-2xl shadow-indigo-500/10"
         >
-          {/* Animated Background Orbs */}
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1],
-              x: [0, 50, 0],
-              y: [0, -50, 0]
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 right-0 w-96 h-96 bg-indigo-600 rounded-full blur-[100px] pointer-events-none"
-          ></motion.div>
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.15, 0.1],
-              x: [0, -70, 0],
-              y: [0, 70, 0]
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-[100px] pointer-events-none"
-          ></motion.div>
+          {/* Static Background Orbs for better performance */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600 rounded-full blur-[100px] pointer-events-none opacity-10"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-[100px] pointer-events-none opacity-10"></div>
 
           <div className="relative z-10 space-y-10">
             <motion.div 
@@ -83,7 +65,7 @@ export default function CTA() {
                 whileHover={{ scale: 1.05, translateY: -5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/contact")}
-                className="w-full sm:w-auto px-12 py-6 bg-indigo-600 text-white rounded-2xl font-black text-xl hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-600/20 flex items-center justify-center gap-3"
+                className="w-full sm:w-auto px-6 py-4 sm:px-12 sm:py-6 bg-indigo-600 text-white rounded-2xl font-black text-base sm:text-xl hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-600/20 flex items-center justify-center gap-3"
               >
                 Apply Now For Batch 2026 <ArrowRight className="w-6 h-6" />
               </motion.button>
@@ -91,7 +73,7 @@ export default function CTA() {
                 whileHover={{ scale: 1.05, translateY: -5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/programs")}
-                className="w-full sm:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-md"
+                className="w-full sm:w-auto px-6 py-4 sm:px-12 sm:py-6 bg-white/5 border border-white/10 text-white rounded-2xl font-bold text-base sm:text-xl hover:bg-white/10 transition-all backdrop-blur-md"
               >
                 View Courses
               </motion.button>

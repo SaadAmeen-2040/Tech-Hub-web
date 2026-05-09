@@ -87,7 +87,7 @@ export default function Navbar() {
                 {location.pathname === link.path && !showSolidNav && (
                   <motion.div 
                     layoutId="navUnderline"
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-white rounded-full"
+                  
                   />
                 )}
               </Link>
@@ -99,7 +99,7 @@ export default function Navbar() {
             >
               <Link
                 to="/contact"
-                className="px-6 py-2.5 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-sm hover:shadow-xl hover:shadow-indigo-500/25 transition-all"
+                className="px-4 py-2 sm:px-6 sm:py-2.5 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-sm hover:shadow-xl hover:shadow-indigo-500/25 transition-all"
               >
                 Apply Now
               </Link>
@@ -145,7 +145,7 @@ export default function Navbar() {
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 300, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="absolute right-4 top-24 w-72 bg-white rounded-3xl shadow-2xl border border-slate-100 p-6"
             >
               <div className="space-y-2">

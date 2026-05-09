@@ -34,7 +34,7 @@ export default function ProgramsPreview() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   };
@@ -68,7 +68,7 @@ export default function ProgramsPreview() {
           >
             <Link 
               to="/programs" 
-              className="group px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-all duration-300 shadow-xl shadow-slate-900/10 flex items-center gap-2"
+              className="group px-6 py-3 sm:px-8 sm:py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-all duration-300 shadow-xl shadow-slate-900/10 flex items-center gap-2"
             >
               View All Tracks
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -87,12 +87,12 @@ export default function ProgramsPreview() {
             <motion.div 
               key={program.id}
               variants={cardVariants}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
               className="group bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500"
             >
               <div className="flex items-center justify-between mb-8">
                 <motion.div 
-                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500"
                 >
                   {getIcon(program.domain)}
@@ -114,7 +114,7 @@ export default function ProgramsPreview() {
               <motion.button 
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/contact", { state: { program: program.title } })}
-                className="w-full py-4 bg-slate-50 text-slate-900 rounded-xl font-bold group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full py-3 sm:py-4 bg-slate-50 text-slate-900 rounded-xl font-bold group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Enroll Now <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
               </motion.button>

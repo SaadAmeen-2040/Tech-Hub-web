@@ -22,8 +22,8 @@ function Counter({ value, suffix }) {
       onViewportEnter={() => {
         let start = 0;
         const end = value;
-        const duration = 2000;
-        const increment = end / (duration / 16);
+        const duration = 1500;
+        const increment = end / (duration / 32);
         
         const timer = setInterval(() => {
           start += increment;
@@ -33,7 +33,7 @@ function Counter({ value, suffix }) {
           } else {
             setCount(Math.floor(start));
           }
-        }, 16);
+        }, 32);
         return () => clearInterval(timer);
       }}
     >
@@ -63,7 +63,7 @@ export default function Stats() {
               className="flex flex-col items-center text-center group"
             >
               <motion.div 
-                whileHover={{ scale: 1.1, rotate: 12 }}
+                whileHover={{ scale: 1.05 }}
                 className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center text-white mb-6 border border-white/20 shadow-xl"
               >
                 {stat.icon}

@@ -32,8 +32,8 @@ export default function LeadForm() {
   };
 
   const inputVariants = {
-    focus: { scale: 1.02, borderColor: "#6366f1", transition: { duration: 0.2 } },
-    initial: { scale: 1, borderColor: "#e2e8f0" }
+    focus: { borderColor: "#6366f1", boxShadow: "0 0 0 4px rgba(99, 102, 241, 0.2)", transition: { duration: 0.2 } },
+    initial: { borderColor: "#e2e8f0", boxShadow: "0 0 0 0px rgba(99, 102, 241, 0)" }
   };
 
   return (
@@ -119,7 +119,7 @@ export default function LeadForm() {
             </label>
             <div className="relative">
               <motion.select
-                whileFocus={{ scale: 1.02, borderColor: "#6366f1" }}
+                whileFocus={{ borderColor: "#6366f1", boxShadow: "0 0 0 4px rgba(99, 102, 241, 0.2)" }}
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
@@ -156,7 +156,7 @@ export default function LeadForm() {
         <motion.button 
           whileHover={{ scale: 1.02, backgroundColor: "#4f46e5" }}
           whileTap={{ scale: 0.98 }}
-          className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-indigo-600/20 mt-4 flex items-center justify-center gap-2"
+          className="w-full py-4 sm:py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg transition-all shadow-xl shadow-indigo-600/20 mt-4 flex items-center justify-center gap-2"
         >
           Submit Application <Send className="w-5 h-5" />
         </motion.button>

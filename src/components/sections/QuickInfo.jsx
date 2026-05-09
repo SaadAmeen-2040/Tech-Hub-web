@@ -15,10 +15,10 @@ export default function QuickInfo() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative z-20 -mt-12 px-4 sm:px-6 lg:px-8"
+      className="relative z-20 w-full"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-2 shadow-2xl shadow-black/50">
+      <div className="w-full bg-slate-900/95 backdrop-blur-2xl border-y border-white/10 py-2 shadow-2xl shadow-black/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
             {infoItems.map((item, i) => (
               <motion.div 
