@@ -8,7 +8,7 @@ const posts = [
     category: "Success Stories",
     author: "Admin",
     date: "May 08, 2026",
-    image: "/src/assets/blog/success.png",
+    image: "/assets/blog/success.png",
     featured: true
   },
   {
@@ -17,7 +17,7 @@ const posts = [
     category: "Tech Trends",
     author: "Engr. Salman",
     date: "May 05, 2026",
-    image: "/src/assets/projects/ai_dashboard.png"
+    image: "/assets/projects/ai_dashboard.png"
   },
   {
     title: "Mastering the MERN Stack in 90 Days",
@@ -25,7 +25,7 @@ const posts = [
     category: "Education",
     author: "Asad Ullah",
     date: "April 28, 2026",
-    image: "/src/assets/projects/ecommerce.png"
+    image: "/assets/projects/ecommerce.png"
   },
   {
     title: "Why Bahawalpur is the Next Tech Hub",
@@ -33,7 +33,7 @@ const posts = [
     category: "Industry News",
     author: "Admin",
     date: "April 15, 2026",
-    image: "/src/assets/events/seminar.png"
+    image: "/assets/events/seminar.png"
   }
 ];
 

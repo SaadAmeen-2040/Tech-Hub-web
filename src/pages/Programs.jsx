@@ -81,7 +81,7 @@ export default function Programs() {
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 shadow-sm">
                         <img 
-                          src={`/src/assets/instructors/${program.instructor.image}`} 
+                          src={`/assets/instructors/${program.instructor.image}`} 
                           alt={program.instructor.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {

@@ -8,7 +8,7 @@ const upcomingEvents = [
     time: "10:00 AM - 01:00 PM",
     location: "Main Auditorium, Tech Hub",
     type: "Seminar",
-    image: "/src/assets/events/seminar.png",
+    image: "/assets/events/seminar.png",
     description: "Join us for an insightful seminar on how AI is reshaping industries in Pakistan and the global market."
   },
   {
@@ -17,7 +17,7 @@ const upcomingEvents = [
     time: "02:00 PM - 05:00 PM",
     location: "Lab 01, Tech Hub",
     type: "Workshop",
-    image: "/src/assets/projects/ecommerce.png",
+    image: "/assets/projects/ecommerce.png",
     description: "A hands-on workshop focused on building scalable MERN stack applications for modern businesses."
   }
 ];

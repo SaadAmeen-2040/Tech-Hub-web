@@ -102,7 +102,7 @@ export default function Navbar() {
               whileHover={{ rotate: 12, scale: 1.1 }}
               className="w-11 h-11 bg-white rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-indigo-500/40 overflow-hidden"
             >
-              <img src="/src/assets/logo/logo.png" alt="Tech Hub Logo" className="w-full h-full object-cover" />
+              <img src="/assets/logo/logo.png" alt="Tech Hub Logo" className="w-full h-full object-cover" />
             </motion.div>
             <div className="flex flex-col">
               <span className={`text-xl font-black tracking-tighter transition-colors duration-300 leading-none ${

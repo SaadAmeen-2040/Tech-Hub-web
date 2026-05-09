@@ -110,7 +110,7 @@ export default function Hero() {
                         <motion.button
                           whileHover={{ scale: 1.05, translateY: -4 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => navigate("/contact")}
+                          onClick={() => navigate("/registration")}
                           className="w-full sm:w-auto px-6 py-3 sm:px-10 sm:py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg sm:text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
                         >
                           Apply Now <ArrowRight className="w-6 h-6" />

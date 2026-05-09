@@ -6,7 +6,7 @@ const studentProjects = [
     title: "AI-Powered Health Assistant",
     student: "Muhammad Ahmed",
     course: "Artificial Intelligence",
-    image: "/src/assets/projects/ai_dashboard.png",
+    image: "/assets/projects/ai_dashboard.png",
     description: "A smart diagnostic system that uses machine learning to predict potential health risks based on symptoms.",
     tags: ["Python", "TensorFlow", "React"],
     type: "AI & ML"
@@ -15,7 +15,7 @@ const studentProjects = [
     title: "Luxury Fashion Hub",
     student: "Fatima Noor",
     course: "Web Development",
-    image: "/src/assets/projects/ecommerce.png",
+    image: "/assets/projects/ecommerce.png",
     description: "A full-stack e-commerce platform with real-time inventory management and secure payment integration.",
     tags: ["MERN Stack", "Stripe", "Redux"],
     type: "Web Design"
@@ -24,7 +24,7 @@ const studentProjects = [
     title: "Eco-Friendly Brand Identity",
     student: "Zain Ali",
     course: "Graphic Design",
-    image: "/src/assets/blog/success.png",
+    image: "/assets/blog/success.png",
     description: "Complete visual branding for a sustainable energy company, including logo, packaging, and digital assets.",
     tags: ["Illustrator", "Photoshop", "Figma"],
     type: "Design"
@@ -33,7 +33,7 @@ const studentProjects = [
     title: "Secure Enterprise Network",
     student: "Usman Raza",
     course: "Cyber Security",
-    image: "/src/assets/events/seminar.png",
+    image: "/assets/events/seminar.png",
     description: "A robust network architecture designed with ethical hacking defenses and automated intrusion detection.",
     tags: ["Networking", "Cisco", "Linux"],
     type: "Security"

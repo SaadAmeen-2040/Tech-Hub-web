@@ -32,7 +32,7 @@ export default function Instructors() {
             {/* Image Container */}
             <div className="relative aspect-square overflow-hidden">
               <img 
-                src={`/src/assets/instructors/${instructor.image}`} 
+                src={`/assets/instructors/${instructor.image}`} 
                 alt={instructor.name}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                 onError={(e) => {
