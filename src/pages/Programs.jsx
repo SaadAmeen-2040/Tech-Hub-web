@@ -78,17 +78,35 @@ export default function Programs() {
                   </p>
                   
                   <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                    <div className="flex items-center gap-2 text-slate-400 font-bold text-xs uppercase tracking-widest">
-                      <Clock className="w-4 h-4" />
-                      {program.duration}
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 shadow-sm">
+                        <img 
+                          src={`/src/assets/instructors/${program.instructor.image}`} 
+                          alt={program.instructor.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(program.instructor.name) + "&background=6366f1&color=fff";
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Instructor</span>
+                        <span className="text-sm font-bold text-slate-700">{program.instructor.name}</span>
+                      </div>
                     </div>
-                    <button 
-                      onClick={() => navigate("/contact", { state: { program: program.title } })}
-                      className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-2 group/btn transition-all"
-                    >
-                      Apply Now 
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest">
+                        <Clock className="w-4 h-4" />
+                        {program.duration}
+                      </div>
+                      <button 
+                        onClick={() => navigate("/contact", { state: { program: program.title } })}
+                        className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-2 group/btn transition-all text-sm"
+                      >
+                        Enroll Now 
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

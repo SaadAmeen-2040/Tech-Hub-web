@@ -1,0 +1,244 @@
+import { motion } from "framer-motion";
+import { Target, Eye, Award, Users, BookOpen, Rocket, ShieldCheck, Zap } from "lucide-react";
+import Instructors from "../components/sections/Instructors";
+
+const stats = [
+  { label: "Years Experience", value: "20+", icon: <Award className="w-6 h-6" /> },
+  { label: "Successful Graduates", value: "10,000+", icon: <Users className="w-6 h-6" /> },
+  { label: "IT Courses", value: "25+", icon: <BookOpen className="w-6 h-6" /> },
+  { label: "Expert Instructors", value: "50+", icon: <Rocket className="w-6 h-6" /> },
+];
+
+const values = [
+  {
+    title: "Innovation",
+    description: "Staying at the forefront of technological advancements to provide the most relevant training.",
+    icon: <Zap className="w-8 h-8" />,
+    color: "bg-indigo-50 text-indigo-600"
+  },
+  {
+    title: "Excellence",
+    description: "Committed to the highest standards of technical education and practical hands-on learning.",
+    icon: <Award className="w-8 h-8" />,
+    color: "bg-purple-50 text-purple-600"
+  },
+  {
+    title: "Integrity",
+    description: "Building trust through ethical practices and transparent communication with our students.",
+    icon: <ShieldCheck className="w-8 h-8" />,
+    color: "bg-emerald-50 text-emerald-600"
+  },
+  {
+    title: "Student-Centric",
+    description: "Focusing on the growth and perception of individuals to help them face the professional world.",
+    icon: <Users className="w-8 h-8" />,
+    color: "bg-blue-50 text-blue-600"
+  }
+];
+
+export default function About() {
+  return (
+    <div className="pt-32 pb-24 bg-white overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm mb-6">
+              <Rocket className="w-4 h-4" />
+              <span>About Tech Hub</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
+              Empowering the Next <span className="text-gradient">Tech Generation</span>
+            </h1>
+            <p className="text-xl text-slate-600 leading-relaxed mb-10">
+              For over two decades, our mission has been to provide excellent technical education 
+              standards through modern forms of instruction. We create an environment that grooms 
+              the perception and technical intellect of individuals.
+            </p>
+            
+            <div className="grid grid-cols-2 gap-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <div className="flex items-center gap-3 text-indigo-600 font-bold">
+                    {stat.icon}
+                    <span className="text-2xl">{stat.value}</span>
+                  </div>
+                  <span className="text-slate-500 font-medium">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-linear-to-tr from-indigo-600/20 to-purple-600/20 rounded-[3rem] blur-3xl -z-10"></div>
+            <div className="bg-slate-900 rounded-[3rem] p-8 aspect-square flex items-center justify-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl"></div>
+              <div className="relative z-10 text-center">
+                <div className="w-32 h-32 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/20">
+                  <span className="text-white text-6xl font-black">T</span>
+                </div>
+                <h3 className="text-white text-3xl font-bold">Tech Hub</h3>
+                <p className="text-white/60 mt-2">Innovation Center Bahawalpur</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Principal Section */}
+      <section className="py-24 bg-slate-900 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px]"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-2xl">
+                <img 
+                  src="/src/assets/instructors/principal_salman .png" 
+                  alt="Muhammad Salman - Principal"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-2xl hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+                    "
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">Muhammad Salman</h4>
+                    <p className="text-sm text-slate-500">Principal, Tech Hub</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: 50 }}
+              viewport={{ once: true }}
+              className="text-white"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-indigo-300 font-bold text-sm mb-8">
+                <Award className="w-4 h-4" />
+                <span>Leadership Excellence</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                Message from the <span className="text-indigo-400">Principal</span>
+              </h2>
+              <div className="space-y-6 text-lg text-slate-300 leading-relaxed italic">
+                <p>
+                  "Welcome to Tech Hub Innovation Center Bahawalpur. Our mission is to transform the 
+                  technological landscape of our region by providing world-class, free IT education 
+                  to the youth."
+                </p>
+                <p>
+                  "We believe that skill development is the key to economic prosperity. Through our 
+                  partnership with NAVTTC and PMYSDP, we ensure that every student who enters our 
+                  doors receives the highest standard of technical training and international 
+                  certification."
+                </p>
+                <p>
+                  "Our doors are always open to those who dare to dream and are ready to work hard 
+                  to achieve professional excellence in the global tech market."
+                </p>
+              </div>
+              <div className="mt-10 pt-10 border-t border-white/10">
+                <h4 className="text-xl font-bold text-white">Muhammad Salman</h4>
+                <p className="text-indigo-400 font-medium">Principal & IT Visionary</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="bg-slate-50 py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+          <motion.div
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            viewport={{ once: true }}
+            className="bg-white p-12 rounded-[2.5rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
+          >
+            <div className="w-16 h-16 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-600/20">
+              <Target className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
+            <p className="text-lg text-slate-600 leading-relaxed italic">
+              "To empower individuals and organizations with the knowledge and skills needed to excel in 
+              the rapidly evolving field of Information Technology. We are committed to providing 
+              high-quality, comprehensive, and practical IT training programs that equip our students 
+              with the latest industry-relevant skills, tools, and technologies."
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="bg-white p-12 rounded-[2.5rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
+          >
+            <div className="w-16 h-16 bg-purple-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-purple-600/20">
+              <Eye className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Vision</h2>
+            <p className="text-lg text-slate-600 leading-relaxed italic">
+              "To be the preferred choice for IT training, recognized for our excellence, integrity, 
+              and commitment to student satisfaction. We strive to highlight the inner potential of 
+              students in order to develop the competitive character needed to face the professional world 
+              in Pakistan and beyond."
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Core Values</h2>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            The principles that guide our education and student support every day.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {values.map((value, index) => (
+            <motion.div
+              key={index}
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group"
+            >
+              <div className={`w-16 h-16 ${value.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                {value.icon}
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">{value.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{value.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <Instructors />
+    </div>
+  );
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronRight, LayoutDashboard, BookOpen, MessageCircle, Home } from "lucide-react";
+import { Menu, X, ChevronRight, LayoutDashboard, BookOpen, MessageCircle, Home, Info } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -18,6 +18,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
+    { name: "About", path: "/about", icon: <Info className="w-4 h-4" /> },
     { name: "Programs", path: "/programs", icon: <BookOpen className="w-4 h-4" /> },
     { name: "Contact", path: "/contact", icon: <MessageCircle className="w-4 h-4" /> },
   ];
