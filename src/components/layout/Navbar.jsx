@@ -27,11 +27,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrolled]);
 
   const menuItems = [
     { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
@@ -88,13 +92,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           animate={{
-            backgroundColor: showSolidNav ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0)",
+            backgroundColor: showSolidNav ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0)",
             backdropFilter: showSolidNav ? "blur(20px)" : "blur(0px)",
+            borderColor: showSolidNav ? "rgba(226, 232, 240, 1)" : "rgba(255, 255, 255, 0)",
           }}
           className={`relative flex items-center justify-between px-6 py-2.5 rounded-[2rem] transition-all duration-500 ${
             showSolidNav
-              ? "shadow-2xl shadow-indigo-500/10 border border-white/20"
-              : "bg-transparent"
+              ? "shadow-2xl shadow-indigo-500/10 border"
+              : "bg-transparent border border-transparent"
           }`}
         >
           {/* Logo */}
@@ -106,12 +111,12 @@ export default function Navbar() {
               <img src="/assets/logo/logo.png" alt="Tech Hub Logo" className="w-full h-full object-cover" />
             </motion.div>
             <div className="flex flex-col">
-              <span className={`text-xl font-black tracking-tighter transition-colors duration-300 leading-none ${
+              <span className={`text-lg sm:text-xl font-black tracking-tighter transition-colors duration-300 leading-none ${
                 showSolidNav ? "text-slate-900" : "text-white"
               }`}>
                 TECH HUB
               </span>
-              <span className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${
+              <span className={`text-[8px] sm:text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-300 ${
                 showSolidNav ? "text-indigo-600" : "text-indigo-300"
               }`}>
                 Innovation Center
@@ -120,7 +125,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden min-[1150px]:flex items-center space-x-1">
             {menuItems.map((item) => (
               <div 
                 key={item.name}
@@ -130,7 +135,7 @@ export default function Navbar() {
               >
                 <Link to={item.path} onClick={item.path === "/" ? handleLogoClick : undefined}>
                   <motion.div
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
+                    className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
                       location.pathname === item.path || (item.submenu && item.submenu.some(s => s.path === location.pathname))
                         ? showSolidNav 
                           ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" 
@@ -184,7 +189,7 @@ export default function Navbar() {
             >
               <Link
                 to="/registration"
-                className="px-6 py-2.5 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-sm hover:shadow-xl hover:shadow-indigo-500/25 transition-all shadow-lg"
+                className="px-4 xl:px-6 py-2.5 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-sm hover:shadow-xl hover:shadow-indigo-500/25 transition-all shadow-lg"
               >
                 Apply Now
               </Link>
@@ -194,7 +199,7 @@ export default function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2.5 rounded-xl transition-colors ${
+            className={`min-[1150px]:hidden p-2.5 rounded-xl transition-colors ${
               showSolidNav ? "text-slate-900 hover:bg-slate-100" : "text-white hover:bg-white/10"
             }`}
           >
@@ -220,7 +225,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-50 min-[1150px]:hidden"
           >
             <div 
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
@@ -231,7 +236,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-screen w-full max-w-sm bg-white shadow-2xl p-8 pt-24"
+              className="absolute right-0 top-0 h-screen w-full max-w-sm bg-white shadow-2xl p-8 pt-24 min-[1150px]:hidden"
             >
               <div className="space-y-4">
                 {menuItems.map((item) => (
