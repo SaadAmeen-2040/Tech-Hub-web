@@ -90,7 +90,7 @@ export default function WhyChooseUs() {
               <div className="relative z-10 space-y-10">
                 <div className="flex items-center gap-6">
                   <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center p-2 shadow-xl overflow-hidden shrink-0">
-                    <img src="/src/assets/navttcofficial_logo.jpg" alt="NAVTTC Official Logo" className="w-full h-full object-contain" />
+                    <img src="/src/assets/logo/navttcofficial_logo.jpg" alt="NAVTTC Official Logo" className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <p className="text-indigo-200 font-bold uppercase tracking-widest text-[10px]">Strategic Partner</p>

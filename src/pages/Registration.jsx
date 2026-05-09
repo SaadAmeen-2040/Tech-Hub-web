@@ -66,7 +66,7 @@ export default function Registration() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm mb-8">
             <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100">
-               <img src="/src/assets/navttcofficial_logo.jpg" alt="NAVTTC" className="w-full h-full object-contain" />
+               <img src="/src/assets/logo/navttcofficial_logo.jpg" alt="NAVTTC" className="w-full h-full object-contain" />
             </div>
             <span className="text-indigo-600 font-black text-sm uppercase tracking-widest">NAVTTC & PM Youth Program</span>
           </div>
@@ -299,7 +299,7 @@ export default function Registration() {
         {/* Footer Info */}
         <div className="mt-16 text-center space-y-6">
            <div className="flex items-center justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all">
-             <img src="/src/assets/navttcofficial_logo.jpg" alt="NAVTTC" className="h-12 object-contain" />
+             <img src="/src/assets/logo/navttcofficial_logo.jpg" alt="NAVTTC" className="h-12 object-contain" />
              <div className="w-px h-8 bg-slate-300"></div>
              <span className="font-bold text-slate-600">Tech Hub Innovation Center</span>
            </div>

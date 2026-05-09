@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="space-y-8">
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden group-hover:rotate-6 transition-transform">
-                <img src="/src/assets/logo.png" alt="Tech Hub Logo" className="w-full h-full object-cover" />
+                <img src="/src/assets/logo/logo.png" alt="Tech Hub Logo" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-black text-white leading-none">TECH HUB</span>
@@ -55,7 +55,7 @@ export default function Footer() {
             
             <div className="flex items-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/10 group hover:border-indigo-500/50 transition-all">
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shrink-0 shadow-lg overflow-hidden p-1">
-                <img src="/src/assets/navttcofficial_logo.jpg" alt="NAVTTC Logo" className="w-full h-full object-contain" />
+                <img src="/src/assets/logo/navttcofficial_logo.jpg" alt="NAVTTC Logo" className="w-full h-full object-contain" />
               </div>
               <span className="text-[11px] font-bold text-slate-300 uppercase tracking-tight leading-tight">
                 Official Partner Of<br/>
