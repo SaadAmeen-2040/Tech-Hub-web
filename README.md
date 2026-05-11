@@ -56,25 +56,6 @@ src/
 
 ---
 
-## 🚦 Getting Started
-
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Run Development Server**:
-   ```bash
-   npm run dev
-   ```
-
-3. **Build for Production**:
-   ```bash
-   npm run build
-   ```
-
----
-
 ## 🛡️ Governance & Standards
 The portal is designed to meet **NAVTTC** and **PM Youth Program** guidelines, providing a secure and professional environment for student data collection.
 
