@@ -1,27 +1,8 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight, Video, Users, Award } from "lucide-react";
-
-const upcomingEvents = [
-  {
-    title: "Future of AI in Pakistan",
-    date: "May 25, 2026",
-    time: "10:00 AM - 01:00 PM",
-    location: "Main Auditorium, Tech Hub",
-    type: "Seminar",
-    image: "/assets/events/seminar.png",
-    description: "Join us for an insightful seminar on how AI is reshaping industries in Pakistan and the global market."
-  },
-  {
-    title: "Fullstack Web Workshop",
-    date: "June 05, 2026",
-    time: "02:00 PM - 05:00 PM",
-    location: "Lab 01, Tech Hub",
-    type: "Workshop",
-    image: "/assets/projects/ecommerce.png",
-    description: "A hands-on workshop focused on building scalable MERN stack applications for modern businesses."
-  }
-];
+import api from "../api/api";
 
 const pastEvents = [
   { title: "Graduation Ceremony 2025", students: "500+", date: "Dec 2025" },
@@ -31,6 +12,22 @@ const pastEvents = [
 
 export default function Events() {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await api.get('/events');
+        setEvents(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch events", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
@@ -58,52 +55,66 @@ export default function Events() {
           <span className="text-indigo-600 font-bold uppercase tracking-widest text-sm">Join Us</span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {upcomingEvents.map((event, index) => (
-            <motion.div
-              key={index}
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 40 }}
-              viewport={{ once: true }}
-              className="group bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500"
-            >
-              <div className="relative aspect-video overflow-hidden">
-                <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute top-6 left-6 px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-lg">
-                  {event.type}
-                </div>
-              </div>
-              <div className="p-10">
-                <div className="flex flex-wrap gap-6 mb-6">
-                  <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                    <Calendar className="w-4 h-4 text-indigo-500" />
-                    {event.date}
-                  </div>
-                  <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                    <Clock className="w-4 h-4 text-indigo-500" />
-                    {event.time}
-                  </div>
-                  <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                    <MapPin className="w-4 h-4 text-indigo-500" />
-                    {event.location}
+        {loading ? (
+          <div className="grid lg:grid-cols-2 gap-12">
+            {[1, 2].map(i => (
+              <div key={i} className="h-96 bg-slate-50 animate-pulse rounded-[3rem]"></div>
+            ))}
+          </div>
+        ) : events.length === 0 ? (
+          <div className="text-center py-20 bg-slate-50 rounded-[3rem]">
+            <p className="text-slate-400 text-xl font-medium">No upcoming events scheduled at the moment.</p>
+          </div>
+        ) : (
+          <div className="grid lg:grid-cols-2 gap-12">
+            {events.map((event, index) => (
+              <motion.div
+                key={event._id}
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                viewport={{ once: true }}
+                className="group bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500"
+              >
+                <div className="relative aspect-video overflow-hidden bg-slate-100">
+                  <img src={event.image || "/assets/events/seminar.png"} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute top-6 left-6 px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-lg">
+                    {event.category}
                   </div>
                 </div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
-                  {event.title}
-                </h3>
-                <p className="text-slate-600 mb-8 leading-relaxed">
-                  {event.description}
-                </p>
-                <button 
-                  onClick={() => navigate("/contact", { state: { subject: `Event Registration: ${event.title}` } })}
-                  className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all"
-                >
-                  Register for Free <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                <div className="p-10">
+                  <div className="flex flex-wrap gap-6 mb-6">
+                    <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                      <Calendar className="w-4 h-4 text-indigo-500" />
+                      {new Date(event.date).toLocaleDateString()}
+                    </div>
+                    {event.time && (
+                      <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                        <Clock className="w-4 h-4 text-indigo-500" />
+                        {event.time}
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2 text-slate-500 text-sm font-medium">
+                      <MapPin className="w-4 h-4 text-indigo-500" />
+                      {event.venue || "Tech Hub"}
+                    </div>
+                  </div>
+                  <h3 className="text-3xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
+                    {event.title}
+                  </h3>
+                  <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
+                    {event.description}
+                  </p>
+                  <button 
+                    onClick={() => navigate("/contact", { state: { subject: `Event Registration: ${event.title}` } })}
+                    className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all"
+                  >
+                    Register for Free <ArrowRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Stats / Past Events Summary */}

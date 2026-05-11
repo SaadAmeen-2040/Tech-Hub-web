@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 
@@ -13,7 +13,3 @@ export default function MainLayout() {
     </>
   );
 }
-
-// export default function MainLayout() {
-//   return <h1>Layout Working ✅</h1>;
-// }

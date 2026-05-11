@@ -53,7 +53,7 @@ export default function Navbar() {
       path: "/services", 
       icon: <LayoutDashboard className="w-4 h-4" />,
       submenu: [
-        { name: "Software Dev", path: "/services", icon: <Code2 className="w-4 h-4" /> },
+        { name: "Software Dev", path: "/software-development", icon: <Code2 className="w-4 h-4" /> },
         { name: "Vocational Training", path: "/services", icon: <BookOpen className="w-4 h-4" /> },
       ]
     },

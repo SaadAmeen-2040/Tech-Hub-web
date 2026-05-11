@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import api from "../api/api";
+import { toast } from "react-hot-toast";
 import { 
   Code2, 
   Send, 
@@ -43,10 +45,31 @@ export default function SoftwareDevelopment() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Software Development Quote Request:", formData);
-    setSubmitted(true);
+    
+    const payload = {
+      name: formData.clientName,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.description,
+      subject: `Project Quote: ${formData.projectType}`,
+      type: 'Quote Request',
+      company: formData.company,
+      projectType: formData.projectType,
+      businessCategory: formData.businessCategory,
+      budget: formData.budget,
+      includeAI: formData.includeAI,
+      country: formData.country
+    };
+
+    try {
+      await api.post("/contacts", payload);
+      setSubmitted(true);
+      toast.success("Quote request sent successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Failed to submit request");
+    }
   };
 
   const projectTypes = [

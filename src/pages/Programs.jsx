@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { programs } from "../data/programs";
+import api from "../api/api";
 import { 
   Cpu, 
   Code2, 
@@ -17,26 +18,42 @@ import {
 
 export default function Programs() {
   const navigate = useNavigate();
+  const [programs, setPrograms] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const res = await api.get('/courses');
+        setPrograms(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch programs", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPrograms();
+  }, []);
 
   // Group programs by level
   const groupedPrograms = programs.reduce((acc, program) => {
-    if (!acc[program.level]) {
-      acc[program.level] = [];
+    const level = program.level || 'Beginner';
+    if (!acc[level]) {
+      acc[level] = [];
     }
-    acc[program.level].push(program);
+    acc[level].push(program);
     return acc;
   }, {});
 
-  const getIcon = (domain) => {
-    switch (domain) {
-      case "Artificial Intelligence": return <Cpu className="w-8 h-8" />;
-      case "Web Development": return <Code2 className="w-8 h-8" />;
-      case "Programming": return <Terminal className="w-8 h-8" />;
-      case "Cyber Security": return <ShieldCheck className="w-8 h-8" />;
-      case "Digital Marketing": return <TrendingUp className="w-8 h-8" />;
-      case "Design": return <Palette className="w-8 h-8" />;
-      default: return <FileCode className="w-8 h-8" />;
-    }
+  const getIcon = (title) => {
+    const t = title.toLowerCase();
+    if (t.includes("ai") || t.includes("machine learning")) return <Cpu className="w-8 h-8" />;
+    if (t.includes("fullstack") || t.includes("web development")) return <Code2 className="w-8 h-8" />;
+    if (t.includes("python") || t.includes("programming")) return <Terminal className="w-8 h-8" />;
+    if (t.includes("security")) return <ShieldCheck className="w-8 h-8" />;
+    if (t.includes("marketing")) return <TrendingUp className="w-8 h-8" />;
+    if (t.includes("design")) return <Palette className="w-8 h-8" />;
+    return <FileCode className="w-8 h-8" />;
   };
 
   return (
@@ -52,7 +69,15 @@ export default function Programs() {
           </p>
         </div>
 
-        {Object.entries(groupedPrograms).map(([level, items], groupIndex) => (
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : Object.entries(groupedPrograms).length === 0 ? (
+          <div className="text-center py-20 text-slate-500 font-medium">
+            No courses available at the moment. Please check back later.
+          </div>
+        ) : Object.entries(groupedPrograms).map(([level, items], groupIndex) => (
           <div key={level} className="mb-20 animate-fade-in-up" style={{ animationDelay: `${groupIndex * 0.1}s` }}>
             <div className="flex items-center gap-4 mb-10">
               <h2 className="text-3xl font-bold text-slate-900">{level}</h2>
@@ -62,11 +87,11 @@ export default function Programs() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {items.map((program) => (
                 <div 
-                  key={program.id}
+                  key={program._id}
                   className="group bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 transform hover:-translate-y-2"
                 >
                   <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm">
-                    {getIcon(program.domain)}
+                    {getIcon(program.title)}
                   </div>
                   
                   <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
@@ -81,17 +106,14 @@ export default function Programs() {
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 shadow-sm">
                         <img 
-                          src={`/assets/instructors/${program.instructor.image}`} 
-                          alt={program.instructor.name}
+                          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(program.instructor)}&background=6366f1&color=fff`} 
+                          alt={program.instructor}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(program.instructor.name) + "&background=6366f1&color=fff";
-                          }}
                         />
                       </div>
                       <div className="flex flex-col">
                         <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Instructor</span>
-                        <span className="text-sm font-bold text-slate-700">{program.instructor.name}</span>
+                        <span className="text-sm font-bold text-slate-700">{program.instructor}</span>
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-1">

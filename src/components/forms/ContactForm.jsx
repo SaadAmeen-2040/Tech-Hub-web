@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { User, Mail, MessageSquare, Send, Book } from "lucide-react";
+import { User, Mail, MessageSquare, Send, Book, Tag } from "lucide-react";
 import { motion } from "framer-motion";
+import api from "../../api/api";
+import { toast } from "react-hot-toast";
 
 export default function ContactForm() {
   const location = useLocation();
   const [submitted, setSubmitted] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    type: "General Inquire",
     subject: location.state?.subject || "",
     message: ""
   });
@@ -23,10 +27,18 @@ export default function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Contact Message:", formData);
-    setSubmitted(true);
+    setSaving(true);
+    try {
+      await api.post("/contacts", formData);
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Failed to send message");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const inputVariants = {
@@ -99,6 +111,21 @@ export default function ContactForm() {
             onChange={handleChange}
             className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none transition-all font-medium"
           />
+        </div>
+
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+            <Tag className="w-4 h-4 text-indigo-500" /> Inquiry Type
+          </label>
+          <select
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+            className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none transition-all font-medium appearance-none cursor-pointer focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20"
+          >
+            <option value="General Inquire">General Inquire</option>
+            <option value="Quote Request">Quote Request</option>
+          </select>
         </div>
 
         <div className="space-y-2">

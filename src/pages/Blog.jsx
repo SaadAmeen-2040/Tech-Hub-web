@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, Tag, Calendar, User, ArrowRight, TrendingUp, Newspaper } from "lucide-react";
+import api from "../api/api";
 
 const posts = [
   {
@@ -39,11 +40,30 @@ const posts = [
   }
 ];
 
-const categories = ["All Posts", "Tech Trends", "Success Stories", "Education", "Industry News"];
+const categories = ["All Posts", "General", "Tech News", "Tutorial", "Student Success", "Events", "Career Tips"];
 
 export default function Blog() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("All Posts");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await api.get('/blogs');
+        // Only show published blogs for public view
+        setBlogs(res.data.data.filter(b => b.isPublished));
+      } catch (err) {
+        console.error("Failed to fetch blogs", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -52,6 +72,10 @@ export default function Blog() {
       setEmail("");
     }
   };
+
+  const filteredBlogs = blogs
+    .filter(b => filter === "All Posts" || b.category === filter)
+    .filter(b => b.title.toLowerCase().includes(search.toLowerCase()) || b.excerpt.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
@@ -84,8 +108,9 @@ export default function Blog() {
             {categories.map((cat, i) => (
               <button 
                 key={i} 
+                onClick={() => setFilter(cat)}
                 className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${
-                  i === 0 ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "bg-slate-50 text-slate-500 hover:bg-slate-100"
+                  filter === cat ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/20" : "bg-slate-50 text-slate-500 hover:bg-slate-100"
                 }`}
               >
                 {cat}
@@ -97,6 +122,8 @@ export default function Blog() {
             <input 
               type="text" 
               placeholder="Search articles..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-12 pr-6 py-3.5 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-indigo-600 font-medium"
             />
           </div>
@@ -105,53 +132,61 @@ export default function Blog() {
 
       {/* Posts Grid */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {posts.map((post, index) => (
-            <motion.div
-              key={index}
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 40 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className={`group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 ${
-                post.featured ? "lg:col-span-2 grid md:grid-cols-2" : ""
-              }`}
-            >
-              <div className="relative aspect-square md:aspect-auto overflow-hidden bg-slate-100">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute top-6 left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-xl font-bold text-sm text-indigo-600 shadow-sm">
-                  {post.category}
-                </div>
-              </div>
-              <div className="p-10 flex flex-col justify-center">
-                <div className="flex items-center gap-6 mb-6 text-slate-400 text-sm font-medium">
-                  <div className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    {post.author}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    {post.date}
+        {loading ? (
+          <div className="grid lg:grid-cols-3 gap-12">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="h-96 bg-slate-50 animate-pulse rounded-[2.5rem]"></div>
+            ))}
+          </div>
+        ) : filteredBlogs.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-slate-400 text-xl font-medium">No blog posts found matching your criteria.</p>
+          </div>
+        ) : (
+          <div className="grid lg:grid-cols-3 gap-12">
+            {filteredBlogs.map((post, index) => (
+              <motion.div
+                key={post._id}
+                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500"
+              >
+                <div className="relative aspect-video overflow-hidden bg-slate-100">
+                  <img src={post.image || "/assets/blog/success.png"} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute top-6 left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-xl font-bold text-sm text-indigo-600 shadow-sm">
+                    {post.category}
                   </div>
                 </div>
-                <h3 className={`font-black text-slate-900 mb-6 group-hover:text-indigo-600 transition-colors ${
-                  post.featured ? "text-3xl md:text-4xl" : "text-2xl"
-                }`}>
-                  {post.title}
-                </h3>
-                <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <button 
-                  onClick={() => navigate("/contact", { state: { subject: `Blog Inquiry: ${post.title}` } })}
-                  className="flex items-center gap-3 font-black text-indigo-600 group-hover:gap-5 transition-all mt-auto"
-                >
-                  Read Full Article <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                <div className="p-10 flex flex-col justify-center">
+                  <div className="flex items-center gap-6 mb-6 text-slate-400 text-sm font-medium">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      {post.author || "Admin"}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <h3 className="font-black text-slate-900 mb-6 group-hover:text-indigo-600 transition-colors text-2xl">
+                    {post.title}
+                  </h3>
+                  <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                  <button 
+                    onClick={() => navigate("/contact", { state: { subject: `Blog Inquiry: ${post.title}` } })}
+                    className="flex items-center gap-3 font-black text-indigo-600 group-hover:gap-5 transition-all mt-auto"
+                  >
+                    Read Full Article <ArrowRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Newsletter */}

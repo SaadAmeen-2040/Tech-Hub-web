@@ -15,10 +15,13 @@ import {
   AlertCircle,
   ChevronRight
 } from "lucide-react";
+import api from "../api/api";
+import { toast } from "react-hot-toast";
 
 export default function Registration() {
   const location = useLocation();
   const [submitted, setSubmitted] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     fatherName: "",
@@ -43,10 +46,18 @@ export default function Registration() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Admission Data:", formData);
-    setSubmitted(true);
+    setSaving(true);
+    try {
+      await api.post("/admissions", formData);
+      setSubmitted(true);
+      toast.success("Registration submitted successfully!");
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Registration failed");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (submitted) {

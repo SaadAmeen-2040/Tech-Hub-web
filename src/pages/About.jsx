@@ -1,15 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Target, Eye, Award, Users, BookOpen, Rocket, ShieldCheck, Zap } from "lucide-react";
 import Instructors from "../components/sections/Instructors";
+import api from "../api/api";
 
-const stats = [
-  { label: "Years Experience", value: "20+", icon: <Award className="w-6 h-6" /> },
-  { label: "Successful Graduates", value: "10,000+", icon: <Users className="w-6 h-6" /> },
-  { label: "IT Courses", value: "25+", icon: <BookOpen className="w-6 h-6" /> },
-  { label: "Expert Instructors", value: "50+", icon: <Rocket className="w-6 h-6" /> },
-];
-
-const values = [
+const DEFAULT_VALUES = [
   {
     title: "Innovation",
     description: "Staying at the forefront of technological advancements to provide the most relevant training.",
@@ -36,7 +31,61 @@ const values = [
   }
 ];
 
+const DEFAULT_STATS = [
+  { label: "Years Experience", value: "20+", icon: <Award className="w-6 h-6" /> },
+  { label: "Successful Graduates", value: "10,000+", icon: <Users className="w-6 h-6" /> },
+  { label: "IT Courses", value: "25+", icon: <BookOpen className="w-6 h-6" /> },
+  { label: "Expert Instructors", value: "50+", icon: <Rocket className="w-6 h-6" /> },
+];
+
 export default function About() {
+  const [settings, setSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await api.get('/settings');
+        setSettings(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch settings", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSettings();
+  }, []);
+
+  const getIcon = (name, className = "w-8 h-8") => {
+    switch (name) {
+      case 'Zap': return <Zap className={className} />;
+      case 'Award': return <Award className={className} />;
+      case 'ShieldCheck': return <ShieldCheck className={className} />;
+      case 'Users': return <Users className={className} />;
+      case 'BookOpen': return <BookOpen className={className} />;
+      case 'Rocket': return <Rocket className={className} />;
+      case 'Target': return <Target className={className} />;
+      case 'Eye': return <Eye className={className} />;
+      default: return <Award className={className} />;
+    }
+  };
+  if (loading) {
+    return (
+      <div className="pt-32 pb-24 min-h-screen flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  const siteStats = settings?.stats || DEFAULT_STATS;
+  const siteValues = settings?.coreValues || DEFAULT_VALUES;
+  const principal = settings?.principal || { 
+    name: 'Muhammad Salman', 
+    designation: 'Principal, Tech Hub', 
+    message: [], 
+    visionaryTitle: 'Principal & IT Visionary' 
+  };
+
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
       {/* Hero Section */}
@@ -61,10 +110,10 @@ export default function About() {
             </p>
             
             <div className="grid grid-cols-2 gap-8">
-              {stats.map((stat, index) => (
+              {siteStats.map((stat, index) => (
                 <div key={index} className="flex flex-col gap-2">
                   <div className="flex items-center gap-3 text-indigo-600 font-bold">
-                    {stat.icon}
+                    {getIcon(stat.icon, "w-6 h-6")}
                     <span className="text-2xl">{stat.value}</span>
                   </div>
                   <span className="text-slate-500 font-medium">{stat.label}</span>
@@ -110,9 +159,12 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img 
-                  src="/assets/instructors/principal_salman.png" 
-                  alt="Muhammad Salman - Principal"
+                  src={principal.image?.startsWith('http') ? principal.image : `/assets/instructors/${principal.image}`} 
+                  alt={principal.name}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(principal.name) + "&background=6366f1&color=fff&size=512";
+                  }}
                 />
               </div>
               <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-2xl hidden md:block">
@@ -121,8 +173,8 @@ export default function About() {
                     "
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900">Muhammad Salman</h4>
-                    <p className="text-sm text-slate-500">Principal, Tech Hub</p>
+                    <h4 className="font-bold text-slate-900">{principal.name}</h4>
+                    <p className="text-sm text-slate-500">{principal.designation}</p>
                   </div>
                 </div>
               </div>
@@ -142,25 +194,13 @@ export default function About() {
                 Message from the <span className="text-indigo-400">Principal</span>
               </h2>
               <div className="space-y-6 text-lg text-slate-300 leading-relaxed italic">
-                <p>
-                  "Welcome to Tech Hub Innovation Center Bahawalpur. Our mission is to transform the 
-                  technological landscape of our region by providing world-class, free IT education 
-                  to the youth."
-                </p>
-                <p>
-                  "We believe that skill development is the key to economic prosperity. Through our 
-                  partnership with NAVTTC and PMYSDP, we ensure that every student who enters our 
-                  doors receives the highest standard of technical training and international 
-                  certification."
-                </p>
-                <p>
-                  "Our doors are always open to those who dare to dream and are ready to work hard 
-                  to achieve professional excellence in the global tech market."
-                </p>
+                {principal.message?.map((para, i) => (
+                  <p key={i}>"{para}"</p>
+                ))}
               </div>
               <div className="mt-10 pt-10 border-t border-white/10">
-                <h4 className="text-xl font-bold text-white">Muhammad Salman</h4>
-                <p className="text-indigo-400 font-medium">Principal & IT Visionary</p>
+                <h4 className="text-xl font-bold text-white">{principal.name}</h4>
+                <p className="text-indigo-400 font-medium">{principal.visionaryTitle}</p>
               </div>
             </motion.div>
           </div>
@@ -181,10 +221,7 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
             <p className="text-lg text-slate-600 leading-relaxed italic">
-              "To empower individuals and organizations with the knowledge and skills needed to excel in 
-              the rapidly evolving field of Information Technology. We are committed to providing 
-              high-quality, comprehensive, and practical IT training programs that equip our students 
-              with the latest industry-relevant skills, tools, and technologies."
+              "{settings?.mission}"
             </p>
           </motion.div>
 
@@ -200,10 +237,7 @@ export default function About() {
             </div>
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Vision</h2>
             <p className="text-lg text-slate-600 leading-relaxed italic">
-              "To be the preferred choice for IT training, recognized for our excellence, integrity, 
-              and commitment to student satisfaction. We strive to highlight the inner potential of 
-              students in order to develop the competitive character needed to face the professional world 
-              in Pakistan and beyond."
+              "{settings?.vision}"
             </p>
           </motion.div>
         </div>
@@ -219,7 +253,7 @@ export default function About() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((value, index) => (
+          {siteValues.map((value, index) => (
             <motion.div
               key={index}
               whileInView={{ opacity: 1, y: 0 }}
@@ -229,7 +263,7 @@ export default function About() {
               className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group"
             >
               <div className={`w-16 h-16 ${value.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                {value.icon}
+                {getIcon(value.icon)}
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-4">{value.title}</h3>
               <p className="text-slate-600 leading-relaxed">{value.description}</p>
