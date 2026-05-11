@@ -33,8 +33,8 @@ const ContactSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['General Inquire', 'Quote Request'],
-    default: 'General Inquire'
+    enum: ['General Inquiry', 'Quote Request'],
+    default: 'General Inquiry'
   },
   status: {
     type: String,

@@ -90,8 +90,20 @@ export default function Programs() {
                   key={program._id}
                   className="group bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 transform hover:-translate-y-2"
                 >
-                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm">
-                    {getIcon(program.title)}
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm overflow-hidden border border-slate-100">
+                    {program.thumbnail ? (
+                      <img 
+                        src={program.thumbnail.startsWith('http') || program.thumbnail.startsWith('/') ? program.thumbnail : `/assets/courses/${program.thumbnail}`} 
+                        alt={program.title} 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.parentElement.innerHTML = '<div class="flex items-center justify-center w-full h-full text-indigo-600 group-hover:text-white">' + getIcon(program.title) + '</div>';
+                        }}
+                      />
+                    ) : (
+                      getIcon(program.title)
+                    )}
                   </div>
                   
                   <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">

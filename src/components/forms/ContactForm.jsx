@@ -12,7 +12,7 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    type: "General Inquire",
+    type: "General Inquiry",
     subject: location.state?.subject || "",
     message: ""
   });
@@ -123,7 +123,7 @@ export default function ContactForm() {
             onChange={handleChange}
             className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none transition-all font-medium appearance-none cursor-pointer focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20"
           >
-            <option value="General Inquire">General Inquire</option>
+            <option value="General Inquiry">General Inquiry</option>
             <option value="Quote Request">Quote Request</option>
           </select>
         </div>

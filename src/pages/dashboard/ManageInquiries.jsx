@@ -75,7 +75,7 @@ const ManageInquiries = () => {
     setLoading(true);
     try {
       const res = await api.get('/contacts');
-      const filteredInquiries = res.data.data.filter(i => i.type === 'General Inquire');
+      const filteredInquiries = res.data.data.filter(i => i.type === 'General Inquiry');
       setInquiries(filteredInquiries);
     } catch {
       toast.error('Could not load inquiries');

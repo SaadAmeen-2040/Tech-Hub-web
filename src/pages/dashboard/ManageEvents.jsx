@@ -193,10 +193,21 @@ const ManageEvents = () => {
               {event.isFeatured && (
                 <span className="absolute top-4 right-4 text-[10px] font-bold bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-2 py-1 rounded-full">Featured</span>
               )}
-              <div className="mb-5">
+              <div className="mb-5 flex justify-between items-start">
                 <span className={`text-[10px] font-bold px-2 py-1 rounded-full border uppercase ${catColor(event.category)}`}>
                   {event.category}
                 </span>
+                <div className="w-16 h-16 rounded-xl bg-white/5 border border-white/10 overflow-hidden shrink-0">
+                  {event.thumbnail ? (
+                    <img 
+                      src={event.thumbnail.startsWith('http') || event.thumbnail.startsWith('/') ? event.thumbnail : `/assets/events/${event.thumbnail}`} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Calendar className="w-full h-full p-4 text-gray-700" />
+                  )}
+                </div>
               </div>
               <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-4">{event.title}</h3>
               <p className="text-sm text-gray-400 line-clamp-2 mb-5">{event.description}</p>

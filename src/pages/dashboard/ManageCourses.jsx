@@ -244,8 +244,16 @@ const ManageCourses = () => {
                 <tr key={course._id} className="hover:bg-white/5 transition-colors group">
                   <td className="px-8 py-5">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500 font-bold text-lg shrink-0">
-                        {(course.title || 'C').charAt(0)}
+                      <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-500 font-bold text-lg shrink-0 overflow-hidden border border-white/10">
+                        {course.thumbnail ? (
+                          <img 
+                            src={course.thumbnail.startsWith('http') || course.thumbnail.startsWith('/') ? course.thumbnail : `/assets/courses/${course.thumbnail}`} 
+                            alt={course.title} 
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          (course.title || 'C').charAt(0)
+                        )}
                       </div>
                       <div>
                         <p className="text-white font-bold group-hover:text-blue-400 transition-colors">{course.title || 'Untitled'}</p>

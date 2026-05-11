@@ -76,7 +76,12 @@ export default function Events() {
                 className="group bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500"
               >
                 <div className="relative aspect-video overflow-hidden bg-slate-100">
-                  <img src={event.image || "/assets/events/seminar.png"} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <img 
+                    src={event.thumbnail?.startsWith('http') || event.thumbnail?.startsWith('/') ? event.thumbnail : `/assets/events/${event.thumbnail || 'seminar.png'}`} 
+                    alt={event.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    onError={(e) => { e.target.src = "/assets/events/seminar.png"; }}
+                  />
                   <div className="absolute top-6 left-6 px-4 py-2 bg-indigo-600 text-white rounded-xl font-bold text-sm shadow-lg">
                     {event.category}
                   </div>
