@@ -11,6 +11,7 @@ const EMPTY = { title: '', excerpt: '', content: '', author: 'Tech Hub Team', ca
 const BlogModal = ({ blog, onClose, onSaved }) => {
   const [form, setForm] = useState(blog ? { ...blog, tags: (blog.tags || []).join(', ') } : EMPTY);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -47,6 +48,7 @@ const BlogModal = ({ blog, onClose, onSaved }) => {
           <ImageUpload 
             value={form.image} 
             onChange={(val) => setForm(prev => ({ ...prev, image: val }))}
+            onUploading={setUploading}
             label="Cover Image"
           />
 

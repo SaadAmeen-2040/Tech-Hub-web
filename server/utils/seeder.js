@@ -29,7 +29,7 @@ export const seedData = async () => {
           designation: 'Senior AI Researcher',
           bio: 'Machine Learning & Neural Networks expert.',
           specialization: ['AI', 'Machine Learning'],
-          image: 'instructor-1.png'
+          image: 'instructor_ai_1778326782354.png'
         },
         {
           name: 'Asad Ullah',
@@ -37,7 +37,7 @@ export const seedData = async () => {
           designation: 'Full Stack Web Developer',
           bio: 'MERN Stack & Cloud Architecture expert.',
           specialization: ['React', 'Node.js', 'MongoDB'],
-          image: 'instructor-2.png'
+          image: 'instructor_web_1778326811927.png'
         },
         {
           name: 'Mr. Farhan Ahmed',
@@ -45,7 +45,7 @@ export const seedData = async () => {
           designation: 'Security Consultant',
           bio: 'Ethical Hacking & Network Security professional.',
           specialization: ['Cyber Security', 'Networking'],
-          image: 'instructor-3.png'
+          image: 'instructor_cyber_1778326831507.png'
         },
         {
           name: 'Ms. Zoya Qureshi',
@@ -53,7 +53,7 @@ export const seedData = async () => {
           designation: 'Creative Director',
           bio: 'Visual Arts & Motion Graphics expert.',
           specialization: ['Graphic Design', 'Video Editing'],
-          image: 'instructor-4.png'
+          image: 'instructor_design_1778326854007.png'
         }
       ]);
     }
@@ -82,6 +82,7 @@ export const seedData = async () => {
         principal: {
           name: 'Muhammad Salman',
           designation: 'Principal, Tech Hub',
+          image: 'principal_salman.png',
           message: [
             'Welcome to Tech Hub Innovation Center Bahawalpur. Our mission is to transform the technological landscape of our region by providing world-class, free IT education to the youth.',
             'We believe that skill development is the key to economic prosperity. Through our partnership with NAVTTC and PMYSDP, we ensure that every student who enters our doors receives the highest standard of technical training and international certification.',

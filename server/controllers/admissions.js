@@ -101,7 +101,7 @@ export const deleteAdmission = async (req, res, next) => {
       'DELETE',
       'Admission',
       admission._id,
-      `Deleted application from ${admission.studentName}`,
+      `Deleted application from ${admission.fullName}`,
       req.ip
     );
 

@@ -12,6 +12,7 @@ const EventModal = ({ event, onClose, onSaved }) => {
     ? { ...event, date: event.date ? new Date(event.date).toISOString().split('T')[0] : '' }
     : EMPTY);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -47,6 +48,7 @@ const EventModal = ({ event, onClose, onSaved }) => {
           <ImageUpload 
             value={form.thumbnail} 
             onChange={(val) => setForm(prev => ({ ...prev, thumbnail: val }))}
+            onUploading={setUploading}
             label="Event Thumbnail"
           />
           <div>
@@ -106,7 +108,7 @@ const EventModal = ({ event, onClose, onSaved }) => {
           </div>
           <div className="flex gap-4 pt-4 border-t border-white/10">
             <button type="button" onClick={onClose} className="flex-1 bg-white/5 hover:bg-white/10 text-white font-semibold py-3 rounded-xl border border-white/10 transition-all">Cancel</button>
-            <button type="submit" disabled={saving} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all disabled:opacity-50">
+            <button type="submit" disabled={saving || uploading} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all disabled:opacity-50">
               {saving ? 'Saving...' : event?._id ? 'Update Event' : 'Create Event'}
             </button>
           </div>

@@ -38,7 +38,15 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Set security headers
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "img-src": ["'self'", "data:", "blob:", "http://localhost:5000", "https://images.unsplash.com", "https://res.cloudinary.com"],
+    },
+  },
+}));
 
 // Prevent XSS attacks
 app.use(xss());

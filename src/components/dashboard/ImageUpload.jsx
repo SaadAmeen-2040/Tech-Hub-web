@@ -3,7 +3,7 @@ import { Upload, X, ImageIcon, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import api from '../../api/api';
 
-const ImageUpload = ({ value, onChange, label = "Upload Image" }) => {
+const ImageUpload = ({ value, onChange, onUploading, label = "Upload Image" }) => {
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = async (e) => {
@@ -19,6 +19,7 @@ const ImageUpload = ({ value, onChange, label = "Upload Image" }) => {
     formData.append('image', file);
 
     setUploading(true);
+    if (onUploading) onUploading(true);
     try {
       const res = await api.post('/uploads', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -29,6 +30,7 @@ const ImageUpload = ({ value, onChange, label = "Upload Image" }) => {
       toast.error(err.response?.data?.message || "Upload failed");
     } finally {
       setUploading(false);
+      if (onUploading) onUploading(false);
     }
   };
 

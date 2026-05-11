@@ -55,7 +55,7 @@ cd Tech-Hub-web
    ```bash
    cp .env.example .env
    ```
-4. Update the `.env` file with your MongoDB URI, JWT secret, and Cloudinary credentials.
+4. Update the `.env` file with your MongoDB URI and JWT secret.
 
 ### 4. Setup Frontend
 1. Return to the root directory:
@@ -85,7 +85,9 @@ npm run dev
 | `PORT` | Server port (default: 5000) |
 | `MONGODB_URI` | Your MongoDB connection string |
 | `JWT_SECRET` | Secret key for authentication |
-| `CLOUDINARY_*` | Media storage credentials |
+| `JWT_EXPIRE` | Expiration time for JWT (e.g., 30d) |
+| `COOKIE_EXPIRE` | Expiration time for cookies (e.g., 30) |
+| `NODE_ENV` | development or production |
 
 ---
 
@@ -105,7 +107,7 @@ npm run dev
 ```bash
 tech-hub-web/
 ├── server/             # Backend (Express API)
-│   ├── config/         # Database & Cloudinary config
+│   ├── config/         # Database configuration
 │   ├── controllers/    # Request handlers
 │   ├── models/         # Mongoose schemas
 │   └── routes/         # API endpoints
