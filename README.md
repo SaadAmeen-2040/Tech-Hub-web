@@ -11,94 +11,68 @@ A premium, modern web portal for **Tech Hub Innovation Center**, designed to fac
 ### 1. **Modern UI/UX Design**
 - **Glassmorphism Aesthetic**: Uses semi-transparent layers, backdrop blurs, and vibrant gradients for a cutting-edge feel.
 - **Fluid Animations**: Powered by `Framer Motion` for smooth page transitions, scroll-triggered reveals, and interactive hover effects.
-- **Full Responsiveness**: Optimized for mobile, tablet, and desktop with custom breakpoints (e.g., 1150px) to ensure perfect layout stability.
+- **Full Responsiveness**: Optimized for mobile, tablet, and desktop with custom breakpoints to ensure layout stability.
 
 ### 2. **Core Pages & Modules**
 - **Home**: Dynamic hero section with Swiper slider, quick-info stats, and featured program previews.
-- **About Us**: Showcases the mission, story, and expert instructors.
-- **Programs**: Comprehensive listing of IT courses (AI, Web, Cyber Security, etc.) with enrollment triggers.
-- **Services (Software Development)**: High-conversion lead capture page for custom ERP, E-commerce, and Cloud solutions.
+- **About Us**: Showcases the mission, story, and **Interactive Expert Instructor Profiles**.
+- **Programs**: Comprehensive listing of IT courses with enrollment triggers.
+- **Services**: High-conversion lead capture page for custom software solutions.
 - **Showcase**: Student projects, latest events, and a technical blog.
-- **Registration**: Official NAVTTC-aligned admission portal with multi-step data capture.
+- **Registration**: Official NAVTTC-aligned admission portal.
 
-### 3. **Advanced Forms**
-- **Quote Request (Software Dev)**: Features intelligent project categorization, AI automation toggles, and multi-country support.
-- **Official Admission**: Detailed form capturing student metadata, academic background, and WhatsApp connectivity.
-- **Contact Us**: Clean, floating-label contact form for direct inquiries.
+### 3. **Administrative Features**
+- **Full Content CMS**: Manage Blogs, Events, Instructors, and Program Settings from a secure dashboard.
+- **Smart Image System**: Robust local image storage with proxy-serving for seamless cross-origin reliability.
+- **Social Connectivity**: Integrated LinkedIn and WhatsApp contact links for all staff, manageable via Admin Portal.
 
 ---
 
 ## 🚦 Installation & Setup
 
-Follow these steps to get the full-stack project running on your local machine:
-
 ### 1. Prerequisites
 - **Node.js** (v18 or higher)
 - **MongoDB** (Local installation or MongoDB Atlas URI)
 
-### 2. Clone the Repository
+### 2. Clone & Install
 ```bash
 git clone <your-repository-url>
-cd Tech-Hub-web
+npm install
+cd server && npm install
 ```
 
-### 3. Setup Backend
-1. Navigate to the server directory:
-   ```bash
-   cd server
-   ```
-2. Install backend dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file from the example:
-   ```bash
-   cp .env.example .env
-   ```
-4. Update the `.env` file with your MongoDB URI and JWT secret.
+### 3. Environment Setup
+Create a `.env` file in the `server` directory based on `.env.example`:
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_secret
+NODE_ENV=development
+```
 
-### 4. Setup Frontend
-1. Return to the root directory:
-   ```bash
-   cd ..
-   ```
-2. Install frontend dependencies:
-   ```bash
-   npm install
-   ```
-
-### 5. Run the Application
-You can run both the frontend and backend concurrently from the root directory:
+### 4. Run the Application
+Run both frontend and backend concurrently from the root directory:
 ```bash
 npm run dev
 ```
 
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:5000/api
-- **Admin Login**: http://localhost:5173/admin/login
+- **Frontend**: [http://localhost:5173](http://localhost:5173)
+- **Backend API**: [http://localhost:5000/api](http://localhost:5000/api)
+- **Admin Portal**: [http://localhost:5173/admin/login](http://localhost:5173/admin/login)
 
 ---
 
-## 🔐 Environment Variables (Server)
-| Variable | Description |
-| --- | --- |
-| `PORT` | Server port (default: 5000) |
-| `MONGODB_URI` | Your MongoDB connection string |
-| `JWT_SECRET` | Secret key for authentication |
-| `JWT_EXPIRE` | Expiration time for JWT (e.g., 30d) |
-| `COOKIE_EXPIRE` | Expiration time for cookies (e.g., 30) |
-| `NODE_ENV` | development or production |
+## 🛠️ Technical Implementation Details
 
----
+### **Image Management**
+The project uses a hybrid **Local Disk Storage** system:
+- **Storage Location**: `server/uploads/`
+- **Smart Serving**: A custom backend route checks for images on disk first, with a fallback to the database for legacy media storage.
+- **Vite Proxy**: Configured in `vite.config.js` to eliminate CORS issues and port mismatches during development.
 
-## 🛠️ Technology Stack
-
-- **Frontend**: React.js 18
-- **Styling**: Tailwind CSS 4.0
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Backend**: Node.js & Express
-- **Database**: MongoDB (Mongoose)
+### **Security**
+- **Helmet**: Configured with specific `Cross-Origin-Resource-Policy` to allow the frontend to safely display backend images.
+- **JWT Authentication**: Secure access control for all administrative routes.
 
 ---
 
@@ -107,15 +81,15 @@ npm run dev
 ```bash
 tech-hub-web/
 ├── server/             # Backend (Express API)
-│   ├── config/         # Database configuration
+│   ├── uploads/        # Local image storage
 │   ├── controllers/    # Request handlers
 │   ├── models/         # Mongoose schemas
 │   └── routes/         # API endpoints
 ├── src/                # Frontend (React)
-│   ├── components/     # UI components
-│   ├── pages/          # Route pages
-│   └── api/            # API client configuration
-└── index.css           # Global styles
+│   ├── components/     # UI components & sections
+│   ├── pages/          # Route pages & Dashboard
+│   └── api/            # API client (Axios Proxy)
+└── index.css           # Global Design System
 ```
 
 ---
