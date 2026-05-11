@@ -7,14 +7,18 @@ import api from '../../api/api';
 
 const EMPTY_FORM = {
   name: '', email: '', designation: '', bio: '',
-  specialization: '', socialLinks: { linkedin: '', github: '' },
+  specialization: '', socialLinks: { linkedin: '', github: '', whatsapp: '' },
   image: ''
 };
 
 const TeacherModal = ({ teacher, onClose, onSaved }) => {
   const [form, setForm] = useState(
     teacher
-      ? { ...teacher, specialization: (teacher.specialization || []).join(', ') }
+      ? { 
+          ...teacher, 
+          specialization: (teacher.specialization || []).join(', '),
+          socialLinks: { ...EMPTY_FORM.socialLinks, ...teacher.socialLinks }
+        }
       : EMPTY_FORM
   );
   const [saving, setSaving] = useState(false);
@@ -118,10 +122,10 @@ const TeacherModal = ({ teacher, onClose, onSaved }) => {
                 placeholder="https://linkedin.com/in/..." />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">GitHub URL</label>
-              <input name="social_github" value={form.socialLinks?.github || ''} onChange={handleChange}
+              <label className="block text-sm font-medium text-gray-400 mb-2">WhatsApp Number</label>
+              <input name="social_whatsapp" value={form.socialLinks?.whatsapp || ''} onChange={handleChange}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-all"
-                placeholder="https://github.com/..." />
+                placeholder="e.g. +923001234567" />
             </div>
           </div>
 
@@ -213,8 +217,16 @@ const ManageTeachers = () => {
               initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
               className="bg-white/5 border border-white/10 p-6 rounded-3xl group relative">
               <div className="flex gap-5 items-start">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shrink-0">
-                  {(item.name || 'I').charAt(0)}
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shrink-0 overflow-hidden border border-white/10">
+                  {item.image ? (
+                    <img 
+                      src={item.image.startsWith('http') || item.image.startsWith('/') ? item.image : `/assets/instructors/${item.image}`} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    (item.name || 'I').charAt(0)
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors truncate">{item.name}</h3>
@@ -234,6 +246,11 @@ const ManageTeachers = () => {
                   {item.socialLinks?.linkedin && (
                     <a href={item.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
                       <ExternalLink size={18} />
+                    </a>
+                  )}
+                  {item.socialLinks?.whatsapp && (
+                    <a href={`https://wa.me/${item.socialLinks.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition-colors">
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                     </a>
                   )}
                 </div>

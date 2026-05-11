@@ -159,7 +159,7 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border-4 border-white/10 shadow-2xl">
                 <img 
-                  src={principal.image?.startsWith('http') ? principal.image : `/assets/instructors/${principal.image}`} 
+                  src={principal.image?.startsWith('http') || principal.image?.startsWith('/') ? principal.image : `/assets/instructors/${principal.image}`} 
                   alt={principal.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {

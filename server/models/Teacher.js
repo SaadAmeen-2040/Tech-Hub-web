@@ -23,7 +23,8 @@ const TeacherSchema = new mongoose.Schema({
   socialLinks: {
     linkedin: String,
     twitter: String,
-    github: String
+    github: String,
+    whatsapp: String
   },
   createdAt: {
     type: Date,

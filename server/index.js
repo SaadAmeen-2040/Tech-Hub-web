@@ -1,4 +1,5 @@
 import express from 'express';
+// Server restarted to apply schema changes
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
