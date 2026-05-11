@@ -28,30 +28,92 @@ A premium, modern web portal for **Tech Hub Innovation Center**, designed to fac
 
 ---
 
+## 🚦 Installation & Setup
+
+Follow these steps to get the full-stack project running on your local machine:
+
+### 1. Prerequisites
+- **Node.js** (v18 or higher)
+- **MongoDB** (Local installation or MongoDB Atlas URI)
+
+### 2. Clone the Repository
+```bash
+git clone <your-repository-url>
+cd Tech-Hub-web
+```
+
+### 3. Setup Backend
+1. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
+2. Install backend dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file from the example:
+   ```bash
+   cp .env.example .env
+   ```
+4. Update the `.env` file with your MongoDB URI, JWT secret, and Cloudinary credentials.
+
+### 4. Setup Frontend
+1. Return to the root directory:
+   ```bash
+   cd ..
+   ```
+2. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+
+### 5. Run the Application
+You can run both the frontend and backend concurrently from the root directory:
+```bash
+npm run dev
+```
+
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5000/api
+- **Admin Login**: http://localhost:5173/admin/login
+
+---
+
+## 🔐 Environment Variables (Server)
+| Variable | Description |
+| --- | --- |
+| `PORT` | Server port (default: 5000) |
+| `MONGODB_URI` | Your MongoDB connection string |
+| `JWT_SECRET` | Secret key for authentication |
+| `CLOUDINARY_*` | Media storage credentials |
+
+---
+
 ## 🛠️ Technology Stack
 
 - **Frontend**: React.js 18
-- **Styling**: Tailwind CSS 4.0 (Modern utility-first framework)
-- **Icons**: Lucide React (Crisp, scalable vector icons)
+- **Styling**: Tailwind CSS 4.0
+- **Icons**: Lucide React
 - **Animations**: Framer Motion
-- **Carousels**: Swiper.js
-- **Routing**: React Router v7
-- **Build Tool**: Vite (Lightning-fast development environment)
+- **Backend**: Node.js & Express
+- **Database**: MongoDB (Mongoose)
 
 ---
 
 ## 📁 Project Structure
 
 ```bash
-src/
-├── components/
-│   ├── forms/          # Reusable form components (Contact, Registration)
-│   ├── layout/         # Core layout (Navbar, Footer, MainLayout)
-│   ├── sections/       # Modular homepage sections (Hero, Stats, CTA)
-│   └── utils/          # Helper components (ScrollToTop)
-├── data/               # Static data for programs and instructors
-├── pages/              # Main route components
-└── index.css           # Global styles and Tailwind configuration
+tech-hub-web/
+├── server/             # Backend (Express API)
+│   ├── config/         # Database & Cloudinary config
+│   ├── controllers/    # Request handlers
+│   ├── models/         # Mongoose schemas
+│   └── routes/         # API endpoints
+├── src/                # Frontend (React)
+│   ├── components/     # UI components
+│   ├── pages/          # Route pages
+│   └── api/            # API client configuration
+└── index.css           # Global styles
 ```
 
 ---
