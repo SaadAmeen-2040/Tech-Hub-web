@@ -83,10 +83,10 @@ export default function Services() {
             <Rocket className="w-4 h-4" />
             <span>Our Dual Expertise</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
             Expert Training & <span className="text-gradient">Custom Development</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             We bridge the gap between education and industry. Whether you're a student looking 
             for world-class training or a business needing custom software, we deliver excellence.
           </p>
@@ -103,40 +103,40 @@ export default function Services() {
               initial={{ opacity: 0, y: 40 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`p-10 rounded-[3rem] border transition-all duration-500 group ${
+              className={`p-6 sm:p-8 rounded-[2rem] border transition-all duration-500 group ${
                 service.highlight 
-                ? "bg-slate-900 border-slate-800 text-white lg:col-span-2 grid lg:grid-cols-2 gap-12" 
+                ? "bg-slate-900 border-slate-800 text-white lg:col-span-2 grid lg:grid-cols-2 gap-8 sm:gap-12" 
                 : "bg-slate-50 border-slate-100 text-slate-900"
               }`}
             >
               <div>
-                <div className={`w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl ${
+                <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center mb-6 sm:mb-8 shadow-xl ${
                   service.highlight ? "bg-indigo-600" : "bg-white text-indigo-600"
                 }`}>
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-6">{service.title}</h3>
-                <p className={`text-lg leading-relaxed mb-8 ${
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{service.title}</h3>
+                <p className={`text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 ${
                   service.highlight ? "text-slate-400" : "text-slate-600"
                 }`}>
                   {service.description}
                 </p>
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                   {service.features.map((feature, fIndex) => (
                     <div key={fIndex} className="flex items-center gap-3">
                       <CheckCircle2 className={`w-5 h-5 ${
                         service.highlight ? "text-indigo-400" : "text-indigo-600"
                       }`} />
-                      <span className="font-medium">{feature}</span>
+                      <span className="font-medium text-sm sm:text-base">{feature}</span>
                     </div>
                   ))}
                 </div>
                 {service.highlight && (
                   <button 
                     onClick={() => navigate(service.title === "Software Development" ? "/software-development" : "/programs")}
-                    className="mt-10 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-700 transition-all"
+                    className="mt-8 px-6 py-3 sm:px-8 sm:py-3.5 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base flex items-center gap-2 hover:bg-indigo-700 transition-all"
                   >
-                    {service.title === "Software Development" ? "Request a Quote" : "View Courses"} <ArrowRight className="w-5 h-5" />
+                    {service.title === "Software Development" ? "Request a Quote" : "View Courses"} <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 )}
               </div>
@@ -194,14 +194,14 @@ export default function Services() {
               initial={{ opacity: 0, x: -50 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 sm:mb-8 leading-tight">
                 Why Our <span className="text-indigo-400">Training Programs</span> Stand Out
               </h2>
-              <div className="grid sm:grid-cols-2 gap-8">
+              <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                 {trainingFeatures.map((feature, index) => (
-                  <div key={index} className="p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10">
-                    <h4 className="text-xl font-bold text-white mb-3">{feature.title}</h4>
-                    <p className="text-slate-400">{feature.desc}</p>
+                  <div key={index} className="p-6 sm:p-8 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10">
+                    <h4 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{feature.title}</h4>
+                    <p className="text-xs sm:text-sm text-slate-400">{feature.desc}</p>
                   </div>
                 ))}
               </div>
@@ -211,30 +211,30 @@ export default function Services() {
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: 50 }}
               viewport={{ once: true }}
-              className="bg-linear-to-br from-indigo-600 to-purple-600 p-12 rounded-[3rem] text-white"
+              className="bg-linear-to-br from-indigo-600 to-purple-600 p-8 sm:p-12 rounded-[2rem] sm:rounded-[3rem] text-white"
             >
-              <h3 className="text-3xl font-bold mb-6">Enrolling for 2026 Batch</h3>
-              <p className="text-indigo-100 text-lg mb-8 leading-relaxed">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Enrolling for 2026 Batch</h3>
+              <p className="text-indigo-100 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
                 We are currently accepting applications for our upcoming 3-month advanced IT courses. 
                 Don't miss the chance to learn from the best in the industry for free.
               </p>
-              <ul className="space-y-4 mb-10">
+              <ul className="space-y-4 mb-8 sm:mb-10 text-sm sm:text-base">
                 <li className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-indigo-300" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-300 shrink-0" />
                   <span className="font-bold">100% Free - No Hidden Charges</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-indigo-300" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-300 shrink-0" />
                   <span className="font-bold">International Certification</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-indigo-300" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-300 shrink-0" />
                   <span className="font-bold">Hands-on Lab Training</span>
                 </li>
               </ul>
               <button 
                 onClick={() => navigate("/registration")}
-                className="w-full py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-2xl"
+                className="w-full py-3 sm:py-4 bg-white text-indigo-600 rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-50 transition-all shadow-2xl"
               >
                 Apply for Training
               </button>
@@ -252,10 +252,10 @@ export default function Services() {
               initial={{ opacity: 0, x: -50 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
                 Our <span className="text-gradient">Tech Stack</span> for Enterprise Solutions
               </h2>
-              <p className="text-xl text-slate-600 mb-12 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 mb-10 sm:mb-12 leading-relaxed">
                 We use the most modern and reliable technologies to ensure your business 
                 stays ahead of the curve. Our development process is agile, transparent, 
                 and focused on delivering value.
@@ -303,18 +303,18 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 sm:mb-8 leading-tight">
           Have a Project in Mind? <br />
           <span className="text-gradient">Let's Build It Together.</span>
         </h2>
-        <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-slate-600 mb-10 sm:mb-12 max-w-2xl mx-auto">
           From concept to launch, we provide full-cycle software development 
           services to help your business thrive in the digital age.
         </p>
         <button 
           onClick={() => navigate("/software-development")}
-          className="px-12 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1"
+          className="px-8 py-3 sm:px-10 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1"
         >
           Start Your Project Now
         </button>

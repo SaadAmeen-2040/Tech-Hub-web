@@ -95,33 +95,34 @@ export default function Hero() {
                         </motion.span>
                       </div>
                       
-                      <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-6 sm:mb-8 leading-[1.1] drop-shadow-2xl px-2">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 sm:mb-6 leading-[1.1] drop-shadow-2xl px-2">
                         {slide.title} <br />
                         <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-indigo-300">
                           {slide.highlight}
                         </span>
                       </h1>
 
-                      <p className="max-w-3xl mx-auto text-base sm:text-xl md:text-2xl text-slate-200 leading-relaxed mb-8 sm:mb-12 font-medium drop-shadow-md px-4">
+                      <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed mb-8 sm:mb-10 font-medium drop-shadow-md px-4">
                         {slide.desc}
                       </p>
 
-                      <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                         <motion.button
                           whileHover={{ scale: 1.05, translateY: -4 }}
                           whileTap={{ scale: 0.95 }}
                           onClick={() => navigate("/registration")}
-                          className="w-full sm:w-auto px-8 py-3.5 sm:px-10 sm:py-5 bg-indigo-600 text-white rounded-xl sm:rounded-2xl font-bold text-base sm:text-xl hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
+                          className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-3.5 bg-indigo-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-700 transition-all duration-300 shadow-2xl shadow-indigo-600/40 flex items-center justify-center gap-2"
                         >
-                          Apply Now <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                          Apply Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                         </motion.button>
                         <motion.div
                           whileHover={{ scale: 1.05, translateY: -4 }}
                           whileTap={{ scale: 0.95 }}
+                          className="w-full sm:w-auto"
                         >
                           <Link
                             to="/programs"
-                            className="w-full sm:w-auto px-8 py-3.5 sm:px-10 sm:py-5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-xl sm:rounded-2xl font-bold text-base sm:text-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center"
+                            className="w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-3.5 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base hover:bg-white/20 transition-all duration-300 flex items-center justify-center"
                           >
                             Browse Programs
                           </Link>

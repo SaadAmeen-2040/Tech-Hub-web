@@ -66,19 +66,19 @@ export default function Registration() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-2xl w-full bg-white rounded-[3rem] p-12 text-center shadow-2xl border border-slate-100"
+          className="max-w-2xl w-full bg-white rounded-[2rem] p-8 sm:p-12 text-center shadow-2xl border border-slate-100"
         >
-          <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-            <CheckCircle2 className="w-12 h-12" />
+          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-xl">
+            <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
           </div>
-          <h2 className="text-4xl font-black text-slate-900 mb-6">Registration Successful!</h2>
-          <p className="text-xl text-slate-600 mb-12 leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4 sm:mb-6">Registration Successful!</h2>
+          <p className="text-base sm:text-lg text-slate-600 mb-8 sm:mb-12 leading-relaxed">
             Thank you for applying to Tech Hub Innovation Center. Our admissions team will 
             review your profile and contact you on WhatsApp within 48 hours for the next steps.
           </p>
           <button 
             onClick={() => window.location.href = "/"}
-            className="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20"
+            className="px-8 py-3 sm:px-10 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20"
           >
             Back to Home
           </button>
@@ -106,11 +106,11 @@ export default function Registration() {
             </div>
             <span className="text-indigo-600 font-black text-sm uppercase tracking-widest">NAVTTC & PM Youth Program</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4 sm:mb-6">
             100% Free Training with Free International Certification <br />
             <span className="text-gradient">Under NAVTTC</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             Secure your future in tech. Fill out the official admission form below 
             to apply for the 2026 Batch.
           </p>
@@ -121,7 +121,7 @@ export default function Registration() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-[3.5rem] shadow-2xl shadow-indigo-500/5 border border-slate-100 p-8 md:p-16"
+          className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-2xl shadow-indigo-500/5 border border-slate-100 p-6 sm:p-10 md:p-12"
         >
           <form onSubmit={handleSubmit} className="space-y-12">
             
@@ -358,9 +358,9 @@ export default function Registration() {
             {/* Submit */}
             <button 
               type="submit"
-              className="w-full py-5 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black text-xl hover:shadow-2xl hover:shadow-indigo-500/40 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3"
+              className="w-full py-3.5 sm:py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black text-sm sm:text-base hover:shadow-2xl hover:shadow-indigo-500/40 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
             >
-              Submit Admission Form <CheckCircle2 className="w-6 h-6" />
+              Submit Admission Form <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </form>
         </motion.div>

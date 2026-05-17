@@ -51,16 +51,16 @@ export default function ContactForm() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white p-12 rounded-[2.5rem] shadow-2xl text-center border border-slate-100"
+        className="bg-white p-8 sm:p-12 rounded-[2rem] shadow-2xl text-center border border-slate-100"
       >
-        <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-          <Send className="w-10 h-10" />
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <Send className="w-8 h-8 sm:w-10 sm:h-10" />
         </div>
-        <h3 className="text-3xl font-bold text-slate-900 mb-4">Message Sent!</h3>
-        <p className="text-slate-600 mb-8">Thank you for reaching out. Our team will get back to you shortly.</p>
+        <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Message Sent!</h3>
+        <p className="text-slate-600 mb-8 text-sm sm:text-base">Thank you for reaching out. Our team will get back to you shortly.</p>
         <button 
           onClick={() => setSubmitted(false)}
-          className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all"
+          className="px-6 py-3 sm:px-8 sm:py-3.5 bg-indigo-600 text-white rounded-xl font-bold text-sm sm:text-base hover:bg-indigo-700 transition-all"
         >
           Send Another Message
         </button>
@@ -72,11 +72,11 @@ export default function ContactForm() {
     <motion.div 
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-indigo-500/10 border border-slate-100"
+      className="bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3rem] shadow-2xl shadow-indigo-500/10 border border-slate-100"
     >
-      <div className="mb-10">
-        <h2 className="text-3xl font-bold text-slate-900 mb-3">Send a <span className="text-gradient">Message</span></h2>
-        <p className="text-slate-500">Have a question? We'd love to hear from you.</p>
+      <div className="mb-8 sm:mb-10">
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 sm:mb-3">Send a <span className="text-gradient">Message</span></h2>
+        <p className="text-slate-500 text-xs sm:text-sm">Have a question? We'd love to hear from you.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -165,9 +165,9 @@ export default function ContactForm() {
           whileHover={{ scale: 1.02, translateY: -2 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
-          className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-3 hover:bg-indigo-700 transition-all"
+          className="w-full py-3.5 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all"
         >
-          Send Message <Send className="w-5 h-5" />
+          Send Message <Send className="w-4 h-4 sm:w-5 sm:h-5" />
         </motion.button>
       </form>
     </motion.div>

@@ -96,19 +96,19 @@ export default function SoftwareDevelopment() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-2xl w-full bg-white rounded-[3rem] p-12 text-center shadow-2xl border border-slate-100"
+          className="max-w-2xl w-full bg-white rounded-[2rem] p-8 sm:p-12 text-center shadow-2xl border border-slate-100"
         >
-          <div className="w-24 h-24 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-            <CheckCircle2 className="w-12 h-12" />
+          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-xl">
+            <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
           </div>
-          <h2 className="text-4xl font-black text-slate-900 mb-4">Request Received!</h2>
-          <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4">Request Received!</h2>
+          <p className="text-base sm:text-lg text-slate-600 mb-8 sm:mb-10 leading-relaxed">
             Thank you, {formData.clientName}! Our technical consultants are reviewing your 
             requirements for {formData.projectType}. Expect a callback or email within 24 hours.
           </p>
           <button 
             onClick={() => setSubmitted(false)}
-            className="px-12 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20"
+            className="px-8 py-3 sm:px-10 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20"
           >
             Submit Another Request
           </button>
@@ -138,12 +138,12 @@ export default function SoftwareDevelopment() {
               <span>Next-Gen Software Development</span>
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] mb-6 tracking-tight">
               Code the <br />
               <span className="text-gradient">Future</span>
             </h1>
             
-            <p className="text-xl text-slate-600 mb-12 leading-relaxed max-w-xl font-medium">
+            <p className="text-base sm:text-lg text-slate-600 mb-10 leading-relaxed max-w-xl font-medium">
               We don't just build software; we engineer competitive advantages. 
               From E-commerce giants to AI-integrated automation.
             </p>
@@ -168,14 +168,14 @@ export default function SoftwareDevelopment() {
               ))}
             </div>
 
-            <div className="bg-slate-900 rounded-[3.5rem] p-12 text-white relative overflow-hidden shadow-2xl group">
-              <div className="relative z-10 flex items-start gap-8">
-                <div className="w-20 h-20 bg-indigo-600 rounded-[2rem] flex items-center justify-center shrink-0 shadow-2xl group-hover:scale-110 transition-transform">
-                  <Cpu className="w-10 h-10 text-white" />
+            <div className="bg-slate-900 rounded-[2rem] p-6 sm:p-8 text-white relative overflow-hidden shadow-2xl group mb-8">
+              <div className="relative z-10 flex items-start gap-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 rounded-[1.5rem] sm:rounded-[2rem] flex items-center justify-center shrink-0 shadow-2xl group-hover:scale-110 transition-transform">
+                  <Cpu className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-3xl font-bold mb-4">AI First Approach</h4>
-                  <p className="text-slate-400 leading-relaxed text-lg">
+                  <h4 className="text-xl sm:text-2xl font-bold mb-3">AI First Approach</h4>
+                  <p className="text-slate-400 leading-relaxed text-sm sm:text-base">
                     We specialize in integrating intelligent LLMs and predictive 
                     algorithms to make your software think, learn, and grow.
                   </p>
@@ -390,9 +390,9 @@ export default function SoftwareDevelopment() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 type="submit"
-                className="w-full py-4 bg-indigo-600 text-white rounded-xl font-black text-lg shadow-2xl shadow-indigo-600/30 flex items-center justify-center gap-3 hover:bg-indigo-700 transition-all active:scale-95"
+                className="w-full py-3.5 sm:py-4 bg-indigo-600 text-white rounded-xl font-black text-sm sm:text-base shadow-2xl shadow-indigo-600/30 flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all active:scale-95"
               >
-                Send Request <Send className="w-5 h-5" />
+                Send Request <Send className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.button>
             </form>
           </motion.div>

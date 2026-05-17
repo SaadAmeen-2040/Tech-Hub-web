@@ -100,10 +100,10 @@ export default function About() {
               <Rocket className="w-4 h-4" />
               <span>About Tech Hub</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
               Empowering the Next <span className="text-gradient">Tech Generation</span>
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed mb-10">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
               For over two decades, our mission has been to provide excellent technical education 
               standards through modern forms of instruction. We create an environment that grooms 
               the perception and technical intellect of individuals.
@@ -190,7 +190,7 @@ export default function About() {
                 <Award className="w-4 h-4" />
                 <span>Leadership Excellence</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Message from the <span className="text-indigo-400">Principal</span>
               </h2>
               <div className="space-y-6 text-lg text-slate-300 leading-relaxed italic">
@@ -209,18 +209,18 @@ export default function About() {
 
       {/* Mission & Vision */}
       <section className="bg-slate-50 py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 sm:gap-12">
           <motion.div
             whileInView={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 30 }}
             viewport={{ once: true }}
-            className="bg-white p-12 rounded-[2.5rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
+            className="bg-white p-8 sm:p-10 rounded-[2rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
           >
-            <div className="w-16 h-16 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-600/20">
-              <Target className="w-8 h-8" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-600/20 shrink-0">
+              <Target className="w-6 h-6 sm:w-8 sm:h-8" />
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
-            <p className="text-lg text-slate-600 leading-relaxed italic">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed italic">
               "{settings?.mission}"
             </p>
           </motion.div>
@@ -230,13 +230,13 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-white p-12 rounded-[2.5rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
+            className="bg-white p-8 sm:p-10 rounded-[2rem] shadow-xl shadow-indigo-500/5 border border-slate-100"
           >
-            <div className="w-16 h-16 bg-purple-600 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-purple-600/20">
-              <Eye className="w-8 h-8" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-purple-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-600/20 shrink-0">
+              <Eye className="w-6 h-6 sm:w-8 sm:h-8" />
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Vision</h2>
-            <p className="text-lg text-slate-600 leading-relaxed italic">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">Our Vision</h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed italic">
               "{settings?.vision}"
             </p>
           </motion.div>
@@ -246,8 +246,8 @@ export default function About() {
       {/* Core Values */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Core Values</h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">Our Core Values</h2>
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             The principles that guide our education and student support every day.
           </p>
         </div>
@@ -260,13 +260,13 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group"
+              className="p-6 sm:p-8 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 group flex flex-col items-center"
             >
-              <div className={`w-16 h-16 ${value.color} rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                {getIcon(value.icon)}
+              <div className={`w-14 h-14 sm:w-16 sm:h-16 ${value.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shrink-0`}>
+                {getIcon(value.icon, "w-6 h-6 sm:w-8 sm:h-8")}
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">{value.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{value.description}</p>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3">{value.title}</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{value.description}</p>
             </motion.div>
           ))}
         </div>

@@ -30,7 +30,7 @@ export const getAnalytics = async (req, res) => {
       Blog.countDocuments({ isPublished: true }),
       Event.countDocuments(),
       Contact.countDocuments({ status: 'New' }),
-      Admission.find().sort('-appliedAt').populate('course', 'title').limit(8),
+      Admission.find().sort('-appliedAt').limit(8),
     ]);
 
     // ── Monthly admission trend (last 6 months) ─────────────────────────────

@@ -64,7 +64,7 @@ export default function Stats() {
             >
               <motion.div 
                 whileHover={{ scale: 1.05 }}
-                className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center text-white mb-6 border border-white/20 shadow-xl"
+                className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center text-white mb-6 border border-white/20 shadow-xl shrink-0"
               >
                 {stat.icon}
               </motion.div>

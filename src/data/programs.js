@@ -1,7 +1,78 @@
 export const programs = [
-  // For 16 Years Education
+  // NAVTTC 100% Free Courses
   {
     id: 1,
+    title: "Advance Web App Development",
+    duration: "3 Months",
+    level: "For Intermediate / Bachelor's",
+    description: "Master modern web application architecture, progressive web apps, and enterprise-grade frontend frameworks.",
+    domain: "Web Development",
+    instructor: {
+      name: "Asad Ullah",
+      role: "Full Stack Web Developer",
+      image: "instructor_web_1778326811927.png",
+      specialty: "MERN Stack & Cloud Architecture"
+    }
+  },
+  {
+    id: 2,
+    title: "JavaScript Fullstack (MERN/MEAN)",
+    duration: "3 Months",
+    level: "For Intermediate / Bachelor's",
+    description: "Comprehensive training in MongoDB, Express, React/Angular, and Node.js for scalable fullstack solutions.",
+    domain: "Web Development",
+    instructor: {
+      name: "Asad Ullah",
+      role: "Full Stack Web Developer",
+      image: "instructor_web_1778326811927.png",
+      specialty: "MERN Stack & Cloud Architecture"
+    }
+  },
+  {
+    id: 3,
+    title: "Cyber Security (CEH, CHFI)",
+    duration: "3 Months",
+    level: "For Intermediate / Bachelor's",
+    description: "Professional ethical hacking and computer hacking forensic investigation with international certification standards.",
+    domain: "Cyber Security",
+    instructor: {
+      name: "Mr. Farhan Ahmed",
+      role: "Security Consultant",
+      image: "instructor_cyber_1778326831507.png",
+      specialty: "Ethical Hacking & Network Security"
+    }
+  },
+  {
+    id: 4,
+    title: "Google UX Design",
+    duration: "3 Months",
+    level: "For Intermediate / Bachelor's",
+    description: "Learn user experience design, wireframing, prototyping, and user research following Google design principles.",
+    domain: "Design",
+    instructor: {
+      name: "Ms. Zoya Qureshi",
+      role: "Creative Director",
+      image: "instructor_design_1778326854007.png",
+      specialty: "UI/UX & Design Systems"
+    }
+  },
+  {
+    id: 5,
+    title: "Digital Forensics",
+    duration: "3 Months",
+    level: "For Intermediate / Bachelor's",
+    description: "Investigate cyber crimes, analyze digital evidence, and master forensic tools for enterprise security.",
+    domain: "Cyber Security",
+    instructor: {
+      name: "Mr. Farhan Ahmed",
+      role: "Security Consultant",
+      image: "instructor_cyber_1778326831507.png",
+      specialty: "Digital Forensics & Incident Response"
+    }
+  },
+  // Other Specialized Tracks
+  {
+    id: 6,
     title: "Artificial Intelligence (Machine Learning)",
     duration: "3 Months",
     level: "For 16 Years Education",
@@ -15,50 +86,7 @@ export const programs = [
     }
   },
   {
-    id: 2,
-    title: "JavaScript Fullstack (MEAN/MERN)",
-    duration: "3 Months",
-    level: "For 16 Years Education",
-    description: "Master full-stack development using MongoDB, Express, React/Angular, and Node.js.",
-    domain: "Web Development",
-    instructor: {
-      name: "Asad Ullah",
-      role: "Full Stack Web Developer",
-      image: "instructor_web_1778326811927.png",
-      specialty: "MERN Stack & Cloud Architecture"
-    }
-  },
-  {
-    id: 3,
-    title: "Advance Python Programming & Applications",
-    duration: "3 Months",
-    level: "For 16 Years Education",
-    description: "Expert level Python training for data science and automation.",
-    domain: "Programming",
-    instructor: {
-      name: "Asad Ullah",
-      role: "Full Stack Web Developer",
-      image: "instructor_web_1778326811927.png",
-      specialty: "MERN Stack & Cloud Architecture"
-    }
-  },
-  {
-    id: 4,
-    title: "Cyber Security (CEH)",
-    duration: "3 Months",
-    level: "For 16 Years Education",
-    description: "Professional ethical hacking course with international certification.",
-    domain: "Cyber Security",
-    instructor: {
-      name: "Mr. Farhan Ahmed",
-      role: "Security Consultant",
-      image: "instructor_cyber_1778326831507.png",
-      specialty: "Ethical Hacking & Network Security"
-    }
-  },
-  // For Intermediate Students
-  {
-    id: 5,
+    id: 7,
     title: "Digital Marketing & SEO",
     duration: "3 Months",
     level: "For Intermediate Students",
@@ -70,33 +98,5 @@ export const programs = [
       image: "instructor_design_1778326854007.png",
       specialty: "SEO & Social Media Strategy"
     }
-  },
-  {
-    id: 6,
-    title: "Graphic Design & Video Editing",
-    duration: "3 Months",
-    level: "For Intermediate Students",
-    description: "Master visual communication through graphic design and video production.",
-    domain: "Design",
-    instructor: {
-      name: "Ms. Zoya Qureshi",
-      role: "Creative Director",
-      image: "instructor_design_1778326854007.png",
-      specialty: "Visual Arts & Motion Graphics"
-    }
-  },
-  {
-    id: 7,
-    title: "Certificate in IT (Web Development)",
-    duration: "3 Months",
-    level: "For Intermediate Students",
-    description: "Start your journey in web development with essential IT certifications.",
-    domain: "Web Development",
-    instructor: {
-      name: "Asad Ullah",
-      role: "Full Stack Web Developer",
-      image: "instructor_web_1778326811927.png",
-      specialty: "MERN Stack & Cloud Architecture"
-    }
-  },
+  }
 ];

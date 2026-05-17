@@ -113,10 +113,10 @@ export default function Instructors() {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
           Meet Our <span className="text-gradient">Expert Instructors</span>
         </h2>
-        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
           Learn from industry veterans with decades of experience in global technology markets.
         </p>
       </div>
@@ -135,48 +135,50 @@ export default function Instructors() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setSelectedInstructor(instructor)}
-              className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 cursor-pointer"
+              className="group relative bg-white rounded-[2rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 cursor-pointer flex flex-col justify-between"
             >
-              {/* Image Container */}
-              <div className="relative aspect-square overflow-hidden">
-                <img 
-                  src={instructor.image?.startsWith('http') || instructor.image?.startsWith('/') ? instructor.image : `/assets/instructors/${instructor.image}`} 
-                  alt={instructor.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
-                  onError={(e) => {
-                    e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(instructor.name) + "&background=6366f1&color=fff&size=512";
-                  }}
-                />
-                <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all duration-500"></div>
-              </div>
+              <div>
+                {/* Image Container */}
+                <div className="relative aspect-square overflow-hidden">
+                  <img 
+                    src={instructor.image?.startsWith('http') || instructor.image?.startsWith('/') ? instructor.image : `/assets/instructors/${instructor.image}`} 
+                    alt={instructor.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
+                    onError={(e) => {
+                      e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(instructor.name) + "&background=6366f1&color=fff&size=512";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all duration-500"></div>
+                </div>
 
-              {/* Content */}
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
-                  {instructor.name}
-                </h3>
-                <p className="text-indigo-600 font-bold text-sm uppercase tracking-widest mb-4">
-                  {instructor.designation}
-                </p>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3 text-slate-500 text-sm">
-                    <Award className="w-4 h-4 text-indigo-400" />
-                    <span>{instructor.specialization?.[0] || 'Expert Instructor'}</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-slate-500 text-sm">
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">
+                    {instructor.name}
+                  </h3>
+                  <p className="text-indigo-600 font-bold text-xs uppercase tracking-widest mb-4">
+                    {instructor.designation}
+                  </p>
+                  
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-2.5 text-slate-500 text-xs sm:text-sm">
+                      <Award className="w-4 h-4 text-indigo-400 shrink-0" />
+                      <span className="line-clamp-1">{instructor.specialization?.[0] || 'Expert Instructor'}</span>
+                    </div>
+                  <div className="flex items-center gap-3 text-slate-500 text-xs sm:text-sm">
                     <GraduationCap className="w-4 h-4 text-indigo-400" />
                     <span>Expert IT Mentor</span>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                {/* Footer */}
-                <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
-                  <span className="text-xs font-black text-indigo-600 uppercase tracking-widest">View Profile</span>
-                  <div className="flex gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                      <Linkedin size={14} />
-                    </div>
+            {/* Footer */}
+            <div className="px-6 pb-6 pt-4 border-t border-slate-50 flex items-center justify-between mt-auto">
+                <span className="text-xs font-black text-indigo-600 uppercase tracking-widest">View Profile</span>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                    <Linkedin size={14} />
                   </div>
                 </div>
               </div>

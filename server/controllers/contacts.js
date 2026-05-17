@@ -58,11 +58,12 @@ export const createContact = async (req, res, next) => {
     const contact = await Contact.create(req.body);
 
     // Create notification
+    const isQuote = contact.type === 'Quote Request';
     await createNotification({
-      title: 'New Inquiry Received',
-      message: `${contact.name} sent a message: ${contact.subject || 'No Subject'}`,
-      type: 'inquiry',
-      link: '/admin/inquiries'
+      title: isQuote ? 'New Project Quote Request' : 'New Inquiry Received',
+      message: `${contact.name} sent a ${isQuote ? 'project quote request' : 'message'}: ${contact.subject || contact.projectType || 'No Subject'}`,
+      type: isQuote ? 'quote' : 'inquiry',
+      link: isQuote ? '/admin/quotes' : '/admin/inquiries'
     });
 
     res.status(201).json({

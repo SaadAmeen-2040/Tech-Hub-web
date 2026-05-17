@@ -6,9 +6,9 @@ import api from '../../api/api';
 
 // Export students list to CSV
 const exportCSV = (students) => {
-  const headers = ['Name', 'Email', 'Phone', 'Course', 'Enrolled Date'];
+  const headers = ['Name', 'Email', 'WhatsApp', 'Course', 'Enrolled Date'];
   const rows = students.map(s => [
-    s.studentName, s.email, s.phone || '', s.course?.title || '', new Date(s.appliedAt).toLocaleDateString()
+    s.fullName, s.email, s.whatsapp || s.phone || '', s.course || '', new Date(s.appliedAt).toLocaleDateString()
   ]);
   const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -47,7 +47,7 @@ const ManageStudents = () => {
   };
 
   const filtered = students.filter(s =>
-    (s.studentName || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (s.fullName || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (s.email || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -75,7 +75,7 @@ const ManageStudents = () => {
           <BookOpen className="text-purple-500 mb-2" size={24} />
           <p className="text-gray-400 text-xs mb-1">Active Courses</p>
           <p className="text-2xl font-bold text-white">
-            {[...new Set(students.map(s => s.course?.title).filter(Boolean))].length}
+            {[...new Set(students.map(s => s.course).filter(Boolean))].length}
           </p>
         </div>
         <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
@@ -92,7 +92,7 @@ const ManageStudents = () => {
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
         <input type="text" placeholder="Search by name or email..." value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-blue-500 transition-all" />
+          className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-blue-50 transition-all" />
       </div>
 
       {/* Student Table */}
@@ -123,22 +123,22 @@ const ManageStudents = () => {
                 <tr key={item._id} className="hover:bg-white/5 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0">
-                        {(item.studentName || 'S').charAt(0)}
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold shrink-0 uppercase">
+                        {(item.fullName || 'S').charAt(0)}
                       </div>
                       <div>
-                        <p className="text-white font-semibold">{item.studentName}</p>
+                        <p className="text-white font-semibold">{item.fullName}</p>
                         <p className="text-xs text-gray-500">Enrolled Student</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-sm text-gray-300">{item.course?.title || '—'}</span>
+                    <span className="text-sm text-gray-300">{item.course || '—'}</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-xs text-gray-500 space-y-1">
                       <div className="flex items-center gap-1.5"><Mail size={11} />{item.email}</div>
-                      {item.phone && <div className="flex items-center gap-1.5"><Phone size={11} />{item.phone}</div>}
+                      {(item.whatsapp || item.phone) && <div className="flex items-center gap-1.5"><Phone size={11} />{item.whatsapp || item.phone}</div>}
                     </div>
                   </td>
                   <td className="px-6 py-4 text-gray-400 text-sm">

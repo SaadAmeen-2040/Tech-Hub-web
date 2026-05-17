@@ -56,14 +56,38 @@ export default function Programs() {
     return <FileCode className="w-8 h-8" />;
   };
 
+  const getInstructorImage = (instructor) => {
+    if (!instructor) return `https://ui-avatars.com/api/?name=Instructor&background=6366f1&color=fff`;
+    if (typeof instructor === 'object') {
+      if (instructor.image) {
+        return instructor.image.startsWith('http') || instructor.image.startsWith('/') 
+          ? instructor.image 
+          : `/assets/instructors/${instructor.image}`;
+      }
+      return getInstructorImage(instructor.name);
+    }
+    const n = instructor.toLowerCase();
+    if (n.includes("asad") || n.includes("ullah")) return "/assets/instructors/instructor_web_1778326811927.png";
+    if (n.includes("farhan") || n.includes("ahmed")) return "/assets/instructors/instructor_cyber_1778326831507.png";
+    if (n.includes("zoya") || n.includes("qureshi")) return "/assets/instructors/instructor_design_1778326854007.png";
+    if (n.includes("arshad") || n.includes("mehmood")) return "/assets/instructors/instructor_ai_1778326782354.png";
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(instructor)}&background=6366f1&color=fff`;
+  };
+
+  const getInstructorName = (instructor) => {
+    if (!instructor) return 'Expert Instructor';
+    if (typeof instructor === 'object') return instructor.name || 'Expert Instructor';
+    return instructor;
+  };
+
   return (
     <div className="pt-32 pb-24 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20 animate-fade-in-up">
-          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">
             Our <span className="text-gradient">Specialized Tracks</span>
           </h1>
-          <p className="max-w-2xl mx-auto text-xl text-slate-600">
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600">
             100% Free 3-Months Advanced IT Courses with International Certification. 
             Choose the track that matches your educational background.
           </p>
@@ -79,8 +103,8 @@ export default function Programs() {
           </div>
         ) : Object.entries(groupedPrograms).map(([level, items], groupIndex) => (
           <div key={level} className="mb-20 animate-fade-in-up" style={{ animationDelay: `${groupIndex * 0.1}s` }}>
-            <div className="flex items-center gap-4 mb-10">
-              <h2 className="text-3xl font-bold text-slate-900">{level}</h2>
+            <div className="flex items-center gap-4 mb-8 sm:mb-10">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">{level}</h2>
               <div className="h-px grow bg-slate-200"></div>
             </div>
             
@@ -88,57 +112,62 @@ export default function Programs() {
               {items.map((program) => (
                 <div 
                   key={program._id}
-                  className="group bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 transform hover:-translate-y-2"
+                  className="group bg-white rounded-[2rem] p-6 sm:p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 transform hover:-translate-y-2 flex flex-col justify-between"
                 >
-                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm overflow-hidden border border-slate-100">
-                    {program.thumbnail ? (
-                      <img 
-                        src={program.thumbnail.startsWith('http') || program.thumbnail.startsWith('/') ? program.thumbnail : `/assets/courses/${program.thumbnail}`} 
-                        alt={program.title} 
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.parentElement.innerHTML = '<div class="flex items-center justify-center w-full h-full text-indigo-600 group-hover:text-white">' + getIcon(program.title) + '</div>';
-                        }}
-                      />
-                    ) : (
-                      getIcon(program.title)
-                    )}
+                  <div>
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm overflow-hidden border border-slate-100 shrink-0">
+                      {program.thumbnail ? (
+                        <img 
+                          src={program.thumbnail.startsWith('http') || program.thumbnail.startsWith('/') ? program.thumbnail : `/assets/courses/${program.thumbnail}`} 
+                          alt={program.title} 
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.innerHTML = '<div class="flex items-center justify-center w-full h-full text-indigo-600 group-hover:text-white">' + getIcon(program.title) + '</div>';
+                          }}
+                        />
+                      ) : (
+                        getIcon(program.title)
+                      )}
+                    </div>
+                    
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-indigo-600 transition-colors">
+                      {program.title}
+                    </h3>
+                    
+                    <p className="text-sm sm:text-base text-slate-600 mb-8 leading-relaxed line-clamp-3">
+                      {program.description}
+                    </p>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors">
-                    {program.title}
-                  </h3>
-                  
-                  <p className="text-slate-600 mb-8 leading-relaxed line-clamp-3">
-                    {program.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 shadow-sm">
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-50 mt-auto gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 shadow-sm bg-indigo-50 shrink-0">
                         <img 
-                          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(program.instructor)}&background=6366f1&color=fff`} 
-                          alt={program.instructor}
+                          src={getInstructorImage(program.instructor)} 
+                          alt={getInstructorName(program.instructor)}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInstructorName(program.instructor))}&background=6366f1&color=fff`;
+                          }}
                         />
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Instructor</span>
-                        <span className="text-sm font-bold text-slate-700">{program.instructor}</span>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider">Instructor</span>
+                        <span className="text-xs sm:text-sm font-bold text-slate-700 truncate">{getInstructorName(program.instructor)}</span>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest">
-                        <Clock className="w-4 h-4" />
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <div className="flex items-center gap-1.5 text-indigo-600 font-bold text-[10px] sm:text-xs uppercase tracking-widest">
+                        <Clock className="w-3.5 h-3.5" />
                         {program.duration}
                       </div>
                       <button 
                         onClick={() => navigate("/registration", { state: { program: program.title } })}
-                        className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-2 group/btn transition-all text-sm"
+                        className="text-indigo-600 font-bold hover:text-indigo-700 flex items-center gap-1.5 group/btn transition-all text-xs sm:text-sm"
                       >
                         Enroll Now 
-                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>
@@ -149,31 +178,31 @@ export default function Programs() {
         ))}
 
         {/* Info Banner */}
-        <div className="mt-20 p-10 md:p-16 rounded-[3rem] bg-indigo-600 relative overflow-hidden text-center text-white shadow-2xl shadow-indigo-600/20">
+        <div className="mt-20 p-6 sm:p-10 md:p-12 rounded-[2rem] bg-indigo-600 relative overflow-hidden text-center text-white shadow-2xl shadow-indigo-600/20">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-3 py-2 px-4 rounded-full bg-white/10 border border-white/20 mb-8 backdrop-blur-md">
-              <UserCheck className="w-5 h-5 text-indigo-300" />
-              <span className="text-sm font-bold uppercase tracking-widest text-indigo-100">Age Limit: 18-40 Years</span>
+            <div className="inline-flex items-center gap-2.5 py-2 px-4 rounded-full bg-white/10 border border-white/20 mb-6 backdrop-blur-md">
+              <UserCheck className="w-4 h-4 text-indigo-300" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-indigo-100">Age Limit: 18-40 Years</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to start your journey?</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Ready to start your journey?</h2>
             
-            <div className="flex flex-wrap justify-center gap-8 mb-12">
+            <div className="flex flex-wrap justify-center gap-6 mb-8 sm:mb-10 text-sm sm:text-base">
               <div className="flex items-center gap-2 text-indigo-100 font-medium">
-                <Calendar className="w-5 h-5" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                 Batch 2026 Now Open
               </div>
               <div className="flex items-center gap-2 text-indigo-100 font-medium">
-                <Clock className="w-5 h-5" />
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
                 Flexible Shifts Available
               </div>
             </div>
 
             <button 
               onClick={() => navigate("/registration")}
-              className="px-12 py-5 bg-white text-indigo-600 rounded-2xl font-bold text-xl hover:bg-indigo-50 transition-all shadow-xl flex items-center gap-3 mx-auto transform hover:-translate-y-1"
+              className="px-6 py-3 sm:px-8 sm:py-3.5 bg-white text-indigo-600 rounded-2xl font-bold text-sm sm:text-base hover:bg-indigo-50 transition-all shadow-xl flex items-center gap-2 mx-auto transform hover:-translate-y-1"
             >
-              Secure Your Seat Now <ArrowRight className="w-6 h-6" />
+              Secure Your Seat Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
           {/* Decorative Background */}

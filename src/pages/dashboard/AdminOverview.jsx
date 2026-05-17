@@ -218,13 +218,13 @@ const AdminOverview = () => {
                   onClick={() => navigate('/admin/admissions')}>
                   <td className="px-8 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-xs font-bold text-white">
-                        {(item.studentName || 'S').charAt(0)}
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-xs font-bold text-white uppercase">
+                        {(item.fullName || 'S').charAt(0)}
                       </div>
-                      <span className="text-white font-medium group-hover:text-blue-400 transition-colors">{item.studentName}</span>
+                      <span className="text-white font-medium group-hover:text-blue-400 transition-colors">{item.fullName}</span>
                     </div>
                   </td>
-                  <td className="px-8 py-4 text-gray-300 text-sm">{item.course?.title || '—'}</td>
+                  <td className="px-8 py-4 text-gray-300 text-sm">{item.course || '—'}</td>
                   <td className="px-8 py-4 text-gray-400 text-sm">{new Date(item.appliedAt).toLocaleDateString()}</td>
                   <td className="px-8 py-4">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase border ${statusColors[item.status] || 'bg-gray-500/10 text-gray-400 border-white/10'}`}>
