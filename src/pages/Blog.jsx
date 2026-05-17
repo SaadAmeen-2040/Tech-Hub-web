@@ -87,14 +87,14 @@ export default function Blog() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm mb-6">
-            <Newspaper className="w-4 h-4" />
-            <span>Tech Hub Insights</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+            <Newspaper className="w-4 h-4 text-indigo-500 animate-pulse" />
+            <span className="tracking-wide">Tech Hub Insights</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4 sm:mb-6">
-            Our Latest <span className="text-gradient">Tech Stories</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.15] mb-6 tracking-tight">
+            Our Latest <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Tech Stories</span>
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
             Stay informed with expert insights, student achievements, and 
             technological breakthroughs from our innovation center.
           </p>

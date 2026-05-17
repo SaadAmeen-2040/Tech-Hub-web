@@ -61,14 +61,14 @@ export default function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm mb-6">
-            <Trophy className="w-4 h-4" />
-            <span>Student Excellence</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+            <Trophy className="w-4 h-4 text-indigo-500 animate-pulse" />
+            <span className="tracking-wide">Student Excellence</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
-            The Student <span className="text-gradient">Showcase</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 leading-[1.15] mb-8 tracking-tight">
+            The Student <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Showcase</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
             Explore the innovative projects built by our students. From AI models to 
             enterprise-grade websites, see what's possible at Tech Hub.
           </p>

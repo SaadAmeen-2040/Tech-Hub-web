@@ -79,14 +79,14 @@ export default function Services() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm mb-6">
-            <Rocket className="w-4 h-4" />
-            <span>Our Dual Expertise</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+            <Rocket className="w-4 h-4 text-indigo-500 animate-pulse" />
+            <span className="tracking-wide">Our Dual Expertise</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
-            Expert Training & <span className="text-gradient">Custom Development</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.15] mb-6 tracking-tight">
+            Expert Training & <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Custom Development</span>
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
             We bridge the gap between education and industry. Whether you're a student looking 
             for world-class training or a business needing custom software, we deliver excellence.
           </p>

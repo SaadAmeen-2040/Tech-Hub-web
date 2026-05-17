@@ -8,10 +8,14 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Contact Information */}
           <div className="animate-fade-in-up">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6">
-              Get in <span className="text-gradient">Touch</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+              <MessageSquare className="w-4 h-4 text-indigo-500 animate-pulse" />
+              <span className="tracking-wide">Contact Tech Hub</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.15] mb-6 tracking-tight">
+              Get in <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Touch</span>
             </h1>
-            <p className="text-xl text-slate-600 mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-600 mb-12 leading-relaxed font-normal">
               Have questions about our courses, software services, or partnerships? 
               Reach out to our team at Tech Hub Innovation Center Bahawalpur.
             </p>

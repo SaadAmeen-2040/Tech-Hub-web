@@ -133,14 +133,14 @@ export default function SoftwareDevelopment() {
             transition={{ duration: 0.8 }}
             className="lg:sticky lg:top-32"
           >
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/50 backdrop-blur-md border border-white text-indigo-600 font-bold text-sm mb-8 shadow-sm">
-              <Sparkles className="w-4 h-4 animate-pulse" />
-              <span>Next-Gen Software Development</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+              <Sparkles className="w-4 h-4 text-indigo-500 animate-pulse" />
+              <span className="tracking-wide">Next-Gen Software Development</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.15] mb-6 tracking-tight">
               Code the <br />
-              <span className="text-gradient">Future</span>
+              <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Future</span>
             </h1>
             
             <p className="text-base sm:text-lg text-slate-600 mb-10 leading-relaxed max-w-xl font-medium">

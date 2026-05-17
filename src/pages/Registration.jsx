@@ -100,17 +100,17 @@ export default function Registration() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm mb-8">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100">
+          <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 shadow-xs mb-8">
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-slate-100 shadow-xs">
                <img src="/assets/logo/navttcofficial_logo.jpg" alt="NAVTTC" className="w-full h-full object-contain" />
             </div>
-            <span className="text-indigo-600 font-black text-sm uppercase tracking-widest">NAVTTC & PM Youth Program</span>
+            <span className="text-indigo-600 font-black text-sm uppercase tracking-wide">NAVTTC & PM Youth Program</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4 sm:mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.15] mb-6 tracking-tight">
             100% Free Training with Free International Certification <br />
-            <span className="text-gradient">Under NAVTTC</span>
+            <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Under NAVTTC</span>
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
             Secure your future in tech. Fill out the official admission form below 
             to apply for the 2026 Batch.
           </p>

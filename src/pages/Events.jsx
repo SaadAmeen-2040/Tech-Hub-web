@@ -37,10 +37,14 @@ export default function Events() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
-            Connect & <span className="text-gradient">Innovate</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-100/80 text-indigo-600 font-bold text-sm mb-6 shadow-xs">
+            <Calendar className="w-4 h-4 text-indigo-500 animate-pulse" />
+            <span className="tracking-wide">Upcoming & Past Events</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 leading-[1.15] mb-8 tracking-tight">
+            Connect & <span className="bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Innovate</span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
             Stay updated with the latest tech seminars, workshops, and graduation 
             ceremonies at Tech Hub Innovation Center.
           </p>
