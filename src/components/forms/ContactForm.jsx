@@ -165,9 +165,10 @@ export default function ContactForm() {
           whileHover={{ scale: 1.02, translateY: -2 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
-          className="w-full py-3.5 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all"
+          disabled={saving}
+          className="w-full py-3.5 sm:py-4 bg-indigo-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all disabled:opacity-50"
         >
-          Send Message <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+          {saving ? 'Sending...' : 'Send Message'} <Send className="w-4 h-4 sm:w-5 sm:h-5" />
         </motion.button>
       </form>
     </motion.div>

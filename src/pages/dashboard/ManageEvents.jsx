@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, Calendar, MapPin, X, Clock } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Calendar, MapPin, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import api from '../../api/api';
@@ -125,16 +125,20 @@ const ManageEvents = () => {
   const [showModal, setShowModal] = useState(false);
   const [current, setCurrent] = useState(null);
 
-  useEffect(() => { fetchEvents(); }, []);
-
   const fetchEvents = async () => {
     setLoading(true);
     try {
       const res = await api.get('/events');
       setEvents(res.data.data);
-    } catch { toast.error('Could not load events'); }
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error('Could not load events', err);
+      toast.error('Could not load events');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => { fetchEvents(); }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this event?')) return;

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Target, Eye, Award, Users, BookOpen, Rocket, ShieldCheck, Zap } from "lucide-react";
 import Instructors from "../components/sections/Instructors";
+import CampusGallery from "../components/sections/CampusGallery";
 import api from "../api/api";
 
 const DEFAULT_VALUES = [
@@ -39,8 +41,21 @@ const DEFAULT_STATS = [
 ];
 
 export default function About() {
+  const location = useLocation();
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    }
+  }, [location]);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -89,7 +104,7 @@ export default function About() {
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24">
+      <section id="story" className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -319,6 +334,7 @@ export default function About() {
         </div>
       </section>
 
+      <CampusGallery />
       <Instructors />
     </div>
   );

@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import api from "../api/api";
 import { toast } from "react-hot-toast";
 import { 
-  Code2, 
   Send, 
   Smartphone, 
   Globe, 

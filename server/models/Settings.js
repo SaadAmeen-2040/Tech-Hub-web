@@ -27,6 +27,18 @@ const SettingsSchema = new mongoose.Schema({
     value: String,
     icon: String
   }],
+  contact: {
+    address: { type: String, default: 'Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road Near Saddar Pulli, Bahawalpur' },
+    phone: { type: String, default: '+92 308 0620868' },
+    email: { type: String, default: 'info@techhubinstitute.pk' }
+  },
+  socials: {
+    facebook: { type: String, default: '#' },
+    twitter: { type: String, default: '#' },
+    instagram: { type: String, default: '#' },
+    linkedin: { type: String, default: '#' },
+    whatsapp: { type: String, default: '923080620868' }
+  },
   updatedAt: {
     type: Date,
     default: Date.now

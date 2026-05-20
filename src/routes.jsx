@@ -20,6 +20,10 @@ import ManageStudents from "./pages/dashboard/ManageStudents";
 import ManageBlog from "./pages/dashboard/ManageBlog";
 import ManageEvents from "./pages/dashboard/ManageEvents";
 import ManageSettings from "./pages/dashboard/ManageSettings";
+import ManageTestimonials from "./pages/dashboard/ManageTestimonials";
+import ManageProjects from "./pages/dashboard/ManageProjects";
+import ManageServices from "./pages/dashboard/ManageServices";
+import ManageGallery from "./pages/dashboard/ManageGallery";
 import MainLayout from "./components/layout/MainLayout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -59,7 +63,10 @@ export default function AppRoutes() {
             <Route path="events" element={<ManageEvents />} />
             <Route path="blog" element={<ManageBlog />} />
             <Route path="settings" element={<ManageSettings />} />
-            <Route path="gallery" element={<div className="text-white p-8">Gallery Management — Coming Soon</div>} />
+            <Route path="testimonials" element={<ManageTestimonials />} />
+            <Route path="projects" element={<ManageProjects />} />
+            <Route path="services" element={<ManageServices />} />
+            <Route path="gallery" element={<ManageGallery />} />
             <Route path="inquiries" element={<ManageInquiries />} />
             <Route path="quotes" element={<ManageQuotes />} />
           </Route>

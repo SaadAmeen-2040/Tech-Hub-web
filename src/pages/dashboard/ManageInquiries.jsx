@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Search, Trash2, CheckCircle, Clock, Mail, User,
+  Search, Trash2, Mail, User,
   MessageSquare, Tag, Download, ChevronDown, X
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -45,7 +45,7 @@ const DetailModal = ({ item, onClose }) => (
           ['AI Included', item.includeAI ? 'Yes' : 'No'],
           ['Country', item.country],
           ['Status', item.status],
-        ].filter(([_, v]) => v !== undefined && v !== '').map(([label, value]) => (
+        ].filter(([, v]) => v !== undefined && v !== '').map(([label, value]) => (
           <div key={label} className="flex gap-4 border-b border-white/5 pb-2">
             <span className="text-gray-500 text-sm w-24 shrink-0">{label}</span>
             <span className="text-white text-sm font-medium">{value || '—'}</span>
@@ -69,19 +69,20 @@ const ManageInquiries = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
 
-  useEffect(() => { fetchInquiries(); }, []);
-
   const fetchInquiries = async () => {
     setLoading(true);
     try {
       const res = await api.get('/contacts');
       const filteredInquiries = res.data.data.filter(i => i.type === 'General Inquiry');
       setInquiries(filteredInquiries);
-    } catch {
+    } catch (err) {
+      console.error('Could not load inquiries', err);
       toast.error('Could not load inquiries');
       setInquiries([]);
     } finally { setLoading(false); }
   };
+
+  useEffect(() => { fetchInquiries(); }, []);
 
   const updateStatus = async (id, status) => {
     setUpdatingId(id);

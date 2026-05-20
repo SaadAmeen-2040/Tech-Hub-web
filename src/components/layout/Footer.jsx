@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   Facebook, 
@@ -8,12 +9,25 @@ import {
   Phone, 
   Mail, 
   ChevronRight,
-  ShieldCheck,
   Zap
 } from "lucide-react";
+import api from "../../api/api";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await api.get('/settings');
+        setSettings(res.data.data);
+      } catch (err) {
+        console.error("Failed to load settings in footer", err);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   const quickLinks = [
     { name: "Home", path: "/" },
@@ -69,14 +83,16 @@ export default function Footer() {
             
             <div className="flex space-x-4">
               {[
-                { icon: <Facebook className="w-5 h-5" />, label: "Facebook" },
-                { icon: <Twitter className="w-5 h-5" />, label: "Twitter" },
-                { icon: <Instagram className="w-5 h-5" />, label: "Instagram" },
-                { icon: <Linkedin className="w-5 h-5" />, label: "Linkedin" }
+                { icon: <Facebook className="w-5 h-5" />, url: settings?.socials?.facebook || "#", label: "Facebook" },
+                { icon: <Twitter className="w-5 h-5" />, url: settings?.socials?.twitter || "#", label: "Twitter" },
+                { icon: <Instagram className="w-5 h-5" />, url: settings?.socials?.instagram || "#", label: "Instagram" },
+                { icon: <Linkedin className="w-5 h-5" />, url: settings?.socials?.linkedin || "#", label: "Linkedin" }
               ].map((social, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-11 h-11 rounded-xl bg-slate-900/50 backdrop-blur-md flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all duration-300 border border-white/5 hover:scale-110"
                 >
@@ -142,7 +158,7 @@ export default function Footer() {
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Location</span>
                   <span className="text-sm leading-relaxed text-slate-300 font-medium">
-                    Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road, Bahawalpur
+                    {settings?.contact?.address || "Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road, Bahawalpur"}
                   </span>
                 </div>
               </li>
@@ -152,7 +168,9 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Phone</span>
-                  <span className="text-sm text-slate-300 font-medium">+92 308 0620868</span>
+                  <a href={`tel:${settings?.contact?.phone || "+923080620868"}`} className="text-sm text-slate-300 font-medium hover:text-indigo-400 transition-colors">
+                    {settings?.contact?.phone || "+92 308 0620868"}
+                  </a>
                 </div>
               </li>
               <li className="flex items-center gap-5">
@@ -161,7 +179,9 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email</span>
-                  <span className="text-sm text-slate-300 font-medium">info@techhubinstitute.pk</span>
+                  <a href={`mailto:${settings?.contact?.email || "info@techhubinstitute.pk"}`} className="text-sm text-slate-300 font-medium hover:text-indigo-400 transition-colors">
+                    {settings?.contact?.email || "info@techhubinstitute.pk"}
+                  </a>
                 </div>
               </li>
             </ul>

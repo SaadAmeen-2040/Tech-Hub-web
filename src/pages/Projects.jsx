@@ -1,56 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Trophy, Code2, Cpu, Palette, Globe, Briefcase } from "lucide-react";
 
-const studentProjects = [
-  {
-    title: "AI-Powered Health Assistant",
-    student: "Muhammad Ahmed",
-    course: "Artificial Intelligence",
-    image: "/assets/projects/ai_dashboard.png",
-    description: "A smart diagnostic system that uses machine learning to predict potential health risks based on symptoms.",
-    tags: ["Python", "TensorFlow", "React"],
-    type: "AI & ML"
-  },
-  {
-    title: "Luxury Fashion Hub",
-    student: "Fatima Noor",
-    course: "Web Development",
-    image: "/assets/projects/ecommerce.png",
-    description: "A full-stack e-commerce platform with real-time inventory management and secure payment integration.",
-    tags: ["MERN Stack", "Stripe", "Redux"],
-    type: "Web Design"
-  },
-  {
-    title: "Eco-Friendly Brand Identity",
-    student: "Zain Ali",
-    course: "Graphic Design",
-    image: "/assets/blog/success.png",
-    description: "Complete visual branding for a sustainable energy company, including logo, packaging, and digital assets.",
-    tags: ["Illustrator", "Photoshop", "Figma"],
-    type: "Design"
-  },
-  {
-    title: "Secure Enterprise Network",
-    student: "Usman Raza",
-    course: "Cyber Security",
-    image: "/assets/events/seminar.png",
-    description: "A robust network architecture designed with ethical hacking defenses and automated intrusion detection.",
-    tags: ["Networking", "Cisco", "Linux"],
-    type: "Security"
-  }
-];
+import api from '../api/api';
 
 const filters = ["All Projects", "AI & ML", "Web Design", "Design", "Security"];
 
 export default function Projects() {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("All Projects");
+  const [studentProjects, setStudentProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await api.get('/projects');
+        setStudentProjects(res.data.data);
+      } catch (error) {
+        console.error("Failed to fetch projects", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const filteredProjects = activeFilter === "All Projects" 
     ? studentProjects 
     : studentProjects.filter(project => project.type === activeFilter);
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-24 min-h-screen flex items-center justify-center bg-white">
+        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
@@ -94,7 +81,7 @@ export default function Projects() {
 
       {/* Projects Grid */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
-        {filteredProjects.map((project, index) => (
+        {filteredProjects.map((project) => (
           <motion.div
             key={project.title}
             layout

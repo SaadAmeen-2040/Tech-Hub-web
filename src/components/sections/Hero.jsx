@@ -1,8 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade, Navigation } from "swiper/modules";
-import { Clock, User, Award, ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Import Swiper styles
 import "swiper/css";

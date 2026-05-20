@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import api from '../../api/api';
-import { Plus, Search, Edit2, Trash2, Eye, EyeOff, X, FileText, Upload, Image as ImageIcon } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Eye, EyeOff, X, FileText, Image as ImageIcon } from 'lucide-react';
 
 import ImageUpload from '../../components/dashboard/ImageUpload';
 
@@ -118,16 +118,20 @@ const ManageBlog = () => {
   const [showModal, setShowModal] = useState(false);
   const [current, setCurrent] = useState(null);
 
-  useEffect(() => { fetchBlogs(); }, []);
-
   const fetchBlogs = async () => {
     setLoading(true);
     try {
       const res = await api.get('/blogs');
       setBlogs(res.data.data);
-    } catch { toast.error('Could not load blog posts'); }
-    finally { setLoading(false); }
+    } catch (err) {
+      console.error('Could not load blog posts', err);
+      toast.error('Could not load blog posts');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => { fetchBlogs(); }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this post?')) return;

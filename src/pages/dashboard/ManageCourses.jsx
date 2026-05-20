@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Search, Edit2, Trash2, Filter, CheckCircle, XCircle, Clock, BookOpen, X } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, CheckCircle, XCircle, Clock, BookOpen, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import ImageUpload from '../../components/dashboard/ImageUpload';
@@ -153,14 +153,13 @@ const ManageCourses = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(null);
 
-  useEffect(() => { fetchCourses(); }, []);
-
   const fetchCourses = async () => {
     setLoading(true);
     try {
       const res = await api.get('/courses');
       setCourses(res.data.data);
     } catch (err) {
+      console.error('Could not load courses', err);
       toast.error('Could not load courses');
     } finally {
       setLoading(false);
@@ -174,9 +173,12 @@ const ManageCourses = () => {
       toast.success('Course deleted');
       setCourses(prev => prev.filter(c => c._id !== id));
     } catch (err) {
+      console.error('Failed to delete course', err);
       toast.error('Failed to delete course');
     }
   };
+
+  useEffect(() => { fetchCourses(); }, []);
 
   const openCreate = () => { setCurrentCourse(null); setShowModal(true); };
   const openEdit = (course) => { setCurrentCourse(course); setShowModal(true); };

@@ -1,4 +1,4 @@
-import { CheckCircle2, ShieldCheck, Zap, Laptop, Trophy, Globe } from "lucide-react";
+import { CheckCircle2, Zap, Laptop, Trophy, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [

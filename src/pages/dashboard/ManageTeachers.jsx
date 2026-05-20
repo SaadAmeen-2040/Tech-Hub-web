@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Search, Edit2, Trash2, Mail, Briefcase, ExternalLink, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
@@ -152,14 +152,13 @@ const ManageTeachers = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentTeacher, setCurrentTeacher] = useState(null);
 
-  useEffect(() => { fetchTeachers(); }, []);
-
   const fetchTeachers = async () => {
     setLoading(true);
     try {
       const res = await api.get('/teachers');
       setTeachers(res.data.data);
     } catch (err) {
+      console.error('Could not load instructors', err);
       toast.error('Could not load instructors');
     } finally {
       setLoading(false);
@@ -173,9 +172,12 @@ const ManageTeachers = () => {
       toast.success('Instructor removed');
       setTeachers(prev => prev.filter(t => t._id !== id));
     } catch (err) {
+      console.error('Delete failed', err);
       toast.error('Delete failed');
     }
   };
+
+  useEffect(() => { fetchTeachers(); }, []);
 
   const openCreate = () => { setCurrentTeacher(null); setShowModal(true); };
   const openEdit = (t) => { setCurrentTeacher(t); setShowModal(true); };

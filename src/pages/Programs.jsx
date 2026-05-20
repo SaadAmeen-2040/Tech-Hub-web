@@ -5,7 +5,6 @@ import {
   Cpu, 
   Code2, 
   ShieldCheck, 
-  Globe, 
   Palette, 
   TrendingUp, 
   FileCode, 
@@ -20,6 +19,7 @@ export default function Programs() {
   const navigate = useNavigate();
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [imageErrors, setImageErrors] = useState({});
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -125,14 +125,13 @@ export default function Programs() {
                   <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div>
                     <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-50/80 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-linear-to-r group-hover:from-indigo-600 group-hover:to-purple-600 group-hover:text-white text-indigo-600 transition-all duration-500 shadow-xs overflow-hidden border border-indigo-100/50 shrink-0">
-                      {program.thumbnail ? (
+                      {program.thumbnail && !imageErrors[program._id] ? (
                         <img 
                           src={program.thumbnail.startsWith('http') || program.thumbnail.startsWith('/') ? program.thumbnail : `/assets/courses/${program.thumbnail}`} 
                           alt={program.title} 
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.parentElement.innerHTML = '<div class="flex items-center justify-center w-full h-full text-indigo-600 group-hover:text-white">' + getIcon(program.title) + '</div>';
+                          onError={() => {
+                            setImageErrors(prev => ({ ...prev, [program._id]: true }));
                           }}
                         />
                       ) : (

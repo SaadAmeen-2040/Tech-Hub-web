@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Rocket, CheckCircle2, Award, Users, BookOpen, Shield, Code2, Laptop, Search, ArrowRight, Calendar, UserCheck } from 'lucide-react';
+import { Rocket, CheckCircle2, Award, Users, BookOpen, Shield, Code2, Laptop, Search, ArrowRight, UserCheck } from 'lucide-react';
 
 export default function AdmissionAnnouncement() {
   const navigate = useNavigate();

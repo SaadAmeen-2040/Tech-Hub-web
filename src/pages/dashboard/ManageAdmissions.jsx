@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Search, Trash2, Check, X, Eye, Download, Mail, Phone, Calendar, ChevronDown
 } from 'lucide-react';
@@ -52,18 +52,19 @@ const ManageAdmissions = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
 
-  useEffect(() => { fetchAdmissions(); }, []);
-
   const fetchAdmissions = async () => {
     setLoading(true);
     try {
       const res = await api.get('/admissions');
       setAdmissions(res.data.data);
     } catch (err) {
+      console.error('Could not load admissions', err);
       toast.error('Could not load admissions');
       setAdmissions([]);
     } finally { setLoading(false); }
   };
+
+  useEffect(() => { fetchAdmissions(); }, []);
 
   const handleExport = async () => {
     try {

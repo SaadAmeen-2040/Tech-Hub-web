@@ -1,7 +1,23 @@
+import { useState, useEffect } from "react";
 import ContactForm from "../components/forms/ContactForm";
-import { MapPin, Mail, Phone, Building2, Clock, MessageSquare } from "lucide-react";
+import { MapPin, Mail, Phone, Building2, MessageSquare } from "lucide-react";
+import api from "../api/api";
 
 export default function Contact() {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await api.get('/settings');
+        setSettings(res.data.data);
+      } catch (err) {
+        console.error("Failed to load settings in Contact page", err);
+      }
+    };
+    fetchSettings();
+  }, []);
+
   return (
     <div className="pt-32 pb-24 bg-slate-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +43,7 @@ export default function Contact() {
                 </div>
                 <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2">Visit Us</h4>
                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road Near Saddar Pulli, Bahawalpur
+                  {settings?.contact?.address || "Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road Near Saddar Pulli, Bahawalpur"}
                 </p>
               </div>
 
@@ -37,7 +53,10 @@ export default function Contact() {
                 </div>
                 <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2">Email Us</h4>
                 <p className="text-slate-500 text-xs sm:text-sm">
-                  info@techhubinstitute.pk<br />
+                  <a href={`mailto:${settings?.contact?.email || "info@techhubinstitute.pk"}`} className="hover:text-indigo-600 transition-colors">
+                    {settings?.contact?.email || "info@techhubinstitute.pk"}
+                  </a>
+                  <br />
                   admissions@techhubinstitute.pk
                 </p>
               </div>
@@ -48,7 +67,10 @@ export default function Contact() {
                 </div>
                 <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-2">Call Us</h4>
                 <p className="text-slate-500 text-xs sm:text-sm">
-                  +92 308 0620868<br />
+                  <a href={`tel:${settings?.contact?.phone || "+923080620868"}`} className="hover:text-indigo-600 transition-colors font-bold">
+                    {settings?.contact?.phone || "+92 308 0620868"}
+                  </a>
+                  <br />
                   Mon - Sat: 9 AM - 5 PM
                 </p>
               </div>

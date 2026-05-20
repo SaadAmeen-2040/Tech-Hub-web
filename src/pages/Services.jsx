@@ -1,11 +1,12 @@
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import api from "../api/api";
 import { 
   Code2, 
   LineChart, 
   Users, 
   Lightbulb, 
-  Globe, 
   Rocket, 
   Smartphone, 
   Database,
@@ -17,41 +18,22 @@ import {
   Cpu
 } from "lucide-react";
 
-const services = [
-  
-  {
-    title: "Vocational Training",
-    description: "International standard technical education for youth, focusing on job-ready skills and certification.",
-    icon: <GraduationCap className="w-12 h-12" />,
-    features: ["NAVTTC Certified", "PMYSDP Implementation", "Hands-on Projects", "Industry Workshops"],
-    color: "bg-indigo-600",
-    highlight: true
-  },
-
-  {
-    title: "Software Development",
-    description: "Tailored digital products for startups and enterprises, ranging from e-commerce to AI-driven automation.",
-    icon: <Code2 className="w-12 h-12" />,
-    features: ["Custom ERP & E-commerce", "AI & LLM Integration", "Mobile & Web Apps", "Final Year Projects (FYP)"],
-    color: "bg-indigo-600",
-    highlight: true
-  },
-  
-  {
-    title: "Corporate Training",
-    description: "Upgrade your team's technical capabilities with our specialized corporate workshops.",
-    icon: <LineChart className="w-10 h-10" />,
-    features: ["Custom Curriculum", "On-site Training", "Digital Transformation", "Performance Analytics"],
-    color: "bg-slate-900",
-  },
-  {
-    title: "Career Counseling",
-    description: "Guiding students towards successful careers in the global technology marketplace.",
-    icon: <Lightbulb className="w-10 h-10" />,
-    features: ["Job Placement", "Resume Building", "Interview Prep", "Industry Networking"],
-    color: "bg-slate-900",
+const getServiceIcon = (iconName, className = "w-12 h-12") => {
+  switch (iconName) {
+    case 'Code2': return <Code2 className={className} />;
+    case 'LineChart': return <LineChart className={className} />;
+    case 'Users': return <Users className={className} />;
+    case 'Lightbulb': return <Lightbulb className={className} />;
+    case 'Rocket': return <Rocket className={className} />;
+    case 'Smartphone': return <Smartphone className={className} />;
+    case 'Database': return <Database className={className} />;
+    case 'Layers': return <Layers className={className} />;
+    case 'GraduationCap': return <GraduationCap className={className} />;
+    case 'Award': return <Award className={className} />;
+    case 'Cpu': return <Cpu className={className} />;
+    default: return <Code2 className={className} />;
   }
-];
+};
 
 const devTech = [
   { name: "Frontend", icons: ["React", "Next.js", "Vue.js", "Tailwind"] },
@@ -69,6 +51,30 @@ const trainingFeatures = [
 
 export default function Services() {
   const navigate = useNavigate();
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await api.get('/services');
+        setServices(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch services", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="pt-32 pb-24 min-h-screen flex items-center justify-center bg-white">
+        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-32 pb-24 bg-white overflow-hidden">
@@ -113,7 +119,7 @@ export default function Services() {
                 <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center mb-6 sm:mb-8 shadow-xl ${
                   service.highlight ? "bg-indigo-600" : "bg-white text-indigo-600"
                 }`}>
-                  {service.icon}
+                  {getServiceIcon(service.icon)}
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">{service.title}</h3>
                 <p className={`text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 ${

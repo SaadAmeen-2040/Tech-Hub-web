@@ -37,10 +37,10 @@ export default function Registration() {
   });
 
   useEffect(() => {
-    if (location.state?.program) {
+    if (location.state?.program && formData.course !== location.state.program) {
       setFormData(prev => ({ ...prev, course: location.state.program }));
     }
-  }, [location.state]);
+  }, [location.state?.program, formData.course]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -358,9 +358,10 @@ export default function Registration() {
             {/* Submit */}
             <button 
               type="submit"
-              className="w-full py-3.5 sm:py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black text-sm sm:text-base hover:shadow-2xl hover:shadow-indigo-500/40 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2"
+              disabled={saving}
+              className="w-full py-3.5 sm:py-4 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-2xl font-black text-sm sm:text-base hover:shadow-2xl hover:shadow-indigo-500/40 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              Submit Admission Form <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
+              {saving ? "Submitting..." : "Submit Admission Form"} <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </form>
         </motion.div>

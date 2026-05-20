@@ -29,3 +29,15 @@ export const deleteBlog = async (req, res) => {
     res.status(200).json({ success: true, data: {} });
   } catch (err) { res.status(400).json({ success: false, error: err.message }); }
 };
+
+export const getBlogById = async (req, res) => {
+  try {
+    const blog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+    if (!blog) return res.status(404).json({ success: false, message: 'Blog not found' });
+    res.status(200).json({ success: true, data: blog });
+  } catch (err) { res.status(400).json({ success: false, error: err.message }); }
+};

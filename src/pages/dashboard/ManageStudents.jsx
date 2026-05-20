@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, Mail, BookOpen, Calendar, Download, Trash2, Phone, GraduationCap } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Mail, BookOpen, Calendar, Download, Trash2, Phone, GraduationCap } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import api from '../../api/api';
 
@@ -23,19 +22,20 @@ const ManageStudents = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => { fetchStudents(); }, []);
-
   const fetchStudents = async () => {
     setLoading(true);
     try {
       const res = await api.get('/admissions');
       // Students = all accepted admissions
       setStudents(res.data.data.filter(a => a.status === 'Accepted'));
-    } catch {
+    } catch (err) {
+      console.error('Could not load students', err);
       toast.error('Could not load students');
       setStudents([]);
     } finally { setLoading(false); }
   };
+
+  useEffect(() => { fetchStudents(); }, []);
 
   const handleRevoke = async (id) => {
     if (!window.confirm('Revoke this student\'s enrollment? This will change their status back to Pending.')) return;

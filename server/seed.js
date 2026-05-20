@@ -19,7 +19,7 @@ const seedAdmin = async () => {
       process.exit();
     }
 
-    const admin = await User.create({
+    await User.create({
       name: 'Tech Hub Admin',
       email: 'admin@techhub.com',
       password: 'adminpassword123', // User should change this

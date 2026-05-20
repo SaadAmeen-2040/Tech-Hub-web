@@ -1,44 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Search, Tag, Calendar, User, ArrowRight, TrendingUp, Newspaper } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Calendar, User, ArrowRight, TrendingUp, Newspaper, Eye, X, MessageSquare } from "lucide-react";
 import api from "../api/api";
-
-const posts = [
-  {
-    title: "How IT Training Changed My Life: A Success Story",
-    excerpt: "From a local graduate to a global freelancer, read about how 3 months of focused training opened doors to international opportunities.",
-    category: "Success Stories",
-    author: "Admin",
-    date: "May 08, 2026",
-    image: "/assets/blog/success.png",
-    featured: true
-  },
-  {
-    title: "Top 5 AI Trends to Watch in 2026",
-    excerpt: "Exploring the latest advancements in generative AI and how they are impacting the local tech industry in Pakistan.",
-    category: "Tech Trends",
-    author: "Engr. Salman",
-    date: "May 05, 2026",
-    image: "/assets/projects/ai_dashboard.png"
-  },
-  {
-    title: "Mastering the MERN Stack in 90 Days",
-    excerpt: "Our comprehensive guide to becoming a professional full-stack developer through the NAVTTC program.",
-    category: "Education",
-    author: "Asad Ullah",
-    date: "April 28, 2026",
-    image: "/assets/projects/ecommerce.png"
-  },
-  {
-    title: "Why Bahawalpur is the Next Tech Hub",
-    excerpt: "Analyzing the growth of software houses and IT centers in the heart of South Punjab.",
-    category: "Industry News",
-    author: "Admin",
-    date: "April 15, 2026",
-    image: "/assets/events/seminar.png"
-  }
-];
 
 const categories = ["All Posts", "General", "Tech News", "Tutorial", "Student Success", "Events", "Career Tips"];
 
@@ -49,6 +13,8 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All Posts");
   const [search, setSearch] = useState("");
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [loadingArticle, setLoadingArticle] = useState(false);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -70,6 +36,20 @@ export default function Blog() {
     if (email) {
       alert(`Success! ${email} has been subscribed to the Tech Hub newsletter.`);
       setEmail("");
+    }
+  };
+
+  const handleReadArticle = async (id) => {
+    setLoadingArticle(true);
+    try {
+      const res = await api.get(`/blogs/${id}`);
+      setSelectedBlog(res.data.data);
+      // Increment locally so view count updates immediately
+      setBlogs(prev => prev.map(b => b._id === id ? { ...b, views: (b.views || 0) + 1 } : b));
+    } catch (err) {
+      console.error("Failed to load article", err);
+    } finally {
+      setLoadingArticle(false);
     }
   };
 
@@ -161,7 +141,7 @@ export default function Blog() {
                     </div>
                   </div>
                   <div className="p-6 sm:p-8 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-4 text-slate-400 text-xs sm:text-sm font-medium">
+                    <div className="flex flex-wrap items-center gap-4 mb-4 text-slate-400 text-xs sm:text-sm font-medium">
                       <div className="flex items-center gap-1.5">
                         <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         {post.author || "Admin"}
@@ -169,6 +149,10 @@ export default function Blog() {
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         {new Date(post.createdAt).toLocaleDateString()}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        {post.views || 0} views
                       </div>
                     </div>
                     <h3 className="font-black text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors text-xl sm:text-2xl line-clamp-2">
@@ -181,8 +165,9 @@ export default function Blog() {
                 </div>
                 <div className="px-6 sm:px-8 pb-6 sm:pb-8 mt-auto">
                   <button 
-                    onClick={() => navigate("/contact", { state: { subject: `Blog Inquiry: ${post.title}` } })}
-                    className="flex items-center gap-2 font-black text-indigo-600 group-hover:gap-4 transition-all text-xs sm:text-sm uppercase tracking-wider"
+                    onClick={() => handleReadArticle(post._id)}
+                    className="flex items-center gap-2 font-black text-indigo-600 group-hover:gap-4 transition-all text-xs sm:text-sm uppercase tracking-wider disabled:opacity-50"
+                    disabled={loadingArticle}
                   >
                     Read Full Article <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
@@ -223,6 +208,98 @@ export default function Blog() {
           </div>
         </div>
       </section>
+
+      {/* Premium Full Article Modal Reader */}
+      <AnimatePresence>
+        {selectedBlog && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md p-4 overflow-y-auto"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 30 }}
+              className="bg-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col border border-slate-100"
+            >
+              {/* Sticky Top Header */}
+              <div className="flex justify-between items-center px-8 py-5 border-b border-slate-100 shrink-0">
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-lg">
+                    {selectedBlog.category}
+                  </span>
+                  {selectedBlog.tags && selectedBlog.tags.map(tag => (
+                    <span key={tag} className="text-xs text-slate-400 font-medium">#{tag}</span>
+                  ))}
+                </div>
+                <button 
+                  onClick={() => setSelectedBlog(null)}
+                  className="p-2 hover:bg-slate-100 rounded-xl text-slate-500 hover:text-slate-900 transition-all"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Scrollable Modal Content */}
+              <div className="overflow-y-auto p-8 sm:p-12 space-y-8 flex-1">
+                {/* Title */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+                  {selectedBlog.title}
+                </h1>
+
+                {/* Metadata */}
+                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 pb-6 border-b border-slate-100">
+                  <div className="flex items-center gap-2 font-bold text-slate-700">
+                    <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                      {selectedBlog.author ? selectedBlog.author[0].toUpperCase() : 'A'}
+                    </div>
+                    {selectedBlog.author || "Admin Team"}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Calendar size={16} />
+                    {new Date(selectedBlog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Eye size={16} />
+                    {selectedBlog.views || 0} views
+                  </div>
+                </div>
+
+                {/* Main Banner Image */}
+                <div className="w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-md">
+                  <img 
+                    src={selectedBlog.image || "/assets/blog/success.png"} 
+                    alt={selectedBlog.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Blog Body HTML/Markdown Parser */}
+                <div className="prose prose-slate max-w-none text-slate-700 text-base sm:text-lg leading-relaxed whitespace-pre-line space-y-6">
+                  {selectedBlog.content}
+                </div>
+              </div>
+
+              {/* Sticky Bottom Actions */}
+              <div className="p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0">
+                <p className="text-sm text-slate-500">Interested in this topic or training?</p>
+                <button 
+                  onClick={() => {
+                    setSelectedBlog(null);
+                    navigate("/contact", { state: { subject: `Inquiry regarding: ${selectedBlog.title}` } });
+                  }}
+                  className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-indigo-600/20 transition-all"
+                >
+                  <MessageSquare size={16} /> Inquire About This Article
+                </button>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

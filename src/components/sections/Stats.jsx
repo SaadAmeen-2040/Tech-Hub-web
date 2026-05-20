@@ -1,6 +1,6 @@
 import { Users, Rocket, Building2, UserCheck } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const stats = [
   { label: "Graduated Students", value: 5000, suffix: "+", icon: <Users className="w-10 h-10" /> },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Search, Trash2, CheckCircle, Clock, Mail, User,
-  MessageSquare, Tag, Download, ChevronDown, X, Globe, Building2, Layers, Cpu
+  Search, Trash2,
+  MessageSquare, Download, ChevronDown, X, Globe, Layers, Cpu
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
@@ -68,8 +68,6 @@ const ManageQuotes = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
 
-  useEffect(() => { fetchQuotes(); }, []);
-
   const fetchQuotes = async () => {
     setLoading(true);
     try {
@@ -77,11 +75,14 @@ const ManageQuotes = () => {
       // Filter only Quote Requests
       const filteredQuotes = res.data.data.filter(i => i.type === 'Quote Request');
       setQuotes(filteredQuotes);
-    } catch {
+    } catch (err) {
+      console.error('Could not load quotes', err);
       toast.error('Could not load quotes');
       setQuotes([]);
     } finally { setLoading(false); }
   };
+
+  useEffect(() => { fetchQuotes(); }, []);
 
   const updateStatus = async (id, status) => {
     setUpdatingId(id);

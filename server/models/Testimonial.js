@@ -7,8 +7,10 @@ const TestimonialSchema = new mongoose.Schema({
   },
   courseName: String,
   review: {
-    type: String,
-    required: [true, 'Please add review content']
+    type: String
+  },
+  youtubeLink: {
+    type: String
   },
   rating: {
     type: Number,

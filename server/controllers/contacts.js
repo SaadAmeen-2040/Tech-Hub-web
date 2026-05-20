@@ -1,5 +1,4 @@
 import Contact from '../models/Contact.js';
-import { logActivity } from '../utils/logger.js';
 import { createNotification } from '../utils/notifications.js';
 
 // @desc    Get all inquiries

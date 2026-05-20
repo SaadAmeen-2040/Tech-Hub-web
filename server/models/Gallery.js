@@ -6,7 +6,6 @@ const GallerySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  publicId: String, // For Cloudinary management
   category: {
     type: String,
     enum: ['Event', 'Campus', 'Student Projects', 'Awards'],

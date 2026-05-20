@@ -29,6 +29,10 @@ import events from './routes/events.js';
 import analytics from './routes/analytics.js';
 import settings from './routes/settings.js';
 import notifications from './routes/notifications.js';
+import projects from './routes/projects.js';
+import testimonials from './routes/testimonials.js';
+import services from './routes/services.js';
+import gallery from './routes/gallery.js';
 
 const app = express();
 
@@ -44,7 +48,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      "img-src": ["'self'", "data:", "blob:", "http://localhost:5000", "https://images.unsplash.com", "https://res.cloudinary.com"],
+      "img-src": ["'self'", "data:", "blob:", "http://localhost:5000", "https://images.unsplash.com"],
     },
   },
 }));
@@ -98,6 +102,10 @@ app.use('/api/events', events);
 app.use('/api/analytics', analytics);
 app.use('/api/settings', settings);
 app.use('/api/notifications', notifications);
+app.use('/api/projects', projects);
+app.use('/api/testimonials', testimonials);
+app.use('/api/services', services);
+app.use('/api/gallery', gallery);
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -116,6 +124,19 @@ const startServer = async () => {
   await connectDB();
   app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  });
+
+  // Handle unhandled promise rejections
+  process.on('unhandledRejection', (err) => {
+    console.error(`Unhandled Rejection: ${err.message}`);
+    console.error(err.stack);
+    // Optionally close server & exit, but for development we want to keep it running
+  });
+
+  // Handle uncaught exceptions
+  process.on('uncaughtException', (err) => {
+    console.error(`Uncaught Exception: ${err.message}`);
+    console.error(err.stack);
   });
 };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   Menu, 
   X, 
@@ -15,7 +15,9 @@ import {
   ChevronDown,
   Sparkles,
   Users,
-  Code2
+  Code2,
+  Video,
+  Camera
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,7 +26,24 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
-
+  const navigate = useNavigate();
+  
+  const handleHashClick = (e, path) => {
+    e.preventDefault();
+    const [targetPath, id] = path.split("#");
+    const normalizedTarget = targetPath === "" ? "/" : targetPath;
+    const isSamePage = normalizedTarget === location.pathname;
+    
+    if (isSamePage) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(path);
+    }
+    setIsOpen(false);
+  };
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -44,8 +63,9 @@ export default function Navbar() {
       path: "/about", 
       icon: <Info className="w-4 h-4" />,
       submenu: [
-        { name: "Our Story", path: "/about", icon: <Sparkles className="w-4 h-4" /> },
-        { name: "Expert Instructors", path: "/about", icon: <Users className="w-4 h-4" /> },
+        { name: "About Tech Hub", path: "/about#story", icon: <Sparkles className="w-4 h-4" /> },
+        { name: "Expert Instructors", path: "/about#instructors", icon: <Users className="w-4 h-4" /> },
+        { name: "Campus Gallery", path: "/about#gallery", icon: <Camera className="w-4 h-4" /> },
       ]
     },
     { 
@@ -58,6 +78,7 @@ export default function Navbar() {
       ]
     },
     { name: "Programs", path: "/programs", icon: <BookOpen className="w-4 h-4" /> },
+    { name: "Testimonials", path: "/#testimonials", icon: <Video className="w-4 h-4" /> },
     { 
       name: "Showcase", 
       path: "/projects", 
@@ -139,7 +160,16 @@ export default function Navbar() {
                   onMouseEnter={() => setActiveDropdown(item.name)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  <Link to={item.path} onClick={item.path === "/" ? handleLogoClick : undefined}>
+                  <Link 
+                    to={item.path} 
+                    onClick={(e) => {
+                      if (item.path.includes("#")) {
+                        handleHashClick(e, item.path);
+                      } else if (item.path === "/") {
+                        handleLogoClick();
+                      }
+                    }}
+                  >
                     <motion.div
                       className={`flex items-center gap-1.5 px-3 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${
                         location.pathname === item.path || (item.submenu && item.submenu.some(s => s.path === location.pathname))
@@ -171,6 +201,11 @@ export default function Navbar() {
                           <Link
                             key={sub.name}
                             to={sub.path}
+                            onClick={(e) => {
+                              if (sub.path.includes("#")) {
+                                handleHashClick(e, sub.path);
+                              }
+                            }}
                             className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 transition-all group/sub"
                           >
                             <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover/sub:bg-indigo-50 group-hover/sub:text-indigo-600 transition-all">
@@ -249,9 +284,13 @@ export default function Navbar() {
                     <div key={item.name} className="space-y-2">
                       <Link
                         to={item.path}
-                        onClick={() => {
-                          if (item.path === "/") handleLogoClick();
-                          if (!item.submenu) setIsOpen(false);
+                        onClick={(e) => {
+                          if (item.path.includes("#")) {
+                            handleHashClick(e, item.path);
+                          } else {
+                            if (item.path === "/") handleLogoClick();
+                            if (!item.submenu) setIsOpen(false);
+                          }
                         }}
                         className={`flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${
                           location.pathname === item.path
@@ -272,7 +311,13 @@ export default function Navbar() {
                             <Link
                               key={sub.name}
                               to={sub.path}
-                              onClick={() => setIsOpen(false)}
+                              onClick={(e) => {
+                                if (sub.path.includes("#")) {
+                                  handleHashClick(e, sub.path);
+                                } else {
+                                  setIsOpen(false);
+                                }
+                              }}
                               className={`flex items-center gap-3 p-3 rounded-xl font-bold text-sm transition-all ${
                                 location.pathname === sub.path ? "text-indigo-600 bg-indigo-50" : "text-slate-500 hover:text-indigo-600 hover:bg-slate-50"
                               }`}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, RefreshCw, Layout, Target, Eye, Award, MessageSquare, Plus, Trash2 } from 'lucide-react';
+import { Save, RefreshCw, Layout, Target, Award, MessageSquare, Plus, Trash2, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import ImageUpload from '../../components/dashboard/ImageUpload';
@@ -10,27 +10,62 @@ const ManageSettings = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
   const fetchSettings = async () => {
     setLoading(true);
     try {
       const res = await api.get('/settings');
-      setSettings(res.data.data);
+      const data = res.data.data;
+      // Ensure contact and socials exist with defaults
+      if (!data.contact) {
+        data.contact = {
+          address: 'Opp. Moon College and Sir Sadiq Banquet Hall, Ring Road Near Saddar Pulli, Bahawalpur',
+          phone: '+92 308 0620868',
+          email: 'info@techhubinstitute.pk'
+        };
+      }
+      if (!data.socials) {
+        data.socials = {
+          facebook: '#',
+          twitter: '#',
+          instagram: '#',
+          linkedin: '#',
+          whatsapp: '923080620868'
+        };
+      }
+      setSettings(data);
     } catch (err) {
+      console.error('Failed to load settings', err);
       toast.error('Failed to load settings');
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
   const handlePrincipalChange = (e) => {
     const { name, value } = e.target;
     setSettings(prev => ({
       ...prev,
       principal: { ...prev.principal, [name]: value }
+    }));
+  };
+
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
+    setSettings(prev => ({
+      ...prev,
+      contact: { ...prev.contact, [name]: value }
+    }));
+  };
+
+  const handleSocialChange = (e) => {
+    const { name, value } = e.target;
+    setSettings(prev => ({
+      ...prev,
+      socials: { ...prev.socials, [name]: value }
     }));
   };
 
@@ -77,6 +112,7 @@ const ManageSettings = () => {
       await api.put('/settings', settings);
       toast.success('Settings updated successfully!');
     } catch (err) {
+      console.error('Failed to update settings', err);
       toast.error('Failed to update settings');
     } finally {
       setSaving(false);
@@ -91,7 +127,7 @@ const ManageSettings = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Site Content Management</h1>
-          <p className="text-gray-400">Update Mission, Vision, and Principal details.</p>
+          <p className="text-gray-400">Update Mission, Vision, Contacts, Socials, and Principal details.</p>
         </div>
         <button 
           onClick={handleSubmit}
@@ -245,6 +281,107 @@ const ManageSettings = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Contact & Socials Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="lg:col-span-2 bg-white/5 border border-white/10 p-8 rounded-[2.5rem] space-y-6"
+        >
+          <div className="flex items-center gap-3 text-emerald-400 mb-2">
+            <Globe size={24} />
+            <h2 className="text-xl font-bold text-white">Contact & Social Media Links</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Contact Details */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2">Contact Details</h3>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Address</label>
+                <input 
+                  name="address"
+                  value={settings.contact?.address || ''}
+                  onChange={handleContactChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Phone</label>
+                <input 
+                  name="phone"
+                  value={settings.contact?.phone || ''}
+                  onChange={handleContactChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                <input 
+                  name="email"
+                  value={settings.contact?.email || ''}
+                  onChange={handleContactChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-white border-b border-white/5 pb-2">Social Media Links</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Facebook URL</label>
+                  <input 
+                    name="facebook"
+                    value={settings.socials?.facebook || ''}
+                    onChange={handleSocialChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Instagram URL</label>
+                  <input 
+                    name="instagram"
+                    value={settings.socials?.instagram || ''}
+                    onChange={handleSocialChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Linkedin URL</label>
+                  <input 
+                    name="linkedin"
+                    value={settings.socials?.linkedin || ''}
+                    onChange={handleSocialChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Twitter URL</label>
+                  <input 
+                    name="twitter"
+                    value={settings.socials?.twitter || ''}
+                    onChange={handleSocialChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">WhatsApp Number (e.g. 923080620868)</label>
+                <input 
+                  name="whatsapp"
+                  value={settings.socials?.whatsapp || ''}
+                  onChange={handleSocialChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-all"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Core Values Section */}
         <motion.div 

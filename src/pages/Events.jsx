@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Clock, ArrowRight, Video, Users, Award } from "lucide-react";
+import { Calendar, MapPin, Clock, ArrowRight, Video } from "lucide-react";
 import api from "../api/api";
 
 const pastEvents = [
@@ -71,7 +71,7 @@ export default function Events() {
           </div>
         ) : (
           <div className="grid lg:grid-cols-2 gap-12">
-            {events.map((event, index) => (
+            {events.map((event) => (
               <motion.div
                 key={event._id}
                 whileInView={{ opacity: 1, y: 0 }}
